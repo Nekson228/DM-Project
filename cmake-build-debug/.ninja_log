@@ -1,0 +1,8 @@
+# ninja log v5
+13	2151	7202201923942945	CMakeFiles/DM.dir/main.cpp.obj	699a32d25257a890
+27	1638	7202201918790501	CMakeFiles/DM.dir/modules/Integer/Integer.cpp.obj	e3a39e18993ece85
+16	2719	7202109714428629	CMakeFiles/DM.dir/Natural/src/Natural.cpp.obj	71047daa84a2a86d
+2152	2611	7202201928359837	DM.exe	856fcad5b160ebe8
+63	2066	7202201923080663	CMakeFiles/DM.dir/modules/Polynomial/Polynomial.cpp.obj	c184679e08aef7f4
+39	1871	7202201921142629	CMakeFiles/DM.dir/modules/Natural/Natural.cpp.obj	9666cd254e8badff
+51	1880	7202201921243150	CMakeFiles/DM.dir/modules/Rational/Rational.cpp.obj	451677b32131a6ad
