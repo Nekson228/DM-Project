@@ -14,15 +14,15 @@ public:
 
     static Polynomial &gcd(const Polynomial &a, const Polynomial &b); //GCF_PP_P
 
-    std::string str(); // TODO
+    std::string str() const; // TODO
 
-    void scale(const Rational &scalar); // MUL_PQ_P
+    Polynomial& scale(const Rational &scalar); // MUL_PQ_P
 
-    void mulByXk(std::size_t k); // MUL_Pxk_P
+    Polynomial& mulByXk(std::size_t k); // MUL_Pxk_P
 
-    Rational &leading(); // LED_P_Q
+    Rational &leading() const; // LED_P_Q
 
-    std::size_t getDegree(); // DEG_P_N
+    std::size_t getDegree() const; // DEG_P_N
 
     Polynomial &factorize(); // FAC_P_Q
 

@@ -79,6 +79,18 @@ build CMakeFiles/DM.dir/modules/Rational/Rational.cpp.obj: CXX_COMPILER__DM_Debu
   OBJECT_DIR = CMakeFiles\DM.dir
   OBJECT_FILE_DIR = CMakeFiles\DM.dir\modules\Rational
 
+build CMakeFiles/DM.dir/modules/Natural/src/Gurkov_Arseniy/Gurkov_Arseniy.cpp.obj: CXX_COMPILER__DM_Debug C$:/Users/bange/CLionProjects/DM/modules/Natural/src/Gurkov_Arseniy/Gurkov_Arseniy.cpp || cmake_object_order_depends_target_DM
+  DEP_FILE = CMakeFiles\DM.dir\modules\Natural\src\Gurkov_Arseniy\Gurkov_Arseniy.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++20
+  OBJECT_DIR = CMakeFiles\DM.dir
+  OBJECT_FILE_DIR = CMakeFiles\DM.dir\modules\Natural\src\Gurkov_Arseniy
+
+build CMakeFiles/DM.dir/modules/Natural/src/Gurkov_Arseniy/Gurkov_Arseniy_test.cpp.obj: CXX_COMPILER__DM_Debug C$:/Users/bange/CLionProjects/DM/modules/Natural/src/Gurkov_Arseniy/Gurkov_Arseniy_test.cpp || cmake_object_order_depends_target_DM
+  DEP_FILE = CMakeFiles\DM.dir\modules\Natural\src\Gurkov_Arseniy\Gurkov_Arseniy_test.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++20
+  OBJECT_DIR = CMakeFiles\DM.dir
+  OBJECT_FILE_DIR = CMakeFiles\DM.dir\modules\Natural\src\Gurkov_Arseniy
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target DM
@@ -87,7 +99,7 @@ build CMakeFiles/DM.dir/modules/Rational/Rational.cpp.obj: CXX_COMPILER__DM_Debu
 #############################################
 # Link the executable DM.exe
 
-build DM.exe: CXX_EXECUTABLE_LINKER__DM_Debug CMakeFiles/DM.dir/main.cpp.obj CMakeFiles/DM.dir/modules/Natural/Natural.cpp.obj CMakeFiles/DM.dir/modules/Integer/Integer.cpp.obj CMakeFiles/DM.dir/modules/Polynomial/Polynomial.cpp.obj CMakeFiles/DM.dir/modules/Rational/Rational.cpp.obj
+build DM.exe: CXX_EXECUTABLE_LINKER__DM_Debug CMakeFiles/DM.dir/main.cpp.obj CMakeFiles/DM.dir/modules/Natural/Natural.cpp.obj CMakeFiles/DM.dir/modules/Integer/Integer.cpp.obj CMakeFiles/DM.dir/modules/Polynomial/Polynomial.cpp.obj CMakeFiles/DM.dir/modules/Rational/Rational.cpp.obj CMakeFiles/DM.dir/modules/Natural/src/Gurkov_Arseniy/Gurkov_Arseniy.cpp.obj CMakeFiles/DM.dir/modules/Natural/src/Gurkov_Arseniy/Gurkov_Arseniy_test.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\DM.dir

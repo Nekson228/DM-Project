@@ -9,17 +9,17 @@ class Integer {
 public:
     explicit Integer(std::int64_t number);
 
-    std::string str(); // TODO
+    std::string str() const; // TODO
 
     Natural &abs(); // ABS_Z_N
 
-    digit isPositive(); // POZ_Z_D
+    digit isPositive() const; // POZ_Z_D
 
     Integer &negative(); // MUL_ZM_Z
 
     Integer &fromNatural(const Natural &natural); // TRANS_N_Z
 
-    Natural &toNatural(); // TRANS_Z_N
+    Natural &toNatural() const; // TRANS_Z_N
 
     Integer &operator+(const Integer &other); // ADD_ZZ_Z
 

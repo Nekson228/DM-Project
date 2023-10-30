@@ -14,15 +14,15 @@ class Natural {
 public:
     explicit Natural(std::size_t number);
 
-    std::string str(); // TODO
+    std::string str() const; // TODO
 
-    static digit cmp(const Natural & a, const Natural & b); // COM_NN_D
+    static digit cmp(const Natural &a, const Natural &b); // COM_NN_D
 
     static Natural &gcd(const Natural &a, const Natural &b); // GCF_NN_N
 
     static Natural &lcm(const Natural &a, const Natural &b); // LCM_NN_N
 
-    bool &isZero(); // NZER_N_B
+    bool &isZero() const; // NZER_N_B
 
     Natural &addOne(); // ADD_1N_N
 
@@ -30,9 +30,9 @@ public:
 
     Natural &mulBy10k(const std::size_t k); // MUL_Nk_N
 
-    Natural &subScaled(const Natural & other, digit k); // SUB_NDN_N
+    Natural &subScaled(const Natural &other, digit k); // SUB_NDN_N
 
-    Natural &divFirstDigit(const Natural & other); // DIV_NN_Dk
+    Natural &divFirstDigit(const Natural &other); // DIV_NN_Dk
 
     Natural &operator+(const Natural &other); // ADD_NN_N
 

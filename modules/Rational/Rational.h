@@ -12,15 +12,15 @@ public:
 
     Rational(std::int64_t numerator, std::size_t denominator);
 
-    std::string str(); // TODO
+    std::string str() const; // TODO
 
     Rational &reduce(); // RED_Q_Q
 
-    bool isInteger(); // INT_Q_B
+    bool isInteger() const; // INT_Q_B
 
     Rational &fromInteger(const Integer &integer); // TRANS_Z_Q
 
-    Integer &toInteger(); // TRANS_Q_Z
+    Integer &toInteger() const; // TRANS_Q_Z
 
     Rational &operator+(const Rational &other); // ADD_QQ_Q
 
