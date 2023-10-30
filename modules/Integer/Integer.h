@@ -9,27 +9,27 @@ class Integer {
 public:
     explicit Integer(std::int64_t number);
 
+    explicit Integer(const Natural &natural); // TRANS_N_Z
+
     std::string str() const; // TODO
 
-    Natural &abs(); // ABS_Z_N
+    Natural &abs() const; // ABS_Z_N
 
     digit isPositive() const; // POZ_Z_D
 
-    Integer &negative(); // MUL_ZM_Z
-
-    Integer &fromNatural(const Natural &natural); // TRANS_N_Z
+    Integer &negative() const; // MUL_ZM_Z
 
     Natural &toNatural() const; // TRANS_Z_N
 
-    Integer &operator+(const Integer &other); // ADD_ZZ_Z
+    Integer &operator+(const Integer &other) const; // ADD_ZZ_Z
 
-    Integer &operator-(const Integer &other); // SUB_ZZ_Z
+    Integer &operator-(const Integer &other) const; // SUB_ZZ_Z
 
-    Integer &operator*(const Integer &other); // MUL_ZZ_Z
+    Integer &operator*(const Integer &other) const; // MUL_ZZ_Z
 
-    Integer &operator/(const Integer &other); // DIV_ZZ_Z
+    Integer &operator/(const Integer &other) const; // DIV_ZZ_Z
 
-    Integer &operator%(const Integer &other); // MOD_ZZ_Z
+    Integer &operator%(const Integer &other) const; // MOD_ZZ_Z
 };
 
 #endif //DM_INTEGER_H

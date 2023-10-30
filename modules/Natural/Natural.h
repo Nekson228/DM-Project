@@ -24,25 +24,25 @@ public:
 
     bool &isZero() const; // NZER_N_B
 
-    Natural &addOne(); // ADD_1N_N
+    Natural &addOne() const; // ADD_1N_N
 
-    Natural &mulByDigit(const digit multiplier); // MUL_ND_N
+    Natural &mulByDigit(const digit multiplier) const; // MUL_ND_N
 
-    Natural &mulBy10k(const std::size_t k); // MUL_Nk_N
+    Natural &mulBy10k(const std::size_t k) const; // MUL_Nk_N
 
-    Natural &subScaled(const Natural &other, digit k); // SUB_NDN_N
+    Natural &subScaled(const Natural &other, digit k) const; // SUB_NDN_N
 
-    Natural &divFirstDigit(const Natural &other); // DIV_NN_Dk
+    Natural &divFirstDigit(const Natural &other) const; // DIV_NN_Dk
 
-    Natural &operator+(const Natural &other); // ADD_NN_N
+    Natural &operator+(const Natural &other) const; // ADD_NN_N
 
-    Natural &operator-(const Natural &other); // SUB_NN_N
+    Natural &operator-(const Natural &other) const; // SUB_NN_N
 
-    Natural &operator*(const Natural &other); // MUL_NN_N
+    Natural &operator*(const Natural &other) const; // MUL_NN_N
 
-    Natural &operator/(const Natural &other); // DIV_NN_N
+    Natural &operator/(const Natural &other) const; // DIV_NN_N
 
-    Natural &operator%(const Natural &other); // MOD_NN_N
+    Natural &operator%(const Natural &other) const; // MOD_NN_N
 };
 
 

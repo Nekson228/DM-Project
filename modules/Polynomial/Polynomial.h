@@ -16,29 +16,29 @@ public:
 
     std::string str() const; // TODO
 
-    Polynomial& scale(const Rational &scalar); // MUL_PQ_P
+    Polynomial& scale(const Rational &scalar) const; // MUL_PQ_P
 
-    Polynomial& mulByXk(std::size_t k); // MUL_Pxk_P
+    Polynomial& mulByXk(std::size_t k) const; // MUL_Pxk_P
 
     Rational &leading() const; // LED_P_Q
 
     std::size_t getDegree() const; // DEG_P_N
 
-    Polynomial &factorize(); // FAC_P_Q
+    Polynomial &factorize() const; // FAC_P_Q
 
-    Polynomial &derivative(); // DER_P_P
+    Polynomial &derivative() const; // DER_P_P
 
-    Polynomial &singlify(); // NMR_P_P
+    Polynomial &singlify() const; // NMR_P_P
 
-    Polynomial &operator+(const Polynomial &other); // ADD_PP_P
+    Polynomial &operator+(const Polynomial &other) const; // ADD_PP_P
 
-    Polynomial &operator-(const Polynomial &other); // SUB_PP_P
+    Polynomial &operator-(const Polynomial &other) const; // SUB_PP_P
 
-    Polynomial &operator*(const Polynomial &other); // MUL_PP_P
+    Polynomial &operator*(const Polynomial &other) const; // MUL_PP_P
 
-    Polynomial &operator/(const Polynomial &other); // DIV_PP_P
+    Polynomial &operator/(const Polynomial &other) const; // DIV_PP_P
 
-    Polynomial &operator%(const Polynomial &other); // MOD_PP_P
+    Polynomial &operator%(const Polynomial &other) const; // MOD_PP_P
 };
 
 
