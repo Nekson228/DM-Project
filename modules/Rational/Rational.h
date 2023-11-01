@@ -14,6 +14,10 @@ public:
 
     Rational(const Integer &integer); // TRANS_Z_Q
 
+    [[nodiscard]] const Integer &getNumerator() const;
+
+    [[nodiscard]] const Natural &getDenominator() const;
+
     std::string str() const; // TODO
 
     Rational &reduce() const; // RED_Q_Q

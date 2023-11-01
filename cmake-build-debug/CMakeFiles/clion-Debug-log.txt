@@ -1,13 +1,4 @@
 "C:\Program Files\JetBrains\CLion 2022.1.3\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.1.3/bin/ninja/win/x64/ninja.exe" -G Ninja -S C:\Users\bange\CLionProjects\DM -B C:\Users\bange\CLionProjects\DM\cmake-build-debug
 -- Configuring done
-CMake Error at CMakeLists.txt:6 (add_executable):
-  Cannot find source file:
-
-    modules/Natural/src/Gurkov_Arseniy/Gurkov_Arseniy.cpp
-
-
-CMake Error at CMakeLists.txt:6 (add_executable):
-  No SOURCES given to target: DM
-
-
-CMake Generate step failed.  Build files cannot be regenerated correctly.
+-- Generating done
+-- Build files have been written to: C:/Users/bange/CLionProjects/DM/cmake-build-debug
