@@ -13,7 +13,7 @@ public:
 
     std::string str() const; // TODO
 
-    Natural &abs() const; // ABS_Z_N
+    Integer &abs() const; // ABS_Z_N
 
     digit isPositive() const; // POZ_Z_D
 

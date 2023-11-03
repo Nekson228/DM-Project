@@ -22,7 +22,7 @@ public:
 
     static Natural &lcm(const Natural &a, const Natural &b); // LCM_NN_N
 
-    bool &isZero() const; // NZER_N_B
+    bool isZero() const; // NZER_N_B
 
     Natural &addOne() const; // ADD_1N_N
 
