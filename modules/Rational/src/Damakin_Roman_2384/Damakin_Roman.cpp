@@ -4,7 +4,6 @@
 /*
 Дамакин Роман гр2384
 Функция Q-2: Проверка на целое, если рациональное число является целым, то «да», иначе «нет»
-
 */
 bool Rational::isInteger() const{ // INT_Q_B
     Natural denominator = this->reduce().getDenominator(); // Получаем знаменатель сокращенной дроби
