@@ -41,6 +41,14 @@ TEST(RationalSubtractionTest, 3){
     ASSERT_TRUE(result == expected);
 }
 
+TEST(RationalSubtractionTest, 3){
+    Rational r1 = Rational(5, 8);
+    Rational r2 = Rational(5, 8);
+    Rational result = r1 - r2;
+    Rational expected = Rational(Integer(0));
+    ASSERT_TRUE(result == expected);
+}
+
 
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest();
