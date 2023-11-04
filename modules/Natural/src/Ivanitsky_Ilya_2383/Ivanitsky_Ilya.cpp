@@ -1,7 +1,7 @@
 #include "../../Natural.h"
 #include <iostream>
 
-[[nodiscard]] Natural Natural::operator+(const Natural& other) const{ //ADD_NN_N
+[[nodiscard]] Natural Natural::operator+(const Natural& other) const{ //ADD_NN_N Иваницкий Илья функция сложения 2 натуральных числел
     int fl = 0; //флаг в который будет записываться целая часть числа при делении на 10, вслучае когда сумма 2 цифр будет больше 10
     int counter_digits = 0;//счетчики для чисел
     int counter_other = 0;
@@ -31,7 +31,7 @@
     return res;
 }
 
-[[nodiscard]] Natural Natural::operator*(const Natural &other) const{// MUL_NN_N
+[[nodiscard]] Natural Natural::operator*(const Natural &other) const{// MUL_NN_N Иваницкий Илья , функция умножения 2 натуральных чисел
     std::vector<Natural> array;//массив чисел полученных путем умножения на конкретное число
     Natural res;//результирующее число
     Natural tmp(*this);
@@ -56,7 +56,7 @@
     return res;
 }
 
-[[nodiscard]] Natural Natural::operator/(const Natural &other) const{ // DIV_NN_N
+[[nodiscard]] Natural Natural::operator/(const Natural &other) const{ // DIV_NN_N Иваницкий Илья , функция для нахождения неполного частного 2ух натуральных чисел
     Natural tmp(*this);
     Natural res;//Результат
     if(other.isZero()){
