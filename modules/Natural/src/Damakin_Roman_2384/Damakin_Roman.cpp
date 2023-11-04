@@ -4,7 +4,7 @@
 Дамакин Роман гр2384
 Функция N-10: Вычисление первой цифры деления большего натурального на меньшее, домноженной на 10^k,где k - номер позиции этой цифры (номер считается с нуля)
 */
-Natural& Natural::divFirstDigit(const Natural &other) const{ // DIV_NN_Dk
+[[nodiscard]] Natural Natural::divFirstDigit(const Natural &other) const{ // DIV_NN_Dk
     if ((Natural::cmp(*this, Natural(0)) == 0) || (Natural::cmp(other, Natural(0)) == 0)){ // Проверка, что числа не нули
         Natural nullNum = Natural(0); // Возвращаем 0 если какое то из чисел ноль
         return nullNum;

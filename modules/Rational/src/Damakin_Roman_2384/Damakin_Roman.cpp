@@ -17,7 +17,7 @@ bool Rational::isInteger() const{ // INT_Q_B
 Дамакин Роман гр2384
 Функция Q-6: Вычитание дробей
 */
-Rational& Rational::operator-(const Rational &other) const{ // SUB_QQ_Q
+[[nodiscard]] Rational Rational::operator-(const Rational &other) const{ // SUB_QQ_Q
     // Скоращаем дроби
     Rational minuend = this->reduce(); // Уменьшаемое
     Rational subtrahend = other.reduce(); // Вычитаемое

@@ -22,9 +22,7 @@ TEST(RationalSubtractionTest, 1){
     Rational r2 = Rational(2, 6);
     Rational result = r1 - r2;
     Rational expected = Rational(1, 6);
-    ASSERT_TRUE(Natural::cmp(result.getDenominator(), expected.getDenominator()) == 0);
-    ASSERT_TRUE(result.getNumerator().isPositive() == true);
-    ASSERT_TRUE(Natural::cmp(result.getNumerator().toNatural(), expected.getNumerator().toNatural()) == 0);
+    ASSERT_TRUE(result == expected);
 }
 
 TEST(RationalSubtractionTest, 2){
@@ -32,9 +30,7 @@ TEST(RationalSubtractionTest, 2){
     Rational r2 = Rational(5, 7);
     Rational result = r1 - r2;
     Rational expected = Rational(16, 7);
-    ASSERT_TRUE(Natural::cmp(result.getDenominator(), expected.getDenominator()) == 0);
-    ASSERT_TRUE(result.getNumerator().isPositive() == true);
-    ASSERT_TRUE(Natural::cmp(result.getNumerator().toNatural(), expected.getNumerator().toNatural()) == 0);
+    ASSERT_TRUE(result == expected);
 }
 
 TEST(RationalSubtractionTest, 3){
@@ -42,9 +38,7 @@ TEST(RationalSubtractionTest, 3){
     Rational r2 = Rational(5, 7);
     Rational result = r1 - r2;
     Rational expected = Rational(-5, 56);
-    ASSERT_TRUE(Natural::cmp(result.getDenominator(), expected.getDenominator()) == 0);
-    ASSERT_FALSE(result.getNumerator().isPositive() == true);
-    ASSERT_TRUE(Natural::cmp(result.getNumerator().abs().toNatural(), expected.getNumerator().abs().toNatural()) == 0);
+    ASSERT_TRUE(result == expected);
 }
 
 
