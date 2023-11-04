@@ -11,4 +11,7 @@ add_executable(DM main.cpp
         modules/Polynomial/Polynomial.cpp
         modules/Polynomial/Polynomial.h
         modules/Rational/Rational.cpp
-        modules/Rational/Rational.h)
+        modules/Rational/Rational.h
+        modules/Natural/src/Damakin_Roman_2384/Damakin_Roman.cpp
+        modules/Polynomial/src/Damakin_Roman_2384/Damakin_Roman.cpp
+        modules/Rational/src/Damakin_Roman_2384/Damakin_Roman.cpp)
