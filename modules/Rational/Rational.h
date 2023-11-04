@@ -7,32 +7,41 @@
 class Rational {
     Integer numerator_{0}; // числитель
     Natural denominator_{1}; // знаменатель
+
+    void checkDenominator();
+
 public:
-    Rational(Integer &numerator, Natural &denominator);
+    Rational(Integer numerator, Natural denominator);
 
     Rational(std::int64_t numerator, std::size_t denominator);
 
-    Rational(const Integer &integer); // TRANS_Z_Q
+    explicit Rational(const std::string &str_number);
+
+    explicit Rational(const Integer &integer); // TRANS_Z_Q
 
     [[nodiscard]] const Integer &getNumerator() const;
 
     [[nodiscard]] const Natural &getDenominator() const;
 
-    std::string str() const; // TODO
+    [[nodiscard]] std::string str() const;
 
-    Rational &reduce() const; // RED_Q_Q
+    [[nodiscard]] Rational reduce() const; // RED_Q_Q
 
-    bool isInteger() const; // INT_Q_B
+    [[nodiscard]] bool isInteger() const; // INT_Q_B
 
-    Integer &toInteger() const; // TRANS_Q_Z
+    [[nodiscard]] Integer toInteger() const; // TRANS_Q_Z
 
-    Rational &operator+(const Rational &other) const; // ADD_QQ_Q
+    [[nodiscard]] Rational operator+(const Rational &other) const; // ADD_QQ_Q
 
-    Rational &operator-(const Rational &other) const; // SUB_QQ_Q
+    [[nodiscard]] Rational operator-(const Rational &other) const; // SUB_QQ_Q
 
-    Rational &operator*(const Rational &other) const; // MUL_QQ_Q
+    [[nodiscard]] Rational operator*(const Rational &other) const; // MUL_QQ_Q
 
-    Rational &operator/(const Rational &other) const; // DIV_QQ_Q
+    [[nodiscard]] Rational operator/(const Rational &other) const; // DIV_QQ_Q
+
+    [[nodiscard]] bool operator==(const Rational &other) const = default;
+
+    [[nodiscard]] bool operator!=(const Rational &other) const = default;
 };
 
 

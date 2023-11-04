@@ -4,32 +4,38 @@
 #include "../Natural/Natural.h"
 
 class Integer {
-    Natural number_; // беззнаковая часть числа
+    Natural number_{0}; // беззнаковая часть числа
     bool sign_; // знак (минус - true, плюс - false)
 public:
     explicit Integer(std::int64_t number);
 
+    explicit Integer(const std::string &str_number);
+
     explicit Integer(const Natural &natural); // TRANS_N_Z
 
-    std::string str() const; // TODO
+    [[nodiscard]] std::string str() const;
 
-    Integer &abs() const; // ABS_Z_N
+    [[nodiscard]] Integer abs() const; // ABS_Z_N
 
-    digit isPositive() const; // POZ_Z_D
+    [[nodiscard]] digit isPositive() const; // POZ_Z_D
 
-    Integer &negative() const; // MUL_ZM_Z
+    [[nodiscard]] Integer negative() const; // MUL_ZM_Z
 
-    Natural &toNatural() const; // TRANS_Z_N
+    [[nodiscard]] Natural toNatural() const; // TRANS_Z_N
 
-    Integer &operator+(const Integer &other) const; // ADD_ZZ_Z
+    [[nodiscard]] Integer operator+(const Integer &other) const; // ADD_ZZ_Z
 
-    Integer &operator-(const Integer &other) const; // SUB_ZZ_Z
+    [[nodiscard]] Integer operator-(const Integer &other) const; // SUB_ZZ_Z
 
-    Integer &operator*(const Integer &other) const; // MUL_ZZ_Z
+    [[nodiscard]] Integer operator*(const Integer &other) const; // MUL_ZZ_Z
 
-    Integer &operator/(const Integer &other) const; // DIV_ZZ_Z
+    [[nodiscard]] Integer operator/(const Integer &other) const; // DIV_ZZ_Z
 
-    Integer &operator%(const Integer &other) const; // MOD_ZZ_Z
+    [[nodiscard]] Integer operator%(const Integer &other) const; // MOD_ZZ_Z
+
+    [[nodiscard]] bool operator==(const Integer &other) const = default;
+
+    [[nodiscard]] bool operator!=(const Integer &other) const = default;
 };
 
 #endif //DM_INTEGER_H
