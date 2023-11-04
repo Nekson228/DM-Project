@@ -12,7 +12,7 @@ class Natural {
     std::size_t n_; // номер старшей позциии
 
 public:
-    explicit Natural(std::size_t number);
+    explicit Natural(std::size_t number = 0);
 
     explicit Natural(const std::string &str_number);
 
