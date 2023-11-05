@@ -1,4 +1,5 @@
-#include"../../Polynomial.h" // LED_P_Q
+// Мирон Возгрин 2382; Возвращает старший коэфицент многочлена (LED_P_Q)
+#include"../../Polynomial.h"
 Rational Polynomial::leading()const{
-    return coefficients_[coefficients_.size()-1]; //вещественное число, равное последнему числу из вектора с коэфицентами многочлена
+    return coefficients_[0]; //вещественное число, равное последнему числу из вектора с коэфицентами многочлена
 }

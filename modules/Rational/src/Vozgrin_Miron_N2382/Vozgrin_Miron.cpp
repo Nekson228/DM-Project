@@ -1,11 +1,15 @@
-#include"../../Rational.h"  // DIV_QQ_Q
+// Мирон Возгрин 2382; оператор деления для дробей (DIV_QQ_Q)
+#include"../../Rational.h"
 Rational Rational::operator/(const Rational &other)const{
-    Integer subNumeratorRight(other.denominator_);                      //вспомогательное целое число равное модулю числитея правой дроби
+
+    if(numerator_.isPositive()==0) return Rational(0, 0);                   //проверка делимой дроби на равенство 0
+
+    Integer subNumeratorRight(other.denominator_);                          //вспомогательное целое число равное модулю числитея правой дроби
 
     Integer newNominator = numerator_ * subNumeratorRight;                  //новый числитель. Произведение левого числителя и правого знаменателя
-    Natural newDenominator = denominator_ * other.numerator_.toNatural();   //новыйз наминатель. Произведение левого наминателя и правого числителя
+    Natural newDenominator = denominator_ * other.numerator_.toNatural();   //новыйз знаминатель. Произведение левого знаминателя и правого числителя
                                                                             //так как все числа были лишены знака, предстоит провести проверку входных данных и присвоить нужный знак возвращаемому значению
-    if ((numerator_.isPositive() and other.numerator_.isPositive()) or (not numerator_.isPositive() and not other.numerator_.isPositive())){
+    if ((numerator_.isPositive()==1 and other.numerator_.isPositive()==1) or (numerator_.isPositive()==-1 and other.numerator_.isPositive()==-1)){
         Rational rat(newNominator, newDenominator);
         return rat;
     }
