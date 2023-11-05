@@ -7,6 +7,7 @@
 // P-2
 // Вычитание многочленов
 // SUB_PP_P
+// Ильин Павел 2383
 [[nodiscard]] Polynomial Polynomial::operator-(const Polynomial &other) const {
     // копируем коэфы для изменяемого числа
     std::vector<Rational> new_coefs = coefficients_;
@@ -15,8 +16,9 @@
         new_coefs.insert(new_coefs.begin(), Rational(0, 1));
     }
     // проводим вычитание коэфов в соответствии с их принадлежностью к степени
-    for (int i = 0; i <= other.degree_; i++) {
-        new_coefs[i] = new_coefs[i] - other.coefficients_[i];
+    size_t indexShift = new_coefs.size() - other.degree_-1;
+    for (size_t i = other.degree_+1; i > 0; i--) {
+        new_coefs[indexShift + i-1] = new_coefs[indexShift + i-1] - other.coefficients_[i-1];
     }
     // удаляем крайние слева коэфы, если он равны нулю, в случае многочлена равного нулю, вектор будет в виде [0/1]
     while (new_coefs.size() > 1 && new_coefs[0] == Rational (0, 1)) {
@@ -30,6 +32,7 @@
 // P-10
 // Остаток от деления многочлена на многочлен при делении с остатком
 // MOD_PP_P
+// Ильин Павел 2383
 [[nodiscard]] Polynomial Polynomial::operator%(const Polynomial &other) const {
     // копируем коэфы для изменения
     std::vector<Rational> coefsForDivisor = coefficients_;
