@@ -2,7 +2,7 @@
 using digit = uint8_t;
 
 // Valeyeva Alina ADD_ZZ_Z - Сложение целых чисел(используемые мметоды: POZ_Z_D, ABS_Z_N, COM_NN_D, ADD_NN_N, SUB_NN_N, MUL_ZM_Z)
-Integer Integer::operator+(const Integer &other) const {
+Integer Integer::operator+(const Integer &other ) const {
     int flag_MUL_ZM_Z = 0; // для определения знака. Если флаг = 1, то умножаем на (-1) через метод MUL_ZM_Z
     Natural number_other = other.abs().number_; // получаю абсолютную часть второго числа (ABS_Z_Z)
     Natural result; // число-резутат, натуральное

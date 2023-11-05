@@ -10,7 +10,7 @@ Rational Rational::operator*(const Rational &other) const{ // MUL_QQ_Q
     return result;
 }
 
-// Valeyeva Alina RED_Q_Q - Сокращение дроби(использумые методы: ABS_Z_N, GCF_NN_N, DIV_ZZ_Z)
+// Valeyeva Alina RED_Q_Q - Сокращение дроби(использумые методы: ABS_Z_N, GCF_NN_N, DIV_ZZ_Z )
 Rational Rational::reduce() const{
     Natural my_numerator = numerator_.abs().toNatural(); // получили мой числитель в виде натурального неотрицательного числа
     Natural nod = Natural::gcd(my_numerator, denominator_); // получили НОД в виде натур числа

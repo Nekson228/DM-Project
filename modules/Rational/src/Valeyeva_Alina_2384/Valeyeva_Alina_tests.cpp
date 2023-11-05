@@ -2,7 +2,7 @@
 #include "../../Rational.h"
 
 TEST(Multiplication_test, test1){
-    Integer integer_1(8);
+    Integer integer_1(8 );
     Natural natural_1(15);
     Rational rational_1(integer_1, natural_1);
 

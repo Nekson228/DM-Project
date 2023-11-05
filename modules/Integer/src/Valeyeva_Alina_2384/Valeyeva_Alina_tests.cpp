@@ -27,7 +27,7 @@ TEST(operator_add, Tests_3){
 
     EXPECT_EQ(ans3,ans3_test);
 }
-int main(int argc, char** argv){
+int main(int argc, char** argv ){
     srand(time(NULL));
     ::testing::InitGoogleTest();
     return RUN_ALL_TESTS();
