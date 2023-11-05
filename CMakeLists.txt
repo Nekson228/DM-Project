@@ -11,4 +11,6 @@ add_executable(DM main.cpp
         modules/Polynomial/Polynomial.cpp
         modules/Polynomial/Polynomial.h
         modules/Rational/Rational.cpp
-        modules/Rational/Rational.h)
+        modules/Rational/Rational.h
+        modules/Rational/src/Valeyeva_Alina_2384/Valeyeva_Alina.cpp
+        modules/Integer/src/Valeyeva_Alina_2384/Valeyeva_Alina.cpp)
