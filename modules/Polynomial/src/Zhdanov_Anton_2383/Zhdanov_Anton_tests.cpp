@@ -2,10 +2,7 @@
 #include "../../Polynomial.h"
 
 TEST(getDegree, regular_test){
-    std::vector<Rational> coef1;
-    coef1.push_back(Rational(1, 1));
-    coef1.push_back(Rational(3, 1));
-    coef1.push_back(Rational(-1, 1));
+    std::vector<Rational> coef1 = {Rational(1, 1), Rational(3, 1), Rational(-1, 1)};
     Polynomial f(coef1);
     std::size_t ans = 2;
     std::size_t ans_test = f.getDegree();
@@ -13,8 +10,8 @@ TEST(getDegree, regular_test){
 }
 
 TEST(getDegree, polynomial_with_degree_0){
-    std::vector<Rational> coef1;
-    coef1.push_back(Rational((1), (1)));
+    std::vector<Rational> coef1 = {Rational((1), (1))};
+
     Polynomial f(coef1);
     std::size_t ans = 0;
     std::size_t ans_test = f.getDegree();
@@ -22,17 +19,8 @@ TEST(getDegree, polynomial_with_degree_0){
 }
 
 TEST(getDegree, high_degree_test){
-    std::vector<Rational> coef1;
-    coef1.push_back(Rational(1, 1));
-    coef1.push_back(Rational(3, 1));
-    coef1.push_back(Rational(-1, 1));
-    coef1.push_back(Rational(-4, 1));
-    coef1.push_back(Rational(-3, 1));
-    coef1.push_back(Rational(1, 1));
-    coef1.push_back(Rational(3, 1));
-    coef1.push_back(Rational(-1, 1));
-    coef1.push_back(Rational(-4, 1));
-    coef1.push_back(Rational(-3, 1));
+    std::vector<Rational> coef1 = {Rational(1, 1), Rational(3, 1),Rational(-1, 1),Rational(-4, 1),
+    Rational(1, 1),Rational(3, 1),Rational(-1, 1),Rational(-4, 1),Rational(-3, 1)};
 
     Polynomial f(coef1);
     std::size_t ans = 9;
@@ -41,19 +29,9 @@ TEST(getDegree, high_degree_test){
 }
 
 TEST(scale, regular_test){
-    std::vector<Rational> coef1;
-    coef1.push_back(Rational(1, 1));
-    coef1.push_back(Rational(3, 1));
-    coef1.push_back(Rational(-1, 1));
-    coef1.push_back(Rational(-4, 1));
-    coef1.push_back(Rational(-3, 1));
+    std::vector<Rational> coef1 = {Rational(1, 1),Rational(3, 1),Rational(-1, 1),Rational(-4, 1),Rational(-3, 1)};
 
-    std::vector<Rational> coef2;
-    coef1.push_back(Rational(2, 1));
-    coef1.push_back(Rational(6, 1));
-    coef1.push_back(Rational(-2, 1));
-    coef1.push_back(Rational(-8, 1));
-    coef1.push_back(Rational(-6, 1));
+    std::vector<Rational> coef2 = {Rational(2, 1),Rational(6, 1),Rational(-2, 1),Rational(-8, 1),Rational(-6, 1)};
 
     Polynomial f(coef1);
     Polynomial g(coef2);
@@ -61,19 +39,9 @@ TEST(scale, regular_test){
 }
 
 TEST(scale, negativ_number_test){
-    std::vector<Rational> coef1;
-    coef1.push_back(Rational(1, 1));
-    coef1.push_back(Rational(3, 1));
-    coef1.push_back(Rational(-1, 1));
-    coef1.push_back(Rational(-4, 1));
-    coef1.push_back(Rational(-3, 1));
+    std::vector<Rational> coef1 = {Rational(1, 1),Rational(3, 1),Rational(-1, 1),Rational(-4, 1),Rational(-3, 1)};
 
-    std::vector<Rational> coef2;
-    coef2.push_back(Rational(-2,3));
-    coef2.push_back(Rational(-2, 1));
-    coef2.push_back(Rational(2, 3));
-    coef2.push_back(Rational(8, 3));
-    coef2.push_back(Rational(2, 1));
+    std::vector<Rational> coef2 = {Rational(-2,3),Rational(-2, 1),Rational(2, 3),Rational(8, 3),Rational(2, 1)};
 
     Polynomial f(coef1);
     Polynomial g(coef2);
@@ -81,15 +49,9 @@ TEST(scale, negativ_number_test){
 }
 
 TEST(scale, test_with_0){
-    std::vector<Rational> coef1;
-    coef1.push_back(Rational(1, 1));
-    coef1.push_back(Rational(3, 1));
-    coef1.push_back(Rational(-1, 1));
-    coef1.push_back(Rational(-4, 1));
-    coef1.push_back(Rational(-3, 1));
+    std::vector<Rational> coef1 = {Rational(1, 1),Rational(3, 1),Rational(-1, 1),Rational(-4, 1),Rational(-3, 1)};
 
-    std::vector<Rational> coef2;
-    coef1.push_back(Rational(0,1));
+    std::vector<Rational> coef2 = {Rational(0,1)};
 
     Polynomial f(coef1);
     Polynomial g(coef2);
@@ -97,18 +59,11 @@ TEST(scale, test_with_0){
 }
 
 TEST(gcd, polynomial_g_is_gcd){
-    std::vector<Rational> coef1;
-    coef1.push_back(Rational((1), (1)));
-    coef1.push_back(Rational((5), (1)));
-    coef1.push_back(Rational((6), (1)));
+    std::vector<Rational> coef1 = {Rational(1, 1),Rational(5, 1),Rational(6, 1)};
 
-    std::vector<Rational> coef2;
-    coef2.push_back(Rational((1), (1)));
-    coef2.push_back(Rational((3), (1)));
+    std::vector<Rational> coef2 = {Rational(1, 1),Rational(3, 1)};
 
-    std::vector<Rational> ans;
-    ans.push_back(Rational((1), (1)));
-    ans.push_back(Rational((3), (1)));
+    std::vector<Rational> ans = {Rational(1, 1),Rational(3, 1)};
 
     Polynomial f(coef1);
     Polynomial g(coef2);
@@ -117,22 +72,11 @@ TEST(gcd, polynomial_g_is_gcd){
 }
 
 TEST(gcd, regular_test){
-    std::vector<Rational> coef1;
-    coef1.push_back(Rational(1, 1));
-    coef1.push_back(Rational(3, 1));
-    coef1.push_back(Rational(-1, 1));
-    coef1.push_back(Rational(-4, 1));
-    coef1.push_back(Rational(-3, 1));
+    std::vector<Rational> coef1 = {Rational(1, 1),Rational(3, 1),Rational(-1, 1),Rational(-4, 1),Rational(-3, 1)};
 
-    std::vector<Rational> coef2;
-    coef2.push_back(Rational(3, 1));
-    coef2.push_back(Rational(10, 1));
-    coef2.push_back(Rational(2, 1));
-    coef2.push_back(Rational(-3, 1));
+    std::vector<Rational> coef2 = {Rational(3, 1),Rational(10, 1),Rational(2, 1),Rational(-3, 1)};
 
-    std::vector<Rational> ans;
-    ans.push_back(Rational(1, 1));
-    ans.push_back(Rational(3, 1));
+    std::vector<Rational> ans = {Rational(1, 1),Rational(3, 1)};
 
     Polynomial f(coef1);
     Polynomial g(coef2);
@@ -141,19 +85,11 @@ TEST(gcd, regular_test){
 }
 
 TEST(gcd, regular_test){
-    std::vector<Rational> coef1;
-    coef1.push_back(Rational(3, 1));
-    coef1.push_back(Rational(10, 1));
-    coef1.push_back(Rational(2, 1));
-    coef1.push_back(Rational(-3, 1));
-    std::vector<Rational> coef2;
-    coef1.push_back(Rational(-5, 9));
-    coef1.push_back(Rational(-25, 9));
-    coef1.push_back(Rational(-10, 3));
+    std::vector<Rational> coef1 = {Rational(3, 1),Rational(10, 1),Rational(2, 1),Rational(-3, 1)};
 
-    std::vector<Rational> ans;
-    ans.push_back(Rational(1, 1));
-    ans.push_back(Rational(3, 1));
+    std::vector<Rational> coef2 = {Rational(-5, 9),Rational(-25, 9),Rational(-10, 3)};
+
+    std::vector<Rational> ans = {Rational(1, 1), Rational(3, 1)};
 
     Polynomial f(coef1);
     Polynomial g(coef2);
