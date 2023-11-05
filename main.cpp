@@ -5,6 +5,5 @@
 #include "modules/Polynomial/Polynomial.h"
 
 int main() {
-    Natural n;
-     std::cout << n.str();
+
 }
