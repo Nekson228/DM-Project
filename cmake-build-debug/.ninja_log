@@ -1,13 +1,8 @@
 # ninja log v5
-1	515	1699186297695096025	CMakeFiles/DM.dir/modules/Polynomial/Polynomial.cpp.o	e19e3ceab9b93642
+13	2151	7202201923942945	CMakeFiles/DM.dir/main.cpp.obj	699a32d25257a890
+27	1638	7202201918790501	CMakeFiles/DM.dir/modules/Integer/Integer.cpp.obj	e3a39e18993ece85
+16	2719	7202109714428629	CMakeFiles/DM.dir/Natural/src/Natural.cpp.obj	71047daa84a2a86d
 2152	2611	7202201928359837	DM.exe	856fcad5b160ebe8
-1	583	1699186297763097400	CMakeFiles/DM.dir/main.cpp.o	498af87082204cdb
-1	515	1699186297695096025	CMakeFiles/DM.dir/modules/Integer/Integer.cpp.o	d07de536d7797b16
-708	785	1699186297963101445	DM	5cf4cc9b65c2810a
-1	515	1699186297695096025	CMakeFiles/DM.dir/modules/Rational/Rational.cpp.o	16739eca29f35ae9
-1	707	1699186297887099908	CMakeFiles/DM.dir/modules/Natural/Natural.cpp.o	88a673c65533bd2b
-0	12	1699187411441626798	build.ninja	d7f702bec533d0f
-1	429	1699187411873616060	CMakeFiles/DM.dir/modules/Integer/src/Valeyeva_Alina_2384/Valeyeva_Alina.cpp.o	c2b289ea2d6850c7
-1	429	1699187411873616060	CMakeFiles/DM.dir/modules/Rational/src/Valeyeva_Alina_2384/Valeyeva_Alina.cpp.o	3bfc888b93fb1b10
-1	995	1699187412437602109	CMakeFiles/DM.dir/modules/Rational/src/Valeyeva_Alina_2384/Valeyeva_Alina_tests.cpp.o	25ff2a95a868c08a
-1	1009	1699187412453601714	CMakeFiles/DM.dir/modules/Integer/src/Valeyeva_Alina_2384/Valeyeva_Alina_tests.cpp.o	eff354aaf5fd1a54
+63	2066	7202201923080663	CMakeFiles/DM.dir/modules/Polynomial/Polynomial.cpp.obj	c184679e08aef7f4
+39	1871	7202201921142629	CMakeFiles/DM.dir/modules/Natural/Natural.cpp.obj	9666cd254e8badff
+51	1880	7202201921243150	CMakeFiles/DM.dir/modules/Rational/Rational.cpp.obj	451677b32131a6ad
