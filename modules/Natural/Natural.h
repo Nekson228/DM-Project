@@ -9,7 +9,7 @@ using digit = uint8_t;
 
 class Natural {
     std::vector<digit> digits_ = {}; // цифры в обратном порядке (154 == [4 5 1])
-    std::size_t n_ = -1; // номер старшей позциии
+    std::size_t n_ = -1; // номер старшей позциии (начиная с 0)
 
 public:
     Natural() = default;
