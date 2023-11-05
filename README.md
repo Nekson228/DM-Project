@@ -10,7 +10,7 @@ ETU 2023 DM Project
 | Юля Лавренова     | Z2, Z8, Q3       | POZ_Z_D, MUL_ZZ_Z, TRANS_Z_Q           | Integer::isPositive, Integer::operator*, Rational::Rational(const Integer &)              |    ✓?   |
 | Роман Цыганков    | Z4, Z7, P4       | TRANS_N_Z, SUB_ZZ_Z, MUL_Pxk_P         | Integer::Integer(const Natural &), Integer::operator-, Polynomial::mulByXk                |         |
 | Катя Соц          | Z5, Z9, N13      | TRANS_Z_N, DIV_ZZ_Z, GCF_NN_N          | Integer::toNatural, Integer::operator/, <br> Natural::gcd                                 |         |
-| Алина Валеева     | Q1, Z6, Q7       | RED_Q_Q, ADD_ZZ_Z, MUL_QQ_Q            | Rational::reduce, Integer::operator+, Rational::operator*                                 |         |
+| Алина Валеева     | Q1, Z6, Q7       | RED_Q_Q, ADD_ZZ_Z, MUL_QQ_Q            | Rational::reduce, Integer::operator+, Rational::operator*                                 |    ✓?   |
 | Рома Дамакин      | Q2, Q6, P8, N10  | INT_Q_B, SUB_QQ_Q, MUL_PP_P, DIV_NN_Dk | Rational::isInteger, Rational::operator-, Polynomial::operator*,  Natural::divFirstDigit  |   ✓?    |
 | Ярослав Борматов  | Q4, P7, P13      | TRANS_Q_Z, FAC_P_Q, NMR_P_P            | Rational::toInteger, Polynomial::factorize, Polynomial::singlify                          |         |
 | Егор Кузьминых    | P1, Q5, P9, P12  | ADD_PP_P, ADD_QQ_Q, DIV_PP_P, DER_P_P  | Polynomial::operator+, Rational::operator+, Polynomial::operator/, Polynomial::derivative |         |
