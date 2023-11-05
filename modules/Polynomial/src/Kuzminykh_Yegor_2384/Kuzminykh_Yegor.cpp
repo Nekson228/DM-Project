@@ -7,17 +7,19 @@
 
     // в maxDegree храню итоговую (макс) степень сложения двух многочленов,
     std::size_t maxDegree = std::max(degree_, other.degree_);
-    //Создал вектор, в котором буду хранить коэффы от результата сложения, заполнил его нулями
-    std::vector<Rational> resultCoefficients(maxDegree + 1, Rational(0, 1));
+    //Создал вектор, в котором буду хранить коэффы от результата сложения, заполнил его коэфами с первого многочлена
+    std::vector<Rational> resultCoefficients = coefficients_;
 
     // Складываем коэффициенты многочленов
     //В первом цикле мы просто добавляем в массив с коэффами коэффы при первом многочлене
-    for (std::size_t i = 0; i <= degree_; i++) {
-        resultCoefficients[i] = coefficients_[i];
+    while (resultCoefficients.size() < maxDegree) {
+        resultCoefficients.insert(resultCoefficients.begin(), Rational(0, 1));
     }
-    //Во втором цикле мы складываем коэффы второго многочлена с коэффами в resultCoefficients
-    for (std::size_t i = 0; i <= other.degree_; i++) {
-        resultCoefficients[i] = resultCoefficients[i] + other.coefficients_[i];// Использование метода (ADD_QQ_Q)
+
+    //складываем коэффы из второго многочлена с новыми
+    for (std::size_t i = 0; i < other.degree_; i++) {
+        resultCoefficients[maxDegree - other.degree_ + i] = resultCoefficients[maxDegree - other.degree_ + i] +
+                                                            other.coefficients_[i];// Использование метода (ADD_QQ_Q)
     }
 
     // Создаем новый многочлен с полученными коэффами и возвращаем его
@@ -44,8 +46,9 @@
                         other.getDegree();//вычислили степень на данном шагу, использование метода (DEG_P_N)
         Rational factor = remainder.leading() /
                           other.leading();//вычислили коэфф при старшей степени, Использование метода (DIV_QQ_Q)
-
-        Polynomial term = other.mulByXk(k).scale(factor);//домножили на x^k, использование метода (MUL_Pxk_P)
+        std::vector<Rational> coef(1, Rational(1, 0));
+        Polynomial polynomial = Polynomial(coef);
+        Polynomial term = polynomial.mulByXk(k).scale(factor);//домножили на x^k, использование метода (MUL_Pxk_P)
         quotient = quotient + term;// увеличили частное, использование метода (ADD_PP_P)
 
         remainder = remainder - term;//Поменяли остаток, сделали меньше
@@ -58,10 +61,11 @@
 //DER_P_P (Производная многочлена, короткий номер - P12)
 Polynomial Polynomial::derivative() const {
     //Создали вектор для хранения коэфициентов
-    std::vector<Rational> derivativeCoefficients(degree_, Rational(0, 1));
+    std::vector<Rational> derivativeCoefficients(degree_ - 1, Rational(0, 1));
 
-    for (std::size_t i = 1; i <= degree_; i++) {//домножаю коэффициент на степень
-        derivativeCoefficients[i - 1] = coefficients_[i] * Rational(i, 1);
+    for (std::size_t i = 0; i < degree_ - 1; i++) {//домножаю коэффициент на степень
+        derivativeCoefficients[i] = coefficients_[i] * Rational((degree_ - i), 1);
+
     }
     Polynomial result = Polynomial(derivativeCoefficients);//создаю новый многочлен и возвращаю его
 

@@ -21,5 +21,5 @@
     //Создаем новую дробь с новым числителем и знаменателем, возвращаем ее
     Rational result = Rational(sum, lcm);
 
-    return result;
+    return result.reduce();
 }
