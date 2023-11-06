@@ -14,10 +14,10 @@ TEST(rationalDiv,3){
     ASSERT_TRUE(Rational(-5,10) / Rational(2, 3) == Rational(-15, 20));
 }
 
-TEST(rationalDiv,3){
+TEST(rationalDiv,4){
     ASSERT_TRUE(Rational(5,10) / Rational(-2, 3) == Rational(-15, 20));
 }
 
-TEST(rationalDiv,4){
+TEST(rationalDiv,5){
     ASSERT_THROW((Rational(1, 1) / Rational(0, 0)),std::invalid_argument);
 }
