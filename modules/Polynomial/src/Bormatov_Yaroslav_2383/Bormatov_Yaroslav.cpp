@@ -7,7 +7,7 @@
 Polynomial Polynomial::factorize() const {
     Polynomial result = Polynomial(*this); // создание многочлена возвращаемого методом
 
-    if(degree_ < 1) return result; // если многочлен степени <= 1 -> нельзя ничего вынести
+    if(degree_ < 1) return result; // если многочлен степени < 1 -> нельзя ничего вынести
 
     Natural lcm_{1}, gcd_{1}; // создаем два натуральных числа - НОД и НОК знаменателей и числителей коэф-ов многочлена соответственно
     gcd_ = gcd_.gcd(coefficients_[0].getNumerator().toNatural(), coefficients_[1].getNumerator().toNatural()); // вычисление НОД <a_0, a_1>
@@ -21,7 +21,7 @@ Polynomial Polynomial::factorize() const {
     Integer gcd_int(gcd_); // gcd -> int
     Rational ratio(gcd_int, lcm_); // ratio = gcd / lcm
 
-    for(size_t i = 0; i < degree_; i++) {
+    for(size_t i = 0; i <= degree_; i++) {
         result.coefficients_[i] = coefficients_[i] / ratio; // делим каждый коэффициент на ratio
     }
 
