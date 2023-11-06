@@ -3,11 +3,7 @@
 
 TEST(IntegerTest, toNaturalNegativeTest) {
     Integer num(-1);
-    try {
-        num.toNatural();
-    } catch (std::invalid_argument const& err) {
-        EXPECT_EQ(err.what(), std::string("Число отрицательное"));
-    }
+    EXPECT_THROW(num.toNatural(), std::invalid_argument);
 }
 
 TEST(IntegerTest, toNaturalZeroTest) {
