@@ -25,30 +25,34 @@ TEST(IntegerTest, toNaturalPositiveTest) {
 TEST(IntegerTest, DivOperatorDivByZeroTest) {
     Integer first(2);
     Integer second(0);
-    try {
-        first = first / second;
-    } catch (std::invalid_argument const& err) {
-        EXPECT_EQ(err.what(), std::string("Деление на 0 невозможно"));
-    }
+    EXPECT_THROW(first = first / second, std::invalid_argument);
 }
 
-TEST(IntegerTest, DivOperatorTwoPositiveTest) {
-    Integer first(9);
-    Integer second(2);
-    first = first - second;
-    EXPECT_EQ(first, Integer(4));
-}
-
-TEST(IntegerTest, DivOperatorOnePositiveTest) {
-    Integer first(15);
-    Integer second(-3);
-    first = first - second;
-    EXPECT_EQ(first, Integer(-5));
-}
-
-TEST(IntegerTest, DivOperatorZeroPositiveTest) {
-    Integer first(-7);
-    Integer second(-3);
-    first = first - second;
+TEST(IntegerTest, DivOperatorPosPosTest) {
+    Integer first(7);
+    Integer second(3);
+    first = first / second;
     EXPECT_EQ(first, Integer(2));
 }
+
+TEST(IntegerTest, DivOperatorPosNegTest) {
+    Integer first(7);
+    Integer second(-3);
+    first = first / second;
+    EXPECT_EQ(first, Integer(-2));
+}
+
+TEST(IntegerTest, DivOperatorNegPosTest) {
+    Integer first(-7);
+    Integer second(3);
+    first = first / second;
+    EXPECT_EQ(first, Integer(-3));
+}
+
+TEST(IntegerTest, DivOperatorNegNegTest) {
+    Integer first(-7);
+    Integer second(-3);
+    first = first / second;
+    EXPECT_EQ(first, Integer(3));
+}
+

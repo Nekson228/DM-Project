@@ -6,7 +6,7 @@
 static Natural gcd(const Natural &a, const Natural &b) { // стандартный алгоритм Евклида для нахождения НОД
     Natural first(a);
     Natural second(b);
-    while(first.cmp(first, Natural(0)) != 0 && second.cmp(second, Natural(0)) != 0) { // while a != 0 && b != 0
+    while(!first.isZero() && !second.isZero()) { // while a != 0 && b != 0
         if(first.cmp(first, second) == 2) { // if first > second
             first = first % second;       
         } else {
