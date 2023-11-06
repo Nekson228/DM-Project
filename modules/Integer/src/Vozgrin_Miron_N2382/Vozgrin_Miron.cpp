@@ -1,6 +1,6 @@
-// Мирон Возгрин 2382; Остаток от деления целого на целое (MOD_ZZ_Z)
 #include "../../Integer.h"
 
+// Мирон Возгрин 2382; Остаток от деления целого на целое (MOD_ZZ_Z)
 Integer Integer::operator%(const Integer &other)const{
     Integer z1(number_);
     Integer z2(other.number_);

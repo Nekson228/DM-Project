@@ -1,8 +1,9 @@
-// Мирон Возгрин 2382; оператор деления для дробей (DIV_QQ_Q)
 #include"../../Rational.h"
+
+// Мирон Возгрин 2382; оператор деления для дробей (DIV_QQ_Q)
 Rational Rational::operator/(const Rational &other)const{
 
-    if(numerator_.isPositive()==0) return Rational(0, 0);                   //проверка делимой дроби на равенство 0
+    if(numerator_.isPositive()==0) std::invalid_argument("Деление на ноль невозможно"); // проверка делимой дроби на равенство 0
 
     Integer subNumeratorRight(other.denominator_);                          //вспомогательное целое число равное модулю числитея правой дроби
 
