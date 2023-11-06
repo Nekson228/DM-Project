@@ -3,7 +3,7 @@
 #include<gtest/gtest.h>
 
 TEST(rationalDiv,1){
-    ASSERT_TRUE(Rational(0, 0) / Rational(1, 1) == Rational(0, 0));
+    ASSERT_TRUE(Rational(0, 1) / Rational(1, 1) == Rational(0, 1));
 }
 
 TEST(rationalDiv,2){
@@ -19,5 +19,5 @@ TEST(rationalDiv,4){
 }
 
 TEST(rationalDiv,5){
-    ASSERT_THROW((Rational(1, 1) / Rational(0, 0)),std::invalid_argument);
+    ASSERT_THROW((Rational(1, 1) / Rational(0, 1)),std::invalid_argument);
 }
