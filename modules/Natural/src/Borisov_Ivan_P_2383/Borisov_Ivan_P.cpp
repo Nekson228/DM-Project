@@ -29,26 +29,8 @@ Natural Natural:: subScaled(const Natural &other, digit k) const
 
     other_num = other_num.mulByDigit(k); //умножаем вычитаемое на цифру
 
-    for (size_t i = 0; i<=other_num.n_; i++){ //вычитание будет производиться до последнего разряда второго числа
-        if(number.digits_[i] < other_num.digits_[i]) //если цифра разряда первого числа меньше второго
-        {   
-            number.digits_[i]+=10; //добавляем десяток "занимаемый" из старшего разряда
-            size_t j = i+1;
-            if(number.digits_[j] == 0){
-                while (number.digits_[j]==0) //пока цифры старших разрядов равны нулю, записываем 9, так как мы занимаем из следующего, и предыдущему даём из данного
-                {
-                    number.digits_[j] = 9;
-                    j++;
-                }
-                number.digits_[j] -= 1; //разряд из которого "заняли" предыдущие
-            }
-            else number.digits_[j] -= 1; //если цифра следующего разряда не равна ноль, то мы просто занимаем у него
-        }
-        number.digits_[i] -= other_num.digits_[i]; //производим вычетание
-    }
-    for(int i = number.n_; number.digits_[i]==0; i--){   //если у числа стало меньше разрядов убираем их
-        number.digits_.pop_back(); 
-    }
+    number = number - other_num; //производим вычетание
+
 
     return number;
 }
@@ -58,13 +40,11 @@ Natural Natural:: operator%(const Natural &other) const
 {
     Natural number(*this); 
 
-    if(cmp(number, other) == 1) return number; //если делитель меньше делимого возвращаем делитель
+    if(cmp(number, other) == 1) return number; //если делимое меньше делителя возвращаем делимое
 
     Natural quotient = number/other; //целочисленно делим число на второе, остаток деления на которое мы ищем
 
-    Natural op = quotient*other; //находим произведение частного и делителя
-
-    Natural res = number.subScaled(op, 1); //вычилсляем остаток от деления
+    Natural res = number.subScaled(other, quotient); //вычилсляем остаток от деления
 
     return res;
 }
