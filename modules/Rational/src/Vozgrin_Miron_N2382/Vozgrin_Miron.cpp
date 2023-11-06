@@ -3,7 +3,7 @@
 // Мирон Возгрин 2382; оператор деления для дробей (DIV_QQ_Q)
 Rational Rational::operator/(const Rational &other)const{
 
-    if(other.numerator_.isPositive()==0) std::invalid_argument("Деление на ноль невозможно"); // проверка делимой дроби на равенство 0
+    if(other.numerator_.isPositive()==0) std::invalid_argument("Деление на ноль невозможно"); // проверка на равенство делителя нулю
 
     Integer subNumeratorRight(other.denominator_);                          //вспомогательное целое число равное модулю числитея правой дроби
 
