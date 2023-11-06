@@ -1,5 +1,5 @@
 #include "../../Polynomial.h"
-
+#include <stdexcept>
 
 //Написал функцию - Кузьминых Егор
 //ADD_PP_P (операция сложения многочленов, короткий номер - P1)
@@ -12,7 +12,7 @@
 
     // Складываем коэффициенты многочленов
     //В первом цикле мы просто добавляем в массив с коэффами коэффы при первом многочлене
-    while (resultCoefficients.size() < maxDegree) {
+    while (resultCoefficients.size() < other.coefficients_.size()) {
         resultCoefficients.insert(resultCoefficients.begin(), Rational(0, 1));
     }
 
@@ -35,6 +35,9 @@
     std::vector<Rational> resultCoefficients(1, Rational(0, 1));
     Polynomial quotient = Polynomial(resultCoefficients); // Частное от деления
     Polynomial remainder(*this); // Остаток от деления
+    if (other.coefficients_[0].getNumerator() == Integer(0)) {
+        throw std::invalid_argument("Деление на ноль невозможно");
+    }
     if (degree_ < other.degree_) {
         // Если степень делителя больше степени делимого, возвращаем ноль (частное на данный момент)
         return quotient;
@@ -46,12 +49,12 @@
                         other.getDegree();//вычислили степень на данном шагу, использование метода (DEG_P_N)
         Rational factor = remainder.leading() /
                           other.leading();//вычислили коэфф при старшей степени, Использование метода (DIV_QQ_Q)
-        std::vector<Rational> coef(1, Rational(1, 0));
+        std::vector<Rational> coef(1, Rational(1, 1));
         Polynomial polynomial = Polynomial(coef);
         Polynomial term = polynomial.mulByXk(k).scale(factor);//домножили на x^k, использование метода (MUL_Pxk_P)
         quotient = quotient + term;// увеличили частное, использование метода (ADD_PP_P)
 
-        remainder = remainder - term;//Поменяли остаток, сделали меньше
+        remainder = remainder - term * other;//Вычислили остаток
     }
 
     return quotient;
@@ -61,9 +64,9 @@
 //DER_P_P (Производная многочлена, короткий номер - P12)
 Polynomial Polynomial::derivative() const {
     //Создали вектор для хранения коэфициентов
-    std::vector<Rational> derivativeCoefficients(degree_ - 1, Rational(0, 1));
+    std::vector<Rational> derivativeCoefficients(degree_, Rational(0, 1));
 
-    for (std::size_t i = 0; i < degree_ - 1; i++) {//домножаю коэффициент на степень
+    for (std::size_t i = 0; i <= degree_ - 1; i++) {//домножаю коэффициент на степень
         derivativeCoefficients[i] = coefficients_[i] * Rational((degree_ - i), 1);
 
     }

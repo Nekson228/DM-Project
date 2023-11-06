@@ -1,31 +1,40 @@
 #include <gtest/gtest.h>
 #include "../../Polynomial.h"
 
-TEST(PolynomialAddictionTest,1){
+TEST(PolynomialAdditionTest,1){
     std::vector<Rational> coef1 = {Rational(Integer(1)), Rational(Integer(1)), Rational(Integer(1))};
     Polynomial first_pol = Polynomial(coef1);
     std::vector<Rational> coef2 = {Rational(Integer(1)), Rational(Integer(1)), Rational(Integer(1)),Rational(Integer(1))};
     Polynomial second_pol = Polynomial(coef2);
-    std::vector<Rational> coef3 = {Rational(Integer(2)), Rational(Integer(2)), Rational(Integer(2)),Rational(Integer(1))};
+    std::vector<Rational> coef3 = {Rational(Integer(1)), Rational(Integer(2)), Rational(Integer(2)),Rational(Integer(2))};
     Polynomial result = Polynomial(coef3);
     EXPECT_EQ(first_pol+second_pol, result);
 }
 
-TEST(PolynomialAddictionTest,2){
+TEST(PolynomialAdditionTest,2){
     std::vector<Rational> coef1 = {Rational(Integer(1))};
     Polynomial first_pol = Polynomial(coef1);
-    std::vector<Rational> coef2 = {Rational(Integer(1))};
+    std::vector<Rational> coef2 = {Rational(Integer(0))};
     Polynomial second_pol = Polynomial(coef2);
-    std::vector<Rational> coef3 = {Rational(Integer(2))};
+    std::vector<Rational> coef3 = {Rational(Integer(1))};
     Polynomial result = Polynomial(coef3);
     EXPECT_EQ(first_pol+second_pol, result);
 }
-TEST(PolynomialAddictionTest,3){
+TEST(PolynomialAdditionTest,3){
     std::vector<Rational> coef1 = {Rational(1,2), Rational(1,2),Rational(1,2)};
     Polynomial first_pol = Polynomial(coef1);
     std::vector<Rational> coef2 = {Rational(1,2), Rational(1,2),Rational(1,2)};
     Polynomial second_pol = Polynomial(coef2);
     std::vector<Rational> coef3 = {Rational(1,1), Rational(1,1),Rational(1,1)};
+    Polynomial result = Polynomial(coef3);
+    EXPECT_EQ(first_pol+second_pol, result);
+}
+TEST(PolynomialAdditionTest,4){
+    std::vector<Rational> coef1 = {Rational(1,2), Rational(1,2),Rational(1,2)};
+    Polynomial first_pol = Polynomial(coef1);
+    std::vector<Rational> coef2 = {Rational(-1,2), Rational(1,2),Rational(1,2)};
+    Polynomial second_pol = Polynomial(coef2);
+    std::vector<Rational> coef3 = {Rational(1,1),Rational(1,1)};
     Polynomial result = Polynomial(coef3);
     EXPECT_EQ(first_pol+second_pol, result);
 }
@@ -36,7 +45,7 @@ TEST(PolynomialDivisionTest,1){
     Polynomial first_pol = Polynomial(coef1);
     std::vector<Rational> coef2 = {Rational(1,1), Rational(1,1),Rational(1,1)};
     Polynomial second_pol = Polynomial(coef2);
-    std::vector<Rational> coef3 = {Rational(0,1)};
+    std::vector<Rational> coef3 = {Rational(1,1)};
     Polynomial result = Polynomial(coef3);
     EXPECT_EQ(first_pol/second_pol, result);
 }
@@ -58,10 +67,22 @@ TEST(PolynomialDivisionTest,3){
     Polynomial result = Polynomial(coef3);
     EXPECT_EQ(first_pol/second_pol, result);
 }
+TEST(PolynomialDivisionTest,4){
+    std::vector<Rational> coef1 = {Rational(1,1), Rational(1,1),Rational(1,1)};
+    Polynomial first_pol = Polynomial(coef1);
+    std::vector<Rational> coef2 = {Rational(0,1)};
+    Polynomial second_pol = Polynomial(coef2);
+    try {
+        Polynomial res = first_pol/second_pol;
+    }catch (std::invalid_argument &e){
+        EXPECT_EQ(e.what(), (std::string)"Деление на ноль невозможно");
+    }
+}
+
 TEST(PolynomialDerivativeTest,1){
     std::vector<Rational> coef1 = {Rational(Integer(1)), Rational(Integer(1))};
     Polynomial first_pol = Polynomial(coef1);
-    std::vector<Rational> coef2 = {Rational(Integer(2)), Rational(Integer(1))};
+    std::vector<Rational> coef2 = {Rational(Integer(1))};
     Polynomial result = Polynomial(coef2);
     EXPECT_EQ(first_pol.derivative(), result);
 }
