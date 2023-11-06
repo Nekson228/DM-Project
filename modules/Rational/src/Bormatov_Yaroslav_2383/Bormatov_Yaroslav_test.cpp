@@ -3,11 +3,7 @@
 
 TEST(RationalTest, ToIntegerThrowTest) {
     Rational num(1,2);
-    try {
-        num.toInteger();
-    } catch (std::invalid_argument const& err) {
-        EXPECT_EQ(err.what(), std::string("Преобразование в \"Integer\" невозможно"));
-    }
+    EXPECT_THROW(num.toInteger(), std::invalid_argument);
 }
 
 TEST(RationalTest, ToIntegerNegativeTest) {

@@ -7,13 +7,13 @@
 Polynomial Polynomial::factorize() const {
     Polynomial result = Polynomial(*this); // создание многочлена возвращаемого методом
 
-    if(degree_ <= 1) return result; // если многочлен степени <= 1 -> нельзя ничего вынести
+    if(degree_ < 1) return result; // если многочлен степени <= 1 -> нельзя ничего вынести
 
     Natural lcm_{1}, gcd_{1}; // создаем два натуральных числа - НОД и НОК знаменателей и числителей коэф-ов многочлена соответственно
     gcd_ = gcd_.gcd(coefficients_[0].getNumerator().toNatural(), coefficients_[1].getNumerator().toNatural()); // вычисление НОД <a_0, a_1>
     lcm_ = lcm_.lcm(coefficients_[0].getDenominator(), coefficients_[1].getDenominator());                     // вычисление НОК <a_0, a_1>
 
-    for(size_t i = 2; i < degree_; i++) {
+    for(size_t i = 2; i <= degree_; i++) {
         gcd_ = gcd_.gcd(gcd_, coefficients_[i].getNumerator().toNatural()); // вычисление НОД от <gcd, a_i>
         lcm_ = lcm_.lcm(lcm_, coefficients_[i].getDenominator());           // вычисление НОК от <lcm, a_i>
     }
