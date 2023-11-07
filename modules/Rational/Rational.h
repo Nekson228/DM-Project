@@ -11,13 +11,15 @@ class Rational {
     void checkDenominator();
 
 public:
+    Rational() = default;
+
     Rational(Integer numerator, Natural denominator);
 
     Rational(std::int64_t numerator, std::size_t denominator);
 
     explicit Rational(const std::string &str_number);
 
-    explicit Rational(const Integer &integer); // TRANS_Z_Q
+    explicit Rational(Integer integer); // TRANS_Z_Q
 
     [[nodiscard]] const Integer &getNumerator() const;
 
@@ -42,6 +44,12 @@ public:
     [[nodiscard]] bool operator==(const Rational &other) const = default;
 
     [[nodiscard]] bool operator!=(const Rational &other) const = default;
+
+    [[nodiscard]] std::string getSign() const;
+
+    [[nodiscard]] Rational abs() const;
+
+    [[nodiscard]] bool isZero() const;
 };
 
 

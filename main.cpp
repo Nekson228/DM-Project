@@ -5,5 +5,7 @@
 #include "modules/Polynomial/Polynomial.h"
 
 int main() {
-
+    Natural natural{"51"};
+    Natural res = natural + natural;
+    std::cout << res.str();
 }

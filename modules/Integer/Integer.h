@@ -11,7 +11,7 @@ public:
 
     explicit Integer(const std::string &str_number);
 
-    explicit Integer(const Natural &natural); // TRANS_N_Z
+    explicit Integer(Natural natural); // TRANS_N_Z
 
     [[nodiscard]] std::string str() const;
 

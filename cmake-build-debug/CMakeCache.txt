@@ -157,7 +157,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=DM
+CMAKE_PROJECT_NAME:STATIC=DM_Modules
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=D:/msys64/mingw64/bin/ranlib.exe
@@ -244,6 +244,15 @@ DM_BINARY_DIR:STATIC=C:/Users/bange/CLionProjects/DM/cmake-build-debug
 
 //Value Computed by CMake
 DM_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+DM_Modules_BINARY_DIR:STATIC=C:/Users/bange/CLionProjects/DM/cmake-build-debug
+
+//Value Computed by CMake
+DM_Modules_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+DM_Modules_SOURCE_DIR:STATIC=C:/Users/bange/CLionProjects/DM
 
 //Value Computed by CMake
 DM_SOURCE_DIR:STATIC=C:/Users/bange/CLionProjects/DM

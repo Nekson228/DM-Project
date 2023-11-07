@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.25)
-project(DM)
+project(DM_Modules)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -12,5 +12,4 @@ add_executable(DM main.cpp
         modules/Polynomial/Polynomial.h
         modules/Rational/Rational.cpp
         modules/Rational/Rational.h
-        modules/Rational/src/Valeyeva_Alina_2384/Valeyeva_Alina.cpp
-        modules/Integer/src/Valeyeva_Alina_2384/Valeyeva_Alina.cpp)
+        modules/utils/utils.cpp modules/utils/utils.h)
