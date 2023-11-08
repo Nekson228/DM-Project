@@ -5,7 +5,7 @@
 #include "modules/Polynomial/Polynomial.h"
 
 int main() {
-    Natural natural{"51"};
-    Natural res = natural + natural;
+    Natural nat1{"100"}, nat2{"1"};
+    Natural res = nat1.divFirstDigit(nat2);
     std::cout << res.str();
 }

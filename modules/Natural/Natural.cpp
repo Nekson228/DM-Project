@@ -257,33 +257,24 @@ digit Natural::cmp(const Natural &a, const Natural &b) {
     return res;
 }
 
-// DIV_NN_N Иваницкий Илья, функция для нахождения неполного частного 2ух натуральных чисел
+//DIV_NN_N  Иваницкий Илья 2383 нахождение неполного частного 2ух чисел
 [[nodiscard]] Natural Natural::operator/(const Natural &other) const {
-    Natural tmp(*this);
-    Natural res;//Результат
-    if (other.isZero()) { // Т.к. деление на 0 невозможно, тогда при подаче 0 программа выбрасывает ошибку
-        throw std::invalid_argument("Деление на 0 невыполнимо!");
-    }
-    if (cmp(tmp, other) == 0) {// если числа равны неполное частное равно 1
-        res.digits_.push_back(1);
-        res.n_ = 0;
-        return res;
-    } else if (cmp(tmp, other) == 1) {//если второе число больше первого, неполное частное равно 0
-        res.digits_.push_back(0);
-        res.n_ = 0;
-        return res;
-    }
-    std::vector<digit> arr;//массив цифр ответа
-    Natural part = tmp.divFirstDigit(other);//получаем первую цифру частного первого числа на второе
-    while (part.digits_[part.n_] >=
-           0) {// Т.к. числа записываются в обратном порядке, то последняя цифра числа обязательно должна быть не 0
-        arr.push_back(part.digits_[part.n_]);
-        tmp = tmp - other *
-                    part;//первое число становится разность изначального на произведение второго числа на цифру деления умноженного на 10^k
-        part = tmp.divFirstDigit(other);
-    }
-    for (unsigned char i: arr) {//заносим в результат цифры из вектора arr)
-        res.digits_.push_back(i);
+    Natural tmp(*this);//создаем копии чисел
+    Natural curr(other);
+    Natural res(0);//результат равен нулю
+    if (cmp(curr, Natural(0)) == 0) throw std::invalid_argument("Деление на 0 невыполнимо");//не допускаем деление на 0
+    else if (cmp(tmp, curr) == 0) return Natural(1);//если числа равны результат деления 1
+    else if (cmp(tmp, curr) == 1) return res;//если второе число больше первого результат деления равен 0
+    Natural part(0);//создаем переменную в которую будем записывать результат поэтапного деления
+    part = curr.divFirstDigit(tmp);
+    if (cmp(tmp, curr) == 2) {
+        while (cmp(tmp, curr) != 1) {
+            // первое число = первое число минус второе умноженное на первую цифру деления(в 10^k степени)
+            tmp = tmp - part * curr;
+            res = res + part; //добавляем результат в res
+            part = tmp.divFirstDigit(curr);
+
+        }
     }
     res.n_ = res.digits_.size() - 1;
     return res;
