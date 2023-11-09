@@ -283,19 +283,19 @@ TEST(NaturalDividingTest , DividingOneTest){
     EXPECT_TRUE(num / num2 == num_answer);
 }
 
-TEST(NaturalTest, gcdZeroTest) {
+TEST(Sots_Katya_2384_Natural, gcdZeroTest) {
     Natural first(5);
     Natural second(0);
     EXPECT_EQ(first.cmp(first.gcd(first, second), first), 0);
 }
 
-TEST(NaturalTest, gcdPrimeTest) {
+TEST(Sots_Katya_2384_Natural, gcdPrimeTest) {
     Natural first(8);
     Natural second(5);
     EXPECT_EQ(first.cmp(first.gcd(first, second), Natural(1)), 0);
 }
 
-TEST(NaturalTest, gcdNotPrimeTest) {
+TEST(Sots_Katya_2384_Natural, gcdNotPrimeTest) {
     Natural first(16);
     Natural second(12);
     EXPECT_EQ(first.cmp(first.gcd(first, second), Natural(4)), 0);
