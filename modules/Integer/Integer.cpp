@@ -153,7 +153,6 @@ Integer Integer::negative() const {
     return answer; // возвращаем новое число
 }
 
-
 // Valeyeva Alina ADD_ZZ_Z - Сложение целых чисел(используемые методы: POZ_Z_D, ABS_Z_N, COM_NN_D, ADD_NN_N, SUB_NN_N, MUL_ZM_Z)
 Integer Integer::operator+(const Integer &other) const {
     int flag_MUL_ZM_Z = 0; // Для определения знака. Если флаг = 1, то умножаем на (-1) через метод MUL_ZM_Z
@@ -175,11 +174,26 @@ Integer Integer::operator+(const Integer &other) const {
 
         // Если одно число положительное, а другое отрицательное
     else {
-        if (my_cmp == 2 || my_cmp == 0) { // если первое > второго или они равны
+        if (my_cmp == 0){ // если равны
             result = (number_ - number_other); // (SUB_NN_N)
-        } else { // если первое < второго (my_cmp == 1)
-            result = (number_other - number_); // вычитаем из второго первое (SUB_NN_N)
-            flag_MUL_ZM_Z = 1; // но впоследствии меняем знак у ответа
+        }
+        else if (my_cmp == 2) { // если первое > второго
+            if (this->isPositive() == 2){ // если при этом первое - положительное (второе отр)
+                result = (number_ - number_other); // вычитаю из первого второе(SUB_NN_N)
+            }
+            else if (this->isPositive() == 1){ // если при этом первое - отрицательное (второе полож)
+                result = (number_ - number_other); // вычитаю из первого второе(SUB_NN_N)
+                flag_MUL_ZM_Z = 1; // нужно поменять знак у моего возвращаемого целого числа на минус
+            }
+        }
+        else{ // если первое < второго (cmp == 1)
+            if (this->isPositive() == 2){ // первое +
+                result = (number_other - number_); // вычитаю из второго первое(SUB_NN_N)
+                flag_MUL_ZM_Z = 1; // нужно поменять знак у моего возвращаемого целого числа на минус
+            }
+            else if (this->isPositive() == 1){ // если при этом первое - отрицательное (второе полож)
+                result = (number_other - number_); // вычитаю из второго первое(SUB_NN_N)
+            }
         }
     }
     // создаем и возвращаем объект класса Integer

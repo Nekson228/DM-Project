@@ -184,8 +184,8 @@ TEST(Reduce_test, test1){
 }
 
 TEST(Reduce_test, test2){
-    Integer integer_1(150);
-    Natural natural_1(-300);
+    Integer integer_1(-150);
+    Natural natural_1(300);
     Rational rational_(integer_1, natural_1);
     Rational my_answer = rational_.reduce();
     Rational test("-1/2");
