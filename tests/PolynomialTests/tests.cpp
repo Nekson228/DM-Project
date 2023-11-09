@@ -109,7 +109,7 @@ TEST(PolynomialMultiplicationTest, 6)
     ASSERT_TRUE((p1 * p2) == expected);
 }
 
-TEST(subToGetZero, 1) {
+TEST(Ilyin_2383_Polynomial_sub_test, GetZero) {
     std::vector<Rational> coefs;
     for (int i = 0; i < 5; i++) {
         coefs.push_back(Rational(i, i + 10));
@@ -118,7 +118,7 @@ TEST(subToGetZero, 1) {
     EXPECT_EQ(Polynomial(coefs)-Polynomial(coefs), Polynomial(finalCoefs));
 }
 
-TEST(subToGetNotZero, 2) {
+TEST(Ilyin_2383_Polynomial_sub_test, GetNotZero) {
     std::vector<Rational> firstCoefs;
     std::vector<Rational> secondCoefs;
     std::vector<Rational> finalCoefs;
@@ -130,27 +130,27 @@ TEST(subToGetNotZero, 2) {
     EXPECT_EQ(Polynomial(firstCoefs) -Polynomial(secondCoefs), Polynomial(finalCoefs));
 }
 
-TEST(subZero, 3) {
+TEST(Ilyin_2383_Polynomial_sub_test, subZero) {
     std::vector<Rational> firstCoefs = {Rational(1, 1), Rational(0, 1), Rational(1, 1)};
     std::vector<Rational> zero = {Rational(0, 1)};
     EXPECT_EQ(Polynomial(firstCoefs) -Polynomial(zero), Polynomial(firstCoefs));
 }
 
-TEST(modToGetZero, 4) {
+TEST(Ilyin_2383_Polynomial_mod_test, GetZero) {
     std::vector<Rational> firstCoefs = {Rational(1, 1), Rational(0, 1), Rational(1, 1)};
     std::vector<Rational> secondCoefs = {Rational(1, 1)};
     std::vector<Rational> finalCoefs = {Rational(0, 1)};
     EXPECT_EQ(Polynomial(firstCoefs)%Polynomial(secondCoefs), Polynomial(finalCoefs));
 }
 
-TEST(modToGetNotZero, 5) {
+TEST(Ilyin_2383_Polynomial_mod_test, GetNotZero) {
     std::vector<Rational> firstCoefs = {Rational(1, 1), Rational(0, 1), Rational(-1, 1)};
     std::vector<Rational> secondCoefs = {Rational(1, 1), Rational(1, 1)};
     std::vector<Rational> finalCoefs = {Rational(1, 1), Rational(-1, 1)};
     EXPECT_EQ(Polynomial(firstCoefs)%Polynomial(secondCoefs), Polynomial(finalCoefs));
 }
 
-TEST(modToSmtElse, 6) {
+TEST(Ilyin_2383_Polynomial_mod_test, get1) {
     std::vector<Rational> firstCoefs = {Rational(9, 1), Rational(56, 1), Rational(1, 1)};
     std::vector<Rational> secondCoefs = {Rational(1, 1), Rational(0, 1)};
     std::vector<Rational> finalCoefs = {Rational(1, 1)};
