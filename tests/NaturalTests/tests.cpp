@@ -68,20 +68,20 @@ TEST(subScaled, equal) {
     EXPECT_TRUE(Natural::cmp(natural, check) == 0);
 }
 
-//TEST(remains, one) {
-//    Natural natural("1234567");
-//    Natural natural_other(1);
-//    natural = natural % natural_other;
-//    EXPECT_TRUE(natural.isZero());
-//}
-//
-//TEST(remains, usual) {
-//    Natural natural("1234567");
-//    Natural check(67);
-//    Natural natural_other(12345);
-//    natural = natural % natural_other;
-//    EXPECT_TRUE(Natural::cmp(natural, check) == 0);
-//}
+TEST(remains, one) {
+    Natural natural("1234567");
+    Natural natural_other(1);
+    natural = natural % natural_other;
+    EXPECT_TRUE(natural.isZero());
+}
+
+TEST(remains, usual) {
+    Natural natural("1234567");
+    Natural check(67);
+    Natural natural_other(12345);
+    natural = natural % natural_other;
+    EXPECT_TRUE(Natural::cmp(natural, check) == 0);
+}
 
 TEST(remains, smaller) {
     Natural natural("1234567");

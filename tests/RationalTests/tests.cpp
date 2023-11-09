@@ -224,7 +224,7 @@ TEST(rationalDiv,5){
 }
 
 
-int main(int argc, char** argv) {
+int main() {
     ::testing::InitGoogleTest();
     return RUN_ALL_TESTS();
 }

@@ -340,6 +340,7 @@ Natural Natural::operator-(const Natural &other) const {
 
     while (answer.digits_.size() > 1 && answer.digits_.back() == 0) { // удаляем ведущие нули
         answer.digits_.pop_back();
+        answer.n_--;
     }
     return answer; // возвращаем новое число
 }
