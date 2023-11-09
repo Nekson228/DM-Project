@@ -85,7 +85,7 @@ Integer Integer::operator/(const Integer &other) const {
         }
         answer = answer - Integer(1);
         answer.sign_ = true;              // ответ - отрицательное число
-    } else if (first.isPositive() == 1 && other.isPositive() == 1) { // a < 0, b > 0
+    } else if (first.isPositive() == 1 && other.isPositive() == 2) { // a < 0, b > 0
         while (first.isPositive() == 1) {  // пока a < 0
             answer = answer + Integer(1); // ans += 1
             first = first + other;       // a += b

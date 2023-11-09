@@ -16,22 +16,22 @@ TEST(RationalTest, ToIntegerPositiveReduceTest) {
     EXPECT_EQ(num.toInteger(), Integer(3));
 }
 
-TEST(IsIntegerTest, 1){
+TEST(Damakin_Roman_2384, IsIntegerTest1){
     Rational r = Rational(6, 3);
     ASSERT_TRUE(r.isInteger() == true);
 }
 
-TEST(IsIntegerTest, 2){
+TEST(Damakin_Roman_2384, IsIntegerTest2){
     Rational r = Rational(-10, 2);
     ASSERT_TRUE(r.isInteger() == true);
 }
 
-TEST(IsIntegerTest, 3){
+TEST(Damakin_Roman_2384, IsIntegerTest3){
     Rational r = Rational(3, 6);
     ASSERT_FALSE(r.isInteger() == true);
 }
 
-TEST(RationalSubtractionTest, 1){
+TEST(Damakin_Roman_2384, RationalSubtractionTest1){
     Rational r1 = Rational(3, 6);
     Rational r2 = Rational(2, 6);
     Rational result = r1 - r2;
@@ -39,7 +39,7 @@ TEST(RationalSubtractionTest, 1){
     ASSERT_TRUE(result == expected);
 }
 
-TEST(RationalSubtractionTest, 2){
+TEST(Damakin_Roman_2384, RationalSubtractionTest2){
     Rational r1 = Rational(9, 3);
     Rational r2 = Rational(5, 7);
     Rational result = r1 - r2;
@@ -47,7 +47,7 @@ TEST(RationalSubtractionTest, 2){
     ASSERT_TRUE(result == expected);
 }
 
-TEST(RationalSubtractionTest, 3){
+TEST(Damakin_Roman_2384, RationalSubtractionTest3){
     Rational r1 = Rational(5, 8);
     Rational r2 = Rational(5, 7);
     Rational result = r1 - r2;
@@ -55,7 +55,7 @@ TEST(RationalSubtractionTest, 3){
     ASSERT_TRUE(result == expected);
 }
 
-TEST(RationalSubtractionTest, 4){
+TEST(Damakin_Roman_2384, RationalSubtractionTest4){
     Rational r1 = Rational(5, 8);
     Rational r2 = Rational(5, 8);
     Rational result = r1 - r2;
