@@ -127,7 +127,7 @@ TEST(Construction_test, test3){
     EXPECT_EQ(rational_, test);
 }
 
-TEST(Multiplication_test, test1){
+TEST(Valeyeva2384_Rational_MUL_QQ_Q, Multiplication_test1){
     Integer integer_1(8 );
     Natural natural_1(15);
     Rational rational_1(integer_1, natural_1);
@@ -142,7 +142,7 @@ TEST(Multiplication_test, test1){
     EXPECT_EQ(rational_, test);
 }
 
-TEST(Multiplication_test, test2){
+TEST(Valeyeva2384_Rational_MUL_QQ_Q, Multiplication_test2){
     Integer integer_1(-8);
     Natural natural_1(15);
     Rational rational_1(integer_1, natural_1);
@@ -157,7 +157,7 @@ TEST(Multiplication_test, test2){
     EXPECT_EQ(rational_, test);
 }
 
-TEST(Multiplication_test, test3){
+TEST(Valeyeva2384_Rational_MUL_QQ_Q, Multiplication_test3){
     Integer integer_1(-8);
     Natural natural_1(15);
     Rational rational_1(integer_1, natural_1);
@@ -173,7 +173,7 @@ TEST(Multiplication_test, test3){
 }
 
 
-TEST(Reduce_test, test1){
+TEST(Valeyeva2384_Rational_RED_Q_Q, Reduce_test1){
     Integer integer_1(150);
     Natural natural_1(300);
     Rational rational_(integer_1, natural_1);
@@ -183,7 +183,7 @@ TEST(Reduce_test, test1){
     EXPECT_EQ(my_answer, test);
 }
 
-TEST(Reduce_test, test2){
+TEST(Valeyeva2384_Rational_RED_Q_Q, Reduce_test2){
     Integer integer_1(-150);
     Natural natural_1(300);
     Rational rational_(integer_1, natural_1);
@@ -193,7 +193,7 @@ TEST(Reduce_test, test2){
     EXPECT_EQ(my_answer, test);
 }
 
-TEST(Reduce_test, test3){
+TEST(Valeyeva2384_Rational_RED_Q_Q, Reduce_test3){
     Integer integer_1(2000);
     Natural natural_1(2000);
     Rational rational_(integer_1, natural_1);

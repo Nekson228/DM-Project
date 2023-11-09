@@ -244,8 +244,7 @@ TEST(IntegerTest, negativeNegativeValueTest) {
 }
 
 
-TEST(operator_add, Tests_1
-) {
+TEST(Valeyeva2384_Integer_ADD_ZZ_Z, Add_Tests1) {
     Integer integer_1(2000);
     Integer integer_2(1000);
     Integer ans1(integer_1 + integer_2);
@@ -254,8 +253,7 @@ TEST(operator_add, Tests_1
     EXPECT_EQ(ans1, ans1_test);
 }
 
-TEST(operator_add, Tests_2
-) {
+TEST(Valeyeva2384_Integer_ADD_ZZ_Z, Add_Tests2) {
     Integer integer_1(-2000);
     Integer integer_2(1000);
     Integer ans2(integer_1 + integer_2);
@@ -264,7 +262,7 @@ TEST(operator_add, Tests_2
     EXPECT_EQ(ans2, ans2_test);
 }
 
-TEST(operator_add, Tests_3) {
+TEST(Valeyeva2384_Integer_ADD_ZZ_Z, Add_Tests3) {
     Integer integer_1(-2000);
     Integer integer_2(-1000);
     Integer ans3(integer_1 + integer_2);
