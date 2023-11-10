@@ -270,6 +270,31 @@ TEST(Valeyeva2384_Integer_ADD_ZZ_Z, Add_Tests3) {
 
     EXPECT_EQ(ans3, ans3_test);
 }
+TEST(Valeyeva2384_Integer_ADD_ZZ_Z, Add_Tests4) {
+    Integer integer_1(0);
+    Integer integer_2(1000);
+    Integer ans3(integer_1 + integer_2);
+    Integer ans3_test(1000);
+
+    EXPECT_EQ(ans3, ans3_test);
+}
+
+TEST(Valeyeva2384_Integer_ADD_ZZ_Z, Add_Tests5) {
+    Integer integer_1(0);
+    Integer integer_2(-1000);
+    Integer ans3(integer_1 + integer_2);
+    Integer ans3_test(-1000);
+
+    EXPECT_EQ(ans3, ans3_test);
+}
+TEST(Valeyeva2384_Integer_ADD_ZZ_Z, Add_Tests6) {
+    Integer integer_1(0);
+    Integer integer_2(0);
+    Integer ans3(integer_1 + integer_2);
+    Integer ans3_test(0);
+
+    EXPECT_EQ(ans3, ans3_test);
+}
 
 
 TEST(checkModOperator, 1) {
