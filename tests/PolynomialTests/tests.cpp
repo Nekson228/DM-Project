@@ -306,25 +306,25 @@ TEST(mulByXk, mul_test3) {
     EXPECT_EQ(f.mulByXk(1), g);
 }
 
-TEST(polynomialLead, 1) {
+TEST(Vozgrin2382_Polynomial_LEAD_P_Q, Lead_test_1) {
     std::vector<Rational> coef = {Rational(1, 1)};
     Polynomial p(coef);
     ASSERT_TRUE(p.leading() == coef[0]);
 }
 
-TEST(polynomialLead, 2) {
+TEST(Vozgrin2382_Polynomial_LEAD_P_Q, Lead_test_2) {
     std::vector<Rational> coef = {Rational(1, 1)};
     Polynomial p(coef);
     ASSERT_TRUE(p.leading() == Rational(1, 1));
 }
 
-TEST(polynomialLead, 3) {
+TEST(Vozgrin2382_Polynomial_LEAD_P_Q, Lead_test_3) {
     std::vector<Rational> coef = {Rational(8, 1), Rational(3, 1), Rational(1, 2)};
     Polynomial p(coef);
     ASSERT_TRUE(p.leading() == coef[0]);
 }
 
-TEST(polynomialLead, 4) {
+TEST(Vozgrin2382_Polynomial_LEAD_P_Q, Lead_test_4) {
     std::vector<Rational> coef = {Rational(8, 1), Rational(3, 1), Rational(1, 2)};
     Polynomial p(coef);
     ASSERT_TRUE(p.leading() == Rational(8, 1));
