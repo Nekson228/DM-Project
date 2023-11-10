@@ -9,6 +9,8 @@ class Polynomial {
     std::size_t degree_{}; // степень многочлена
 
     [[nodiscard]] Polynomial reduceAllCoefficients() const;
+
+    void removeLeadingZeros();
 public:
     explicit Polynomial(const std::vector<Rational> &coefficients);
 
