@@ -196,11 +196,11 @@ Polynomial Polynomial::singlify() const {
         resultCoefficients[maxDegree - other.degree_ + i] =
                 resultCoefficients[maxDegree - other.degree_ + i] + other.coefficients_[i];
     }
+    
 
     // Создаем новый многочлен с полученными коэффами и возвращаем его
     return Polynomial(resultCoefficients).reduceAllCoefficients();
 }
-
 
 //Написал функцию - Кузьминых Егор
 //DIV_PP_P (операция получения частного от деления многочлена на многочлен при делении с остатком, которткий номер - P9)
@@ -238,6 +238,11 @@ Polynomial Polynomial::singlify() const {
 Polynomial Polynomial::derivative() const {
     //Создали вектор для хранения коэффициентов
     std::vector<Rational> derivativeCoefficients(degree_, Rational(0, 1));
+    std::vector<Rational> const_coeff(1, Rational(0, 1));
+    if(degree_==0){
+        Polynomial zero = Polynomial(const_coeff);
+        return zero;
+    }
 
     for (std::size_t i = 0; i <= degree_ - 1; i++) {// умножаю коэффициент на степень
         derivativeCoefficients[i] = coefficients_[i] * Rational(degree_ - i, 1);

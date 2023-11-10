@@ -63,43 +63,43 @@ TEST(Damakin2384_Rational_SUB_QQ_Q, RationalSubtractionTest4){
     ASSERT_TRUE(result == expected);
 }
 
-TEST(RationalAdditionTest, 1) {
+TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest1) {
     Rational first_number = Rational(1, 4);
     Rational second_number = Rational(1, 4);
-    Rational answer = Rational(1, 2);
-    EXPECT_EQ(first_number + second_number, Rational(2, 4));
+    Rational answer = Rational(2, 4);
+    EXPECT_EQ(first_number + second_number, answer);
 }
 
-TEST(RationalAdditionTest, 2) {
+TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest2) {
     Rational first_number = Rational(1, 2);
     Rational second_number = Rational(1, 2);
-    Rational answer = Rational(1, 1);
-    EXPECT_EQ(first_number + second_number, Rational(2, 2));
+    Rational answer = Rational(2, 2);
+    EXPECT_EQ(first_number + second_number, answer);
 
 }
 
-TEST(RationalAdditionTest, 3) {
+TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest3) {
     Rational first_number = Rational(3, 5);
     Rational second_number = Rational(1, 3);
     Rational answer = Rational(14, 15);
     EXPECT_EQ(first_number + second_number, answer);
 }
 
-TEST(RationalAAdditionTest, 4) {
+TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest4) {
     Rational first_number = Rational(2, 3);
     Rational second_number = Rational(5, 7);
     Rational answer = Rational(29, 21);
     EXPECT_EQ(first_number + second_number, answer);
 }
 
-TEST(RationalAAdditionTest, 5) {
+TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest5) {
     Rational first_number = Rational(2, 3);
     Rational second_number = Rational(0, 1);
     Rational answer = Rational(2, 3);
     EXPECT_EQ(first_number + second_number, answer);
 }
 
-TEST(RationalAAdditionTest, 6) {
+TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest6) {
     Rational first_number = Rational(3, 5);
     Rational second_number = Rational(-2, 5);
     Rational answer = Rational(1, 5);
