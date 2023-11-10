@@ -91,25 +91,25 @@ TEST(remains, smaller) {
     EXPECT_TRUE(Natural::cmp(natural, check) == 0);
 }
 
-TEST(DivFirstDigitTest, 1){
+TEST(Damakin2384_Natural_DIV_NN_Dk, DivFirstDigitTest1){
     Natural a = Natural(2222);
     Natural b = Natural(111);
     ASSERT_TRUE(a.divFirstDigit(b) == Natural(20));
 }
 
-TEST(DivFirstDigitTest, 2){
+TEST(Damakin2384_Natural_DIV_NN_Dk, DivFirstDigitTest2){
     Natural a = Natural(111);
     Natural b = Natural(2222);
     ASSERT_TRUE(a.divFirstDigit(b) == Natural(20));
 }
 
-TEST(DivFirstDigitTest, 3){
+TEST(Damakin2384_Natural_DIV_NN_Dk, DivFirstDigitTest3){
     Natural a = Natural(0);
     Natural b = Natural(12345);
     ASSERT_FALSE(a.divFirstDigit(b) == Natural(10000));
 }
 
-TEST(DivFirstDigitTest, 4){
+TEST(Damakin2384_Natural_DIV_NN_Dk, DivFirstDigitTest4){
     Natural a = Natural(1);
     Natural b = Natural(12345);
     ASSERT_TRUE(a.divFirstDigit(b) == Natural(10000));
