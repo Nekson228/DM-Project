@@ -4,7 +4,7 @@
 #include <map>
 #include <algorithm>
 
-Polynomial::Polynomial(std::vector<Rational> &coefficients) :
+Polynomial::Polynomial(const std::vector<Rational> &coefficients) :
         coefficients_(coefficients), degree_(coefficients.size() - 1) {}
 
 std::string Polynomial::str() const {
