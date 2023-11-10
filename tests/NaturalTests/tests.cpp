@@ -189,66 +189,49 @@ TEST(Ilyin_2383_Natural_lcm_test, getOneOfNum) {
     EXPECT_EQ(Natural("1324234234"), first.lcm(first, second));
 }
 
-
-TEST(NaturalAdditionTest , 1){
+TEST(Ivanitsky_Ilya_2383_ADD_NN_N , simple_addition){
     Natural num(1000000000);
     Natural num2(123456789);
     Natural num_answer(1123456789);
     EXPECT_TRUE(num + num2 == num_answer);
 }
 
-TEST(NaturalAdditionTest , 2){
+TEST(Ivanitsky_Ilya_2383_ADD_NN_N , hard_addition){
     Natural num(123456789);
     Natural num2(1234567890);
     Natural num_answer(1358024679);
     EXPECT_TRUE(num+num2== num_answer);
 }
 
-
-TEST(NaturalAdditionTest , 3){
-    Natural num(1);
-    Natural num2(1);
-    Natural num3 = num + num2;
-    Natural num_answer(2);
-    EXPECT_TRUE(num.cmp(num3,num_answer) == 0);
-}
-
-TEST(NaturalAdditionTest , 4){
-    Natural num(123456789);
-    Natural num2(1234567890);
-    Natural num_answer(1358024679);
-    EXPECT_TRUE(num.cmp(num + num2 , num_answer) == 0);
-}
-
-TEST(NaturalAdditionTest , 5){
+TEST(Ivanitsky_Ilya_2383_ADD_NN_N , addition_zero){
     Natural num(111);
     Natural num2(0);
     Natural num_answer(111);
     EXPECT_TRUE(Natural::cmp(num+num2,num_answer) == 0);
 }
 
-TEST(NaturalMultyplicationTest , FirstTest){
+TEST(Ivanitsky_Ilya_2383_MUL_NN_N, simple_multyplication){
     Natural num(121);
     Natural num2(11);
     Natural num_answer(1331);
     EXPECT_TRUE(num*num2 == num_answer);
 }
 
-TEST(NaturalMultyplicationTest , SecondTest){
+TEST(Ivanitsky_Ilya_2383_MUL_NN_N, hard_multyplication){
     Natural num(1331);
     Natural num2(1331);
     Natural num_answer(1771561);
     EXPECT_TRUE(num*num2 == num_answer);
 }
 
-TEST(NaturalMultyplicationTest , MultyplicationZeroTest){
+TEST(Ivanitsky_Ilya_2383_MUL_NN_N, multyplication_zero){
     Natural num(11111111);
     Natural num2(0);
     Natural num_answer(0);
     EXPECT_TRUE(num*num2 == num_answer);
 }
 
-TEST(NaturalMultyplicationTest , MultyplicationOneTest){
+TEST(Ivanitsky_Ilya_2383_MUL_NN_N, multyplication_one){
     Natural num(11111111);
     Natural num2(1);
     Natural num_answer(11111111);
@@ -256,27 +239,27 @@ TEST(NaturalMultyplicationTest , MultyplicationOneTest){
 }
 
 
-TEST(NaturalDividingTest , FirstTest){
+TEST(Ivanitsky_Ilya_2383_DIV_NN_N, simple_dividing){
     Natural num(1771561);
     Natural num2(1331);
     Natural num_answer(1331);
     EXPECT_TRUE(num/num2 == num_answer);
 }
 
-TEST(NaturalDividingTest , Secondtest){
+TEST(Ivanitsky_ILya_2383_DIV_NN_N, hard_dividing){
     Natural num(10000000000);
     Natural num2(3);
     Natural num_answer(3333333333);
     EXPECT_TRUE(num/num2 == num_answer);
 }
 
-TEST(NaturalDividingTest , DividingZeroTest){
+TEST(Ivanitsky_ILya_2383_DIV_NN_N, dividing_zero){
     Natural num(10000000000);
     Natural num2(0);
     EXPECT_THROW(num / num2 , std::invalid_argument);
 }
 
-TEST(NaturalDividingTest , DividingOneTest){
+TEST(Ivanitsky_ILya_2383_DIV_NN_N, dividing_one){
     Natural num(10000000000);
     Natural num2(1);
     Natural num_answer(10000000000);
