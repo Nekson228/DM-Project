@@ -8,7 +8,7 @@ class Polynomial {
     std::vector<Rational> coefficients_; // массив дробных коэффициентов в прямом порядке (x^2 + 1/2 == [1/1, 0/1, 1/2]) 
     std::size_t degree_{}; // степень многочлена
 public:
-    explicit Polynomial(std::vector<Rational> &coefficients);
+    explicit Polynomial(const std::vector<Rational> &coefficients);
 
     explicit Polynomial(const std::string& polynomial);
 
