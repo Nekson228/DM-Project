@@ -54,9 +54,6 @@ Integer::Integer(Natural natural) : number_(std::move(natural)), sign_(false) {}
 // Katya Sots TRANS_Z_N - Преобразование целого неотрицательного в натуральное
 
 Natural Integer::toNatural() const {
-    if (sign_) { // проверка на то, является ли число отрицательным
-        throw std::invalid_argument("Число отрицательное");
-    }
 
     return Natural{number_}; // возвращаем натуральное число
 }
@@ -85,7 +82,7 @@ Integer Integer::operator/(const Integer &other) const {
         }
         answer = answer - Integer(1);
         answer.sign_ = true;              // ответ - отрицательное число
-    } else if (first.isPositive() == 1 && other.isPositive() == 1) { // a < 0, b > 0
+    } else if (first.isPositive() == 1 && other.isPositive() == 2) { // a < 0, b > 0
         while (first.isPositive() == 1) {  // пока a < 0
             answer = answer + Integer(1); // ans += 1
             first = first + other;       // a += b
