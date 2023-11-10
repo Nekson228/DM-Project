@@ -203,23 +203,23 @@ TEST(Valeyeva2384_Rational_RED_Q_Q, Reduce_test3){
     EXPECT_EQ(my_answer, test);
 }
 
-TEST(rationalDiv,1){
+TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_zero){
     ASSERT_TRUE(Rational(0, 1) / Rational(1, 1) == Rational(0, 1));
 }
 
-TEST(rationalDiv,2){
+TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_PP){
     ASSERT_TRUE(Rational(7, 8) / Rational(5, 6) == Rational(42, 40));
 }
 
-TEST(rationalDiv,3){
+TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_NP){
     ASSERT_TRUE(Rational(-5,10) / Rational(2, 3) == Rational(-15, 20));
 }
 
-TEST(rationalDiv,4){
+TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_PN){
     ASSERT_TRUE(Rational(5,10) / Rational(-2, 3) == Rational(-15, 20));
 }
 
-TEST(rationalDiv,5){
+TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_NN){
     ASSERT_THROW((Rational(1, 1) / Rational(0, 1)),std::invalid_argument);
 }
 

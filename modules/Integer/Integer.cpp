@@ -203,6 +203,8 @@ Integer Integer::operator+(const Integer &other) const {
 
 // Мирон Возгрин 2382; Остаток от деления целого на целое (MOD_ZZ_Z)
 Integer Integer::operator%(const Integer &other) const {
-    //Возвращаемое значение равно разности левого числа и произведения правого на разность деления 2 чисел
+    //проверка на деление на 0
+    if(other == Integer(0))std::invalid_argument("Деление на 0 невозможно!");
+    // Возвращаемое значение равно разности левого числа и произведения правого на разность деления 2 чисел
     return *this - (other * (*this / other));
 }

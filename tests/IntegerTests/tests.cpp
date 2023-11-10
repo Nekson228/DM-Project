@@ -271,7 +271,6 @@ TEST(Valeyeva2384_Integer_ADD_ZZ_Z, Add_Tests3) {
     EXPECT_EQ(ans3, ans3_test);
 }
 
-
 TEST(checkModOperator, 1) {
     ASSERT_TRUE(Integer(21) % Integer(4) == Integer(1));
 }
@@ -281,11 +280,11 @@ TEST(checkModOperator, 2) {
 }
 
 TEST(checkModOperator, 3) {
-    ASSERT_TRUE(Integer(23) % Integer(-4) == Integer(-1));
+    ASSERT_TRUE(Integer(23) % Integer(-4) == Integer(3));
 }
 
 TEST(checkModOperator, 4) {
-    ASSERT_TRUE(Integer(-32) % Integer(-30) == Integer(-2));
+    ASSERT_TRUE(Integer(-32) % Integer(-30) == Integer(28));
 }
 
 int main() {
