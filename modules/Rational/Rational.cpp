@@ -14,7 +14,7 @@ Rational::Rational(std::int64_t numerator, std::size_t denominator) :
 }
 
 Rational::Rational(const std::string &str_number) {
-    std::string trimmed_str_number = trim(str_number);
+    std::string trimmed_str_number = utils::trim(str_number);
     std::size_t slash_sign = trimmed_str_number.find('/');
     if (slash_sign == 0)
         throw std::invalid_argument("No numerator specified.");
@@ -175,9 +175,8 @@ Rational Rational::operator/(const Rational &other) const {
     Natural newDenominator = denominator_ * other.numerator_.toNatural();
     //так как все числа были лишены знака,
     //предстоит провести проверку входных данных и присвоить нужный знак возвращаемому значению
-    if ((numerator_.isPositive() == 2 and other.numerator_.isPositive() == 2) or
-        (numerator_.isPositive() == 1 and other.numerator_.isPositive() == 1)) {
-        return Rational{newNominator, newDenominator};
+    if (other.numerator_.isPositive() == 1) {
+        return Rational{newNominator.negative(), newDenominator};
     }
-    return Rational{newNominator.negative(), newDenominator};
+    return Rational{newNominator, newDenominator};
 }

@@ -5,7 +5,6 @@
 #include "modules/Polynomial/Polynomial.h"
 
 int main() {
-    Natural nat1{"100"}, nat2{"1"};
-    Natural res = nat1.divFirstDigit(nat2);
-    std::cout << res.str();
+    Polynomial pol1{"1/2*x"}, pol2{"x-2"};
+    std::cout << (pol1 + pol1).str();
 }

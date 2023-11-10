@@ -18,7 +18,7 @@ Natural::Natural(std::size_t number) {
 Natural::Natural(const std::string &str_number) {
     if (str_number.empty())
         throw std::invalid_argument("Operand expected not empty");
-    for (digit digit: trim(str_number)) {
+    for (digit digit: utils::trim(str_number)) {
         if (!isdigit(digit)) {
             std::string exception = "Operand data is invalid. Unknown character '";
             exception += static_cast<char>(digit);

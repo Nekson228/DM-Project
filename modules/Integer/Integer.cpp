@@ -19,8 +19,8 @@ std::string Integer::str() const {
 //Лавренова Юлия гр.2384 POZ_Z_D - Определение положительности числа (2 - положительное, 0 — равное нулю, 1 - отрицательное)
 [[nodiscard]] digit Integer::isPositive() const {
     digit sign; //переменная знака
-    if (number_.isZero()) return 0;
-    if (sign_) sign = 1; //если знак числа true, число отрицательное - возвращаем 1
+    if (number_.isZero()) sign = 0;
+    else if (sign_) sign = 1; //если знак числа true, число отрицательное - возвращаем 1
     else sign = 2; //если знак числа false, число положительное - возвращаем 2
     return sign; //возвращаем знак
 }
@@ -152,6 +152,11 @@ Integer Integer::negative() const {
 
 // Valeyeva Alina ADD_ZZ_Z - Сложение целых чисел(используемые методы: POZ_Z_D, ABS_Z_N, COM_NN_D, ADD_NN_N, SUB_NN_N, MUL_ZM_Z)
 Integer Integer::operator+(const Integer &other) const {
+    if (this->isPositive() == 0)
+        return other;
+    if (other.isPositive() == 0)
+        return *this;
+
     int flag_MUL_ZM_Z = 0; // Для определения знака. Если флаг = 1, то умножаем на (-1) через метод MUL_ZM_Z
     Natural number_other = other.abs().number_; // получаю абсолютную часть второго числа (ABS_Z_Z)
     Natural result; // число-резу тат, натуральное
@@ -159,11 +164,10 @@ Integer Integer::operator+(const Integer &other) const {
     digit my_cmp = Natural::cmp(number_, number_other); // сравниваю два натуральных числа (COM_NN_D)
 
     // если числа положительные или равны 0 (POZ_Z_D)
-    if ((other.isPositive() == 2 || other.isPositive() == 0) && (this->isPositive() == 2 || this->isPositive() == 0)) {
+    if (other.isPositive() == 2 && this->isPositive() == 2) {
         result = (number_ + other.number_); //  Складываю два натуральных числа без модуля, т.к. положительные
     }
-
-        // если оба числа отрицательные
+    // если оба числа отрицательные
     else if (other.isPositive() == 1 && this->isPositive() == 1) {
         result = (number_ + number_other); // складываю два натуральных числа(ADD_NN_N)
         flag_MUL_ZM_Z = 1; // нужно поменять знак у моего возвращаемого целого числа на минус
@@ -171,24 +175,20 @@ Integer Integer::operator+(const Integer &other) const {
 
         // Если одно число положительное, а другое отрицательное
     else {
-        if (my_cmp == 0){ // если равны
+        if (my_cmp == 0) { // если равны
             result = (number_ - number_other); // (SUB_NN_N)
-        }
-        else if (my_cmp == 2) { // если первое > второго
-            if (this->isPositive() == 2){ // если при этом первое - положительное (второе отр)
+        } else if (my_cmp == 2) { // если первое > второго
+            if (this->isPositive() == 2) { // если при этом первое - положительное (второе отр)
                 result = (number_ - number_other); // вычитаю из первого второе(SUB_NN_N)
-            }
-            else if (this->isPositive() == 1){ // если при этом первое - отрицательное (второе полож)
+            } else if (this->isPositive() == 1) { // если при этом первое - отрицательное (второе полож)
                 result = (number_ - number_other); // вычитаю из первого второе(SUB_NN_N)
                 flag_MUL_ZM_Z = 1; // нужно поменять знак у моего возвращаемого целого числа на минус
             }
-        }
-        else{ // если первое < второго (cmp == 1)
-            if (this->isPositive() == 2){ // первое +
+        } else { // если первое < второго (cmp == 1)
+            if (this->isPositive() == 2) { // первое +
                 result = (number_other - number_); // вычитаю из второго первое(SUB_NN_N)
                 flag_MUL_ZM_Z = 1; // нужно поменять знак у моего возвращаемого целого числа на минус
-            }
-            else if (this->isPositive() == 1){ // если при этом первое - отрицательное (второе полож)
+            } else if (this->isPositive() == 1) { // если при этом первое - отрицательное (второе полож)
                 result = (number_other - number_); // вычитаю из второго первое(SUB_NN_N)
             }
         }

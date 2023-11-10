@@ -166,7 +166,7 @@ TEST(TsygankovRoman, operator_sub_4) {
     EXPECT_EQ(ans4, ans4_test);
 }
 
-TEST(TsygankovRoman, Toperator_sub_5) {
+TEST(TsygankovRoman, operator_sub_5) {
     Integer integer_1(-1000);
     Integer integer_2(-500);
     Integer ans5(integer_1 - integer_2);

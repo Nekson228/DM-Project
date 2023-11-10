@@ -12,9 +12,9 @@
 //}
 
 TEST(PolynomialTest, FactoriseNotChangeTest) {
-    std::vector<Rational> cf = {Rational{5, 1}, Rational{5, 1}};
-    Polynomial poly(cf);
-    EXPECT_EQ(poly.factorize(), poly);
+    std::vector<Rational> cf1 = {Rational{5, 1}, Rational{5, 1}}, cf2 = {Rational(1, 1), Rational(1, 1)};
+    Polynomial poly(cf1), answer(cf2);
+    EXPECT_EQ(poly.factorize(), answer);
 }
 
 TEST(PolynomialTest, FactoriseChangeTest) {
@@ -275,10 +275,7 @@ TEST(PolynomialDerivativeTest, 3) {
 
 TEST(mulByXk, mul_test1) {
     std::vector<Rational> coef1 = {Rational(1, 1), Rational(2, 1), Rational(3, 1)};
-    std::vector<Rational> coef2 = {Rational(1, 1), Rational(2, 1), Rational(3, 1)};
-
-    coef2.push_back(Rational(0, 1));
-    coef2.push_back(Rational(0, 1));
+    std::vector<Rational> coef2 = {Rational(1, 1), Rational(2, 1), Rational(3, 1), Rational(0, 1), Rational(0, 1)};
 
     Polynomial f(coef1);
     Polynomial g(coef2);

@@ -4,8 +4,10 @@
 #include <map>
 #include <algorithm>
 
-Polynomial::Polynomial(const std::vector<Rational> &coefficients) :
-        coefficients_(coefficients), degree_(coefficients.size() - 1) {}
+Polynomial::Polynomial(const std::vector<Rational> &coefficients) {
+    coefficients_ = coefficients;
+    degree_ = coefficients_.size() - 1;
+}
 
 std::string Polynomial::str() const {
     std::stringstream res_stream;
@@ -32,23 +34,34 @@ std::string Polynomial::str() const {
 }
 
 std::map<size_t, std::string> getDegreeToCoefficientsMap(const std::string &polynomial) {
-    size_t start = 0, end, x_pos, caret_pos, star_pos;
+    size_t start = 0, end, x_pos, caret_pos, star_pos, exponent;
     std::string monomial_token, coefficient_str, exponent_str;
     char sign = (polynomial.find_first_of("+-") < polynomial.find('x')) ? polynomial[end] : '+';
     std::map<size_t, std::string> res;
     while (end != std::string::npos) {
         end = polynomial.find_first_of("+-", start);
         monomial_token = polynomial.substr(start, end - start);
-        x_pos = monomial_token.find('x'), caret_pos = monomial_token.find('^'), star_pos = monomial_token.find('*');
-        exponent_str = monomial_token.substr(caret_pos + 1),
-                coefficient_str = monomial_token.substr(0, (star_pos == std::string::npos) ? x_pos : star_pos);
-        if (x_pos == std::string::npos && caret_pos == std::string::npos)
+        x_pos = monomial_token.find('x');
+        caret_pos = monomial_token.find('^');
+        star_pos = monomial_token.find('*');
+        exponent_str = monomial_token.substr(caret_pos + 1);
+        coefficient_str = monomial_token.substr(0, (star_pos == std::string::npos) ? x_pos : star_pos);
+        if (x_pos == std::string::npos && caret_pos == std::string::npos) {
             exponent_str = "0";
-        else if (caret_pos == std::string::npos)
+        } else if (caret_pos == std::string::npos) {
             exponent_str = "1";
-        else if (x_pos == std::string::npos)
+        } else if (x_pos == std::string::npos) {
             throw std::invalid_argument("Operand data is invalid");
-        res[std::stoi(exponent_str)] = sign + coefficient_str;
+        }
+        if (star_pos == std::string::npos && x_pos == 0) {
+            coefficient_str = "1";
+        }
+        try {
+            exponent = std::stoull(exponent_str);
+        } catch (const std::invalid_argument &exception) {
+            throw std::invalid_argument("Operand data is invalid");
+        }
+        res[exponent] = sign + coefficient_str;
         start = end + 1;
         sign = end != std::string::npos ? polynomial[end] : '\0';
     }
@@ -95,7 +108,7 @@ Polynomial Polynomial::factorize() const {
     for (size_t i = 0; i <= degree_; i++) {
         result.coefficients_[i] = coefficients_[i] / ratio; // делим каждый коэффициент на ratio
     }
-    return result; // возвращаем новый многочлен
+    return result.reduceAllCoefficients(); // возвращаем новый многочлен
 }
 
 // Bormatov_Yaroslav NMR_P_P - Преобразование многочлена — кратные корни в простые
@@ -104,7 +117,7 @@ Polynomial Polynomial::singlify() const {
     Polynomial der_ = derivative();  // вычисление производной многочлена
     Polynomial gcd_ = gcd(*this, der_); // вычисление НОД <P(x), P'(x)>
     Polynomial result = *this / gcd_; // вычисление P(x) / gcd(<P(x), P'(x))
-    return result; // возвращаем новый многочлен
+    return result.reduceAllCoefficients(); // возвращаем новый многочлен
 }
 
 /*
@@ -114,13 +127,13 @@ Polynomial Polynomial::singlify() const {
 [[nodiscard]] Polynomial Polynomial::operator*(const Polynomial &other) const { // MUL_PP_P
     size_t k = other.degree_; // Степень многочлена
     // Создаем переменную для записи результата и записываем туда результат умножения первого многочлена на свободный коэффициент второго многочлена
-    Polynomial result = Polynomial(this->scale(other.coefficients_[k]));
+    Polynomial result = this->scale(other.coefficients_[k]);
     while (k > 0) { // Цикл по степеням многочлена
         k--; // Уменьшаем степень
         // Прибавляем к результату результат умножения первого многочлена на очередной составляющий одночлен второго многочлена
         result = result + this->scale(other.coefficients_[k]).mulByXk(other.degree_ - k);
     }
-    return result;
+    return result.reduceAllCoefficients();
 }
 
 
@@ -145,7 +158,7 @@ Polynomial Polynomial::singlify() const {
         new_coefs.erase(new_coefs.begin());
     }
     // возвращаем измененный многочлен
-    return Polynomial(new_coefs);
+    return Polynomial(new_coefs).reduceAllCoefficients();
 }
 
 
@@ -185,8 +198,7 @@ Polynomial Polynomial::singlify() const {
     }
 
     // Создаем новый многочлен с полученными коэффами и возвращаем его
-    Polynomial result = Polynomial(resultCoefficients);
-    return result;
+    return Polynomial(resultCoefficients).reduceAllCoefficients();
 }
 
 
@@ -218,8 +230,7 @@ Polynomial Polynomial::singlify() const {
 
         remainder = remainder - term * other;//Вычислили остаток
     }
-
-    return quotient;
+    return quotient.reduceAllCoefficients();
 }
 
 //Написал функцию - Кузьминых Егор
@@ -230,17 +241,15 @@ Polynomial Polynomial::derivative() const {
 
     for (std::size_t i = 0; i <= degree_ - 1; i++) {// умножаю коэффициент на степень
         derivativeCoefficients[i] = coefficients_[i] * Rational(degree_ - i, 1);
-
     }
     Polynomial result = Polynomial(derivativeCoefficients);//создаю новый многочлен и возвращаю его
-
-    return result;
+    return result.reduceAllCoefficients();
 }
 
 //Цыганков Роман гр 2384 MUL_Pxk_P - умножение мн-на на x^k
 Polynomial Polynomial::mulByXk(std::size_t k) const {
     std::size_t degree = this->degree_ + k; // степень нового мн-на
-    std::vector<Rational> new_coeff(degree); // создаем новыый вектор с коэффицентами
+    std::vector<Rational> new_coeff(degree + 1); // создаем новыый вектор с коэффицентами
     for (size_t i = 0; i < this->degree_ + 1; i++) {
         new_coeff[i] = coefficients_[i]; // присваиваем коэффиценты
     }
@@ -270,8 +279,7 @@ P - 3
     if (scalar == Rational(0, 1))                       // если скаляр равен 0, то при умножении на многочлен
     {                                                  // остается многочлен степени 0, с коэффицентом Rational(0,1)
         std::vector<Rational> new_coeff{Rational(0, 1)};// => создаем вектор с 1 элементом и из него создаем многочлен
-        Polynomial new_coefficients_(new_coeff);
-        return new_coefficients_;
+        return Polynomial{new_coeff};
     }
 
     std::vector<Rational> new_coeff(this->degree_ + 1); // создаем вектор для новых коэффицентов
@@ -279,9 +287,7 @@ P - 3
     for (int i = 0; i < this->degree_ + 1; i++) {
         new_coeff[i] = this->coefficients_[i] * scalar; // записываем в вектор новые коэффиценты у множенные на скаляр
     }
-
-    Polynomial new_coefficients_(new_coeff); // создаем многочлен с новыми коэффицентами и возвращаем его
-    return new_coefficients_;
+    return Polynomial{new_coeff}.reduceAllCoefficients(); // создаем многочлен с новыми коэффицентами и возвращаем его
 }
 
 /*
@@ -302,7 +308,7 @@ P - 11
 */
 [[nodiscard]] Polynomial Polynomial::gcd(const Polynomial &a, const Polynomial &b) {
     Polynomial first = a.degree_ >= b.degree_ ? a : b; // Сортируем многочлены по степени
-    Polynomial second = a.degree_ < b.degree_ ? b : a; // где first - многочлен степени больше или равной second
+    Polynomial second = a.degree_ < b.degree_ ? a : b; // где first - многочлен степени больше или равной second
 
     Polynomial ost1{first % second}; // находим остаток от деления первого на второй
     if (ost1.coefficients_[0] == Rational(0, 1)) // если остаток равен нулю, значит НОД - это second
@@ -317,3 +323,11 @@ P - 11
     }
     return ost1; // если цикл завершился и не вернул ничего => НОД - ost1
 }
+
+Polynomial Polynomial::reduceAllCoefficients() const {
+    Polynomial copy{*this};
+    std::transform(copy.coefficients_.begin(), copy.coefficients_.end(), copy.coefficients_.begin(),
+                   [](const Rational &rational) { return rational.reduce(); });
+    return copy;
+}
+
