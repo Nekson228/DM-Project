@@ -152,7 +152,7 @@ TEST(Compare_test, test3){
     EXPECT_EQ(res, test);
 }
 
-TEST(mul10degree0check, 1) {
+TEST(Ilyin_2383_Natural_mulBy10k_test, degree0) {
     Natural first(5);
     Natural second(5);
     Natural third;
@@ -160,30 +160,30 @@ TEST(mul10degree0check, 1) {
     EXPECT_EQ(third, second);
 }
 
-TEST(mul10degree6check, 2) {
+TEST(Ilyin_2383_Natural_mulBy10k_test, degree6) {
     Natural first = Natural(5), second = Natural(5000000), third = first.mulBy10k(6);
     EXPECT_EQ(third, second);
 }
 
-TEST(mul10degree25, 3) {
+TEST(Ilyin_2383_Natural_mulBy10k_test, degree25) {
     Natural test_object(1);
     Natural expected_size("10000000000000000000000000");
     EXPECT_EQ(test_object.mulBy10k(25), expected_size);
 }
 
-TEST(lcm5and6, 4) {
+TEST(Ilyin_2383_Natural_lcm_test, 5and6get30) {
     Natural first(5);
     Natural second(6);
     EXPECT_EQ(Natural(30), first.lcm(first, second));
 }
 
-TEST(lcm1and1, 5) {
+TEST(Ilyin_2383_Natural_lcm_test, 1and1get1) {
     Natural first(1);
     Natural second(1);
     EXPECT_EQ(Natural(1), first.lcm(first, second));
 }
 
-TEST(lcm1324234234and2, 6) {
+TEST(Ilyin_2383_Natural_lcm_test, getOneOfNum) {
     Natural first("1324234234");
     Natural second(2);
     EXPECT_EQ(Natural("1324234234"), first.lcm(first, second));
@@ -283,19 +283,19 @@ TEST(NaturalDividingTest , DividingOneTest){
     EXPECT_TRUE(num / num2 == num_answer);
 }
 
-TEST(NaturalTest, gcdZeroTest) {
+TEST(Sots_Katya_2384_Natural, gcdZeroTest) {
     Natural first(5);
     Natural second(0);
     EXPECT_EQ(first.cmp(first.gcd(first, second), first), 0);
 }
 
-TEST(NaturalTest, gcdPrimeTest) {
+TEST(Sots_Katya_2384_Natural, gcdPrimeTest) {
     Natural first(8);
     Natural second(5);
     EXPECT_EQ(first.cmp(first.gcd(first, second), Natural(1)), 0);
 }
 
-TEST(NaturalTest, gcdNotPrimeTest) {
+TEST(Sots_Katya_2384_Natural, gcdNotPrimeTest) {
     Natural first(16);
     Natural second(12);
     EXPECT_EQ(first.cmp(first.gcd(first, second), Natural(4)), 0);

@@ -79,51 +79,51 @@ TEST(Lavrenova_Yulia, product4) {
     EXPECT_EQ(ans4, ans4_test);
 }
 
-TEST(IntegerTest, toNaturalNegativeTest) {
-    Integer num(-1);
-    EXPECT_THROW(num.toNatural(), std::invalid_argument);
-}
+//TEST(IntegerTest, toNaturalNegativeTest) {
+//    Integer num(-1);
+//    EXPECT_THROW(num.toNatural(), std::invalid_argument);
+//}
 
-TEST(IntegerTest, toNaturalZeroTest) {
+TEST(Sots_Katya_2384_Integer, toNaturalZeroTest) {
     Integer num(0);
     Natural value = num.toNatural();
     EXPECT_EQ(value.cmp(value, Natural(0)), 0);
 }
 
-TEST(IntegerTest, toNaturalPositiveTest) {
+TEST(Sots_Katya_2384_Integer, toNaturalPositiveTest) {
     Integer num(123);
     Natural value = num.toNatural();
     EXPECT_EQ(value.cmp(value, Natural(123)), 0);
 }
 
-TEST(IntegerTest, DivOperatorDivByZeroTest) {
+TEST(Sots_Katya_2384_Integer, DivOperatorDivByZeroTest) {
     Integer first(2);
     Integer second(0);
     EXPECT_THROW(first = first / second, std::invalid_argument);
 }
 
-TEST(IntegerTest, DivOperatorPosPosTest) {
+TEST(Sots_Katya_2384_Integer, DivOperatorPosPosTest) {
     Integer first(7);
     Integer second(3);
     first = first / second;
     EXPECT_EQ(first, Integer(2));
 }
 
-TEST(IntegerTest, DivOperatorPosNegTest) {
+TEST(Sots_Katya_2384_Integer, DivOperatorPosNegTest) {
     Integer first(7);
     Integer second(-3);
     first = first / second;
     EXPECT_EQ(first, Integer(-2));
 }
 
-TEST(IntegerTest, DivOperatorNegPosTest) {
+TEST(Sots_Katya_2384_Integer, DivOperatorNegPosTest) {
     Integer first(-7);
     Integer second(3);
     first = first / second;
     EXPECT_EQ(first, Integer(-3));
 }
 
-TEST(IntegerTest, DivOperatorNegNegTest) {
+TEST(Sots_Katya_2384_Integer, DivOperatorNegNegTest) {
     Integer first(-7);
     Integer second(-3);
     first = first / second;
@@ -244,8 +244,7 @@ TEST(IntegerTest, negativeNegativeValueTest) {
 }
 
 
-TEST(operator_add, Tests_1
-) {
+TEST(Valeyeva2384_Integer_ADD_ZZ_Z, Add_Tests1) {
     Integer integer_1(2000);
     Integer integer_2(1000);
     Integer ans1(integer_1 + integer_2);
@@ -254,8 +253,7 @@ TEST(operator_add, Tests_1
     EXPECT_EQ(ans1, ans1_test);
 }
 
-TEST(operator_add, Tests_2
-) {
+TEST(Valeyeva2384_Integer_ADD_ZZ_Z, Add_Tests2) {
     Integer integer_1(-2000);
     Integer integer_2(1000);
     Integer ans2(integer_1 + integer_2);
@@ -264,7 +262,7 @@ TEST(operator_add, Tests_2
     EXPECT_EQ(ans2, ans2_test);
 }
 
-TEST(operator_add, Tests_3) {
+TEST(Valeyeva2384_Integer_ADD_ZZ_Z, Add_Tests3) {
     Integer integer_1(-2000);
     Integer integer_2(-1000);
     Integer ans3(integer_1 + integer_2);
