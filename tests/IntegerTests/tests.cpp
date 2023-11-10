@@ -271,20 +271,24 @@ TEST(Valeyeva2384_Integer_ADD_ZZ_Z, Add_Tests3) {
     EXPECT_EQ(ans3, ans3_test);
 }
 
-TEST(checkModOperator, 1) {
+TEST(Vozgrin2382_Integer_MOD_ZZ_Z, MOD_PP) {
     ASSERT_TRUE(Integer(21) % Integer(4) == Integer(1));
 }
 
-TEST(checkModOperator, 2) {
+TEST(Vozgrin2382_Integer_MOD_ZZ_Z, MOD_NP) {
     ASSERT_TRUE(Integer(-50) % Integer(7) == Integer(6));
 }
 
-TEST(checkModOperator, 3) {
+TEST(Vozgrin2382_Integer_MOD_ZZ_Z, MOD_PN) {
     ASSERT_TRUE(Integer(23) % Integer(-4) == Integer(3));
 }
 
-TEST(checkModOperator, 4) {
+TEST(Vozgrin2382_Integer_MOD_ZZ_Z, MOD_NN) {
     ASSERT_TRUE(Integer(-32) % Integer(-30) == Integer(28));
+}
+
+TEST(Vozgrin2382_Integer_MOD_ZZ_Z, MOD_PZero) {
+    ASSERT_THROW(Integer(10) % Integer(0),std::invalid_argument);
 }
 
 int main() {
