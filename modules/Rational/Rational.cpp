@@ -93,26 +93,24 @@ bool Rational::isInteger() const { // INT_Q_B
     // Скоращаем дроби
     Rational minuend = this->reduce(); // Уменьшаемое
     Rational subtrahend = other.reduce(); // Вычитаемое
-    Rational *difference; // Разность
+    Rational difference; // Разность
     // Проверяем равенство знаменателей уменьшлаемого и вычитаемого
     bool isDenominatorsEqual = (Natural::cmp(minuend.getDenominator(), subtrahend.getDenominator()) == 0);
     if (isDenominatorsEqual) { // Если знаменатели равны
         const Natural &newDenominator = minuend.getDenominator(); // Фиксируем знаменатель
-        *difference = Rational(minuend.getNumerator() - subtrahend.getNumerator(),
+        difference = Rational(minuend.getNumerator() - subtrahend.getNumerator(),
                                newDenominator); // Записыываем результат
     } else {
-        const Natural &minuendDenominator = minuend.getDenominator(); // Получаем знаменатель уменьшаемого
-        const Natural &subtrahendDenominator = subtrahend.getDenominator(); // Получаем знаменатель вычитаемого
-        Natural newDenominator = Natural::lcm(minuendDenominator,
-                                              subtrahendDenominator); // Ищем НОК - фиксируем как получившийся знаменатель
-        Integer minuendNumerator = Integer(newDenominator / minuendDenominator) *
+        Natural newDenominator = Natural::lcm(minuend.getDenominator(),
+                                              subtrahend.getDenominator()); // Ищем НОК - фиксируем как получившийся знаменатель
+        Integer minuendNumerator = Integer(newDenominator / minuend.getDenominator()) *
                                    minuend.getNumerator(); // Считаем новый числитель уменьшаемого
-        Integer subtrahendNumerator = Integer(newDenominator / subtrahendDenominator) *
+        Integer subtrahendNumerator = Integer(newDenominator / subtrahend.getDenominator()) *
                                       subtrahend.getNumerator(); // Считаем новый числитель вычитаемого
-        *difference = Rational(minuendNumerator - subtrahendNumerator, newDenominator); // Записыываем результат
+        difference = Rational(minuendNumerator - subtrahendNumerator, newDenominator); // Записыываем результат
     }
-    *difference = difference->reduce(); // Сокращаем полученный результат
-    return *difference;
+    difference = difference.reduce(); // Сокращаем полученный результат
+    return difference;
 }
 
 //Написал функцию - Кузьминых Егор
