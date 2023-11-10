@@ -4,9 +4,9 @@
 #include <map>
 #include <algorithm>
 
-Polynomial::Polynomial(const std::vector<Rational> &coefficients) {
-    coefficients_ = coefficients;
-    degree_ = coefficients_.size() - 1;
+Polynomial::Polynomial(const std::vector<Rational> &coefficients)
+        : coefficients_(coefficients), degree_(coefficients.size() - 1) {
+    removeLeadingZeros();
 }
 
 std::string Polynomial::str() const {
@@ -78,7 +78,8 @@ Polynomial::Polynomial(const std::string &polynomial) : degree_(0) {
         degree_ = degree + 1;
     }
     std::reverse(coefficients_.begin(), coefficients_.end());
-    degree_--; // TODO: test
+    removeLeadingZeros();
+    degree_--;
 }
 
 
@@ -329,5 +330,11 @@ Polynomial Polynomial::reduceAllCoefficients() const {
     std::transform(copy.coefficients_.begin(), copy.coefficients_.end(), copy.coefficients_.begin(),
                    [](const Rational &rational) { return rational.reduce(); });
     return copy;
+}
+
+void Polynomial::removeLeadingZeros() {
+    coefficients_.erase(std::remove_if(coefficients_.begin(), coefficients_.end(),
+                                       [](const Rational &rational) { return rational.isZero(); }),
+                        coefficients_.end());
 }
 

@@ -2,14 +2,11 @@
 #include "gtest/gtest.h"
 #include <vector>
 
-//TEST(PolynomialTest, FactoriseLowDegreeTest) {
-//    std::vector<Rational> cf1 = {Rational{5, 1}};
-//    std::vector<Rational> cf2 = {};
-//    Polynomial poly1(cf1);
-//    Polynomial poly2(cf2);
-//    EXPECT_EQ(poly1.factorize(), poly1);
-//    EXPECT_EQ(poly2.factorize(), poly2);
-//}
+TEST(PolynomialTest, FactoriseLowDegreeTest) {
+    std::vector<Rational> cf1 = {Rational{5, 1}};
+    Polynomial poly1(cf1);
+    EXPECT_EQ(poly1.factorize(), poly1);
+}
 
 TEST(PolynomialTest, FactoriseNotChangeTest) {
     std::vector<Rational> cf1 = {Rational{5, 1}, Rational{5, 1}}, cf2 = {Rational(1, 1), Rational(1, 1)};
@@ -25,11 +22,11 @@ TEST(PolynomialTest, FactoriseChangeTest) {
     EXPECT_EQ(poly1.factorize(), poly2);
 }
 
-//TEST(PolynomialTest, SinglifyZeroRootTest) {
-//    std::vector<Rational> cf = {Rational{5, 1}};
-//    Polynomial poly(cf);
-//    EXPECT_EQ(poly.singlify(), poly);
-//}
+TEST(PolynomialTest, SinglifyZeroRootTest) {
+    std::vector<Rational> cf = {Rational{5, 1}};
+    Polynomial poly(cf);
+    EXPECT_EQ(poly.singlify(), poly);
+}
 
 TEST(PolynomialTest, SinglifyOneRootTest) {
     std::vector<Rational> cf = {Rational{1, 1}, Rational{-14, 2}, Rational{12, 1}}; // (x-3)(x-4) = x^2 - 7x + 12

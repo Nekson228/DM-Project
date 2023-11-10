@@ -67,14 +67,14 @@ TEST(RationalAdditionTest, 1) {
     Rational first_number = Rational(1, 4);
     Rational second_number = Rational(1, 4);
     Rational answer = Rational(1, 2);
-    EXPECT_EQ(first_number + second_number, answer);
+    EXPECT_EQ(first_number + second_number, Rational(2, 4));
 }
 
 TEST(RationalAdditionTest, 2) {
     Rational first_number = Rational(1, 2);
     Rational second_number = Rational(1, 2);
     Rational answer = Rational(1, 1);
-    EXPECT_EQ(first_number + second_number, answer);
+    EXPECT_EQ(first_number + second_number, Rational(2, 2));
 
 }
 

@@ -5,6 +5,6 @@
 #include "modules/Polynomial/Polynomial.h"
 
 int main() {
-    Polynomial pol1{"1/2*x"}, pol2{"x-2"};
-    std::cout << (pol1 + pol1).str();
+    Polynomial pol1{"0*x^2+x+1"};
+    std::cout << pol1.str();
 }
