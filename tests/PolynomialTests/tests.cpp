@@ -330,7 +330,7 @@ TEST(Vozgrin2382_Polynomial_LEAD_P_Q, Lead_test_4) {
     ASSERT_TRUE(p.leading() == Rational(8, 1));
 }
 
-TEST(getDegree, regular_test) {
+TEST(Zhdanov_Anton_2383_DEG_P_N, regular_test) {
     std::vector<Rational> coef1 = {Rational(1, 1), Rational(3, 1), Rational(-1, 1)};
     Polynomial f(coef1);
     std::size_t ans = 2;
@@ -338,7 +338,7 @@ TEST(getDegree, regular_test) {
     EXPECT_EQ(ans, ans_test);
 }
 
-TEST(getDegree, polynomial_with_degree_0) {
+TEST(Zhdanov_Anton_2383_DEG_P_N, polynomial_with_degree_0) {
     std::vector<Rational> coef1 = {Rational((1), (1))};
 
     Polynomial f(coef1);
@@ -347,17 +347,17 @@ TEST(getDegree, polynomial_with_degree_0) {
     EXPECT_EQ(ans, ans_test);
 }
 
-TEST(getDegree, high_degree_test) {
+TEST(Zhdanov_Anton_2383_DEG_P_N, high_degree_test) {
     std::vector<Rational> coef1 = {Rational(1, 1), Rational(3, 1), Rational(-1, 1), Rational(-4, 1),
                                    Rational(1, 1), Rational(3, 1), Rational(-1, 1), Rational(-4, 1), Rational(-3, 1)};
 
     Polynomial f(coef1);
-    std::size_t ans = 9;
+    std::size_t ans = 8;
     std::size_t ans_test = f.getDegree();
     EXPECT_EQ(ans, ans_test);
 }
 
-TEST(scale, regular_test) {
+TEST(Zhdanov_Anton_2383_MUL_PQ_P, regular_test) {
     std::vector<Rational> coef1 = {Rational(1, 1), Rational(3, 1), Rational(-1, 1), Rational(-4, 1), Rational(-3, 1)};
 
     std::vector<Rational> coef2 = {Rational(2, 1), Rational(6, 1), Rational(-2, 1), Rational(-8, 1), Rational(-6, 1)};
@@ -367,7 +367,7 @@ TEST(scale, regular_test) {
     EXPECT_EQ(f.scale(Rational(2, 1)), g);
 }
 
-TEST(scale, negativ_number_test) {
+TEST(Zhdanov_Anton_2383_MUL_PQ_P, negativ_number_test) {
     std::vector<Rational> coef1 = {Rational(1, 1), Rational(3, 1), Rational(-1, 1), Rational(-4, 1), Rational(-3, 1)};
 
     std::vector<Rational> coef2 = {Rational(-2, 3), Rational(-2, 1), Rational(2, 3), Rational(8, 3), Rational(2, 1)};
@@ -377,7 +377,7 @@ TEST(scale, negativ_number_test) {
     EXPECT_EQ(f.scale(Rational(-2, 3)), g);
 }
 
-TEST(scale, test_with_0) {
+TEST(Zhdanov_Anton_2383_MUL_PQ_P, test_with_0) {
     std::vector<Rational> coef1 = {Rational(1, 1), Rational(3, 1), Rational(-1, 1), Rational(-4, 1), Rational(-3, 1)};
 
     std::vector<Rational> coef2 = {Rational(0, 1)};
@@ -387,7 +387,7 @@ TEST(scale, test_with_0) {
     EXPECT_EQ(f.scale(Rational(0, 1)), g);
 }
 
-TEST(gcd, polynomial_g_is_gcd) {
+TEST(Zhdanov_Anton_2383_GCF_PP_P, polynomial_g_is_gcd) {
     std::vector<Rational> coef1 = {Rational(1, 1), Rational(5, 1), Rational(6, 1)};
 
     std::vector<Rational> coef2 = {Rational(1, 1), Rational(3, 1)};
@@ -400,7 +400,7 @@ TEST(gcd, polynomial_g_is_gcd) {
     EXPECT_EQ(Polynomial::gcd(f, g), r);
 }
 
-TEST(gcd, regular_test1) {
+TEST(Zhdanov_Anton_2383_GCF_PP_P, regular_test1) {
     std::vector<Rational> coef1 = {Rational(1, 1), Rational(3, 1), Rational(-1, 1), Rational(-4, 1), Rational(-3, 1)};
 
     std::vector<Rational> coef2 = {Rational(3, 1), Rational(10, 1), Rational(2, 1), Rational(-3, 1)};
@@ -413,7 +413,7 @@ TEST(gcd, regular_test1) {
     EXPECT_EQ(Polynomial::gcd(f, g), r);
 }
 
-TEST(gcd, regular_test2) {
+TEST(Zhdanov_Anton_2383_GCF_PP_P, test_with_negativ_coef) {
     std::vector<Rational> coef1 = {Rational(3, 1), Rational(10, 1), Rational(2, 1), Rational(-3, 1)};
 
     std::vector<Rational> coef2 = {Rational(-5, 9), Rational(-25, 9), Rational(-10, 3)};
