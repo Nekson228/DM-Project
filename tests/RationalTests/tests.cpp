@@ -106,21 +106,21 @@ TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest6) {
     EXPECT_EQ(first_number + second_number, answer);
 }
 
-TEST(Construction_test, test1){
+TEST(Lavrenova2384_Rational_TRANS_Z_Q, RationalTransformationTest1){
     Integer integer_(234);
     Rational rational_(integer_);
     Rational test("234/1");
     EXPECT_EQ(rational_, test);
 }
 
-TEST(Construction_test, test2){
+TEST(Lavrenova2384_Rational_TRANS_Z_Q, RationalTransformationTest2){
     Integer integer_(347564);
     Rational rational_(integer_);
     Rational test("347564/1");
     EXPECT_EQ(rational_, test);
 }
 
-TEST(Construction_test, test3){
+TEST(Lavrenova2384_Rational_TRANS_Z_Q, RationalTransformationTest3){
     Integer integer_(-172);
     Rational rational_(integer_);
     Rational test("-172/1");
