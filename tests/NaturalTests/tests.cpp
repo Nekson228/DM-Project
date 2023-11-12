@@ -50,7 +50,7 @@ TEST(Borisov_IP_2383_Natural_subScaled, zero_all) {
     EXPECT_TRUE(natural.isZero());
 }
 
-TESTBorisov_IP_2383_Natural_(subScaled, usual) {
+TEST(Borisov_IP_2383_Natural_subScaled, usual) {
     Natural natural("1234567");
     Natural check("1172842");
     Natural natural_other(12345);
@@ -115,17 +115,22 @@ TEST(Damakin2384_Natural_DIV_NN_Dk, DivFirstDigitTest4){
     ASSERT_TRUE(a.divFirstDigit(b) == Natural(10000));
 }
 
-TEST(IsZero_Test, test1){
-    Natural natural(12);
-    EXPECT_EQ(natural.isZero(), false);
+TEST(Gurkov2384_Natural_NZER_N_B, NOT_ZERO_VALUE){
+    Natural natural_1(12);
+    EXPECT_EQ(natural_1.isZero(), false);
 }
 
-TEST(IsZero_Test, test2){
-    Natural natural(0);
-    EXPECT_EQ(natural.isZero(), true);
+TEST(Gurkov2384_Natural_NZER_N_B, ZERO_VAUE){
+    Natural natural_2(0);
+    EXPECT_EQ(natural_1.isZero(), true);
 }
 
-TEST(Compare_test, test1){
+TEST(Gurkov2384_Natural_NZER_N_B, STANDART_CONSTRUCTOR_VALUE){
+    Natural natural_3;
+    EXPECT_EQ(natural_1.isZero(), true);
+}
+
+TEST(Gurkov2384_Natural_COM_NN_D, FIRST_IS_BIGGER){
     Natural a(2000);
     Natural b(1000);
     digit res = 2;
@@ -134,7 +139,7 @@ TEST(Compare_test, test1){
     EXPECT_EQ(res, test);
 }
 
-TEST(Compare_test, test2){
+TEST(Gurkov2384_Natural_COM_NN_D, FIRST_IS_SMALLER){
     Natural a(1000);
     Natural b(2000);
     digit res = 1;
@@ -143,13 +148,13 @@ TEST(Compare_test, test2){
     EXPECT_EQ(res, test);
 }
 
-TEST(Compare_test, test3){
+TEST(Gurkov2384_Natural_COM_NN_D, FIRST_EQUALS_SECOND){
     Natural a(1000);
     Natural b(1000);
     digit res = 0;
     digit test = Natural::cmp(a, b);
 
-    EXPECT_EQ(res, test);
+    EXPECT_EQ(res, test); 
 }
 
 TEST(Ilyin_2383_Natural_mulBy10k_test, degree0) {
