@@ -1,19 +1,19 @@
 #include <gtest/gtest.h>
 #include "../../modules/Integer/Integer.h"
 
-TEST(GurkovArseniy, IntegerAbsTest1) {
+TEST(Gurkov2384_Integer_ABS_Z_N, ABS_NEGATIVE_VALUE) {
     Integer i1 = Integer(-1);
     Integer result = i1.abs();
     Integer expected = Integer(1);
     ASSERT_TRUE(result == expected);
 }
 
-TEST(GurkovArseniy, IntegerAbsTest2) {
+TEST(Gurkov2384_Integer_ABS_Z_N, ABS_ZERO_VALUE) {
     Integer i1 = Integer(0);
     ASSERT_TRUE(i1.abs() == Integer(0));
 }
 
-TEST(GurkovArseniy, IntegerAbsTest3) {
+TEST(Gurkov2384_Integer_ABS_Z_N, ABS_POSITIVE_VALUE) {
     for (int i = -100; i <= 100; ++i) {
         ASSERT_TRUE(Integer(i).abs() == Integer(std::abs(i)));
     }
