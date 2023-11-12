@@ -227,17 +227,17 @@ TEST(Tsygankov_Roman_2384_Integer_TRANS_N_Z, HundredTest){
     EXPECT_EQ(integer_,ans11_test);
 }
 
-TEST(IntegerTest, negativeZeroValueTest) {
+TEST(Tsygulev_Stanislav_2383_MUL_ZM_Z, negativeZeroValueTest) {
     Integer num(0);
     EXPECT_EQ(num.negative(), Integer(0));
 }
 
-TEST(IntegerTest, negativePositiveValueTest) {
+TEST(Tsygulev_Stanislav_2383_MUL_ZM_Z, negativePositiveValueTest) {
     Integer num(123);
     EXPECT_EQ(num.negative(), Integer(-123));
 }
 
-TEST(IntegerTest, negativeNegativeValueTest) {
+TEST(Tsygulev_Stanislav_2383_MUL_ZM_Z, negativeNegativeValueTest) {
     Integer num(-777);
     EXPECT_EQ(num.negative(), Integer(777));
 }

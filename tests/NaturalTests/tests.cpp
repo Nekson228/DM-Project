@@ -289,32 +289,32 @@ TEST(Sots_Katya_2384_Natural, gcdNotPrimeTest) {
     EXPECT_EQ(first.cmp(first.gcd(first, second), Natural(4)), 0);
 }
 
-TEST(NaturalTest, addOneZeroTest) {
+TEST(Tsygulev_Stanislav_2383_ADD_1N_N, addOneZeroTest) {
     Natural num(0);
     EXPECT_EQ(num.addOne(), Natural(1));
 }
 
-TEST(NaturalTest, addOneNoTransitionTest) {
+TEST(Tsygulev_Stanislav_2383_ADD_1N_N, addOneNoTransitionTest) {
     Natural num(11);
     EXPECT_EQ(num.addOne(), Natural(12));
 }
 
-TEST(NaturalTest, addOneTransitionTest) {
+TEST(Tsygulev_Stanislav_2383_ADD_1N_N, addOneTransitionTest) {
     Natural num(99);
     EXPECT_EQ(num.addOne(), Natural(100));
 }
 
-TEST(NaturalTest, subLowerTest) {
+TEST(Tsygulev_Stanislav_2383_SUB_NN_N, subLowerTest) {
     Natural num(10);
     EXPECT_THROW(num - Natural(20), std::invalid_argument);
 }
 
-TEST(NaturalTest, subEqualTest) {
+TEST(Tsygulev_Stanislav_2383_SUB_NN_N, subEqualTest) {
     Natural num(77);
     EXPECT_EQ(num - Natural(77), Natural(0));
 }
 
-TEST(NaturalTest, subGreaterTest) {
+TEST(Tsygulev_Stanislav_2383_SUB_NN_N, subGreaterTest) {
     Natural num(2248);
     EXPECT_EQ(num - Natural(1372), Natural(876));
 }
