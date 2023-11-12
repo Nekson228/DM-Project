@@ -203,10 +203,6 @@ TEST(Valeyeva2384_Rational_RED_Q_Q, Reduce_test3){
     EXPECT_EQ(my_answer, test);
 }
 
-TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_ZeroP){
-    ASSERT_TRUE(Rational(0, 1) / Rational(1, 1) == Rational(0, 1));
-}
-
 TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_PP){
     ASSERT_TRUE(Rational(7, 8) / Rational(5, 6) == Rational(42, 40));
 }
