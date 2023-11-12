@@ -130,103 +130,102 @@ TEST(Sots_Katya_2384_Integer, DivOperatorNegNegTest) {
     EXPECT_EQ(first, Integer(3));
 }
 
-TEST(TsygankovRoman, operator_sub_1) {
+TEST(Tsygankov_Roman_2384_Integer_SubOperator, PosPosTest){
     Integer integer_1(1000);
     Integer integer_2(500);
     Integer ans1(integer_1 - integer_2);
     Integer ans1_test(500);
 
-    EXPECT_EQ(ans1, ans1_test);
+    EXPECT_EQ(ans1,ans1_test);
 }
 
-TEST(TsygankovRoman, operator_sub_2) {
+TEST(Tsygankov_Roman_2384_Integer_SubOperator, PosNegTest){
     Integer integer_1(1000);
     Integer integer_2(-500);
     Integer ans2(integer_1 - integer_2);
     Integer ans2_test(1500);
 
-    EXPECT_EQ(ans2, ans2_test);
+    EXPECT_EQ(ans2,ans2_test);
 }
 
-TEST(TsygankovRoman, operator_sub_3) {
+TEST(Tsygankov_Roman_2384_Integer_SubOperator, PosZeroTest){
     Integer integer_1(1000);
     Integer integer_2(0);
     Integer ans3(integer_1 - integer_2);
     Integer ans3_test(1000);
 
-    EXPECT_EQ(ans3, ans3_test);
+    EXPECT_EQ(ans3,ans3_test);
 }
 
-TEST(TsygankovRoman, operator_sub_4) {
+TEST(Tsygankov_Roman_2384_Integer_SubOperator, NegPosTest){
     Integer integer_1(-1000);
     Integer integer_2(500);
     Integer ans4(integer_1 - integer_2);
     Integer ans4_test(-1500);
 
-    EXPECT_EQ(ans4, ans4_test);
+    EXPECT_EQ(ans4,ans4_test);
 }
 
-TEST(TsygankovRoman, operator_sub_5) {
+TEST(Tsygankov_Roman_2384_Integer_SubOperator, NegNegTest){
     Integer integer_1(-1000);
     Integer integer_2(-500);
     Integer ans5(integer_1 - integer_2);
     Integer ans5_test(-500);
 
-    EXPECT_EQ(ans5, ans5_test);
+    EXPECT_EQ(ans5,ans5_test);
 }
 
-TEST(TsygankovRoman, operator_sub_6) {
+TEST(Tsygankov_Roman_2384_Integer_SubOperator, NegZeroTest){
     Integer integer_1(-1000);
     Integer integer_2(0);
     Integer ans6(integer_1 - integer_2);
     Integer ans6_test(-1000);
 
-    EXPECT_EQ(ans6, ans6_test);
+    EXPECT_EQ(ans6,ans6_test);
 }
 
-TEST(TsygankovRoman, operator_sub_7) {
+TEST(Tsygankov_Roman_2384_Integer_SubOperator, ZeroPosTest){
     Integer integer_1(0);
     Integer integer_2(500);
     Integer ans7(integer_1 - integer_2);
     Integer ans7_test(-500);
 
-    EXPECT_EQ(ans7, ans7_test);
+    EXPECT_EQ(ans7,ans7_test);
 }
 
-TEST(TsygankovRoman, operator_sub_8) {
+TEST(Tsygankov_Roman_2384_Integer_SubOperator, ZeroNegTest){
     Integer integer_1(0);
     Integer integer_2(-500);
     Integer ans8(integer_1 - integer_2);
     Integer ans8_test(500);
 
-    EXPECT_EQ(ans8, ans8_test);
+    EXPECT_EQ(ans8,ans8_test);
 }
 
-TEST(TsygankovRoman, operator_sub_9) {
+TEST(Tsygankov_Roman_2384_Integer_SubOperator, ZeroZeroTest){
     Integer integer_1(0);
     Integer integer_2(0);
     Integer ans9(integer_1 - integer_2);
     Integer ans9_test(0);
 
-    EXPECT_EQ(ans9, ans9_test);
+    EXPECT_EQ(ans9,ans9_test);
 }
 
-TEST(TsygankovRoman, constructor_1) {
+TEST(Tsygankov_Roman_2384_Integer_TRANS_N_Z, TenTest){
     Natural natural_(10);
     Integer integer_(natural_);
     Integer ans10_test(10);
 
-    EXPECT_EQ(integer_, ans10_test);
+    EXPECT_EQ(integer_,ans10_test);
 }
 
-TEST(TsygankovRoman, constructor_2) {
+TEST(Tsygankov_Roman_2384_Integer_TRANS_N_Z, HundredTest){
     Natural natural_(100);
     Integer integer_(natural_);
     Integer ans11_test(100);
 
-    EXPECT_EQ(integer_, ans11_test);
+    EXPECT_EQ(integer_,ans11_test);
 }
-
 
 TEST(IntegerTest, negativeZeroValueTest) {
     Integer num(0);
