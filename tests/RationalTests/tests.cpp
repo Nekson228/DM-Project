@@ -220,6 +220,10 @@ TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_PN){
 }
 
 TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_NN){
+    ASSERT_TRUE(Rational(-5,10) / Rational(-2, 3) == Rational(15, 20));
+}
+
+TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_PZero){
     ASSERT_THROW((Rational(1, 1) / Rational(0, 1)),std::invalid_argument);
 }
 
