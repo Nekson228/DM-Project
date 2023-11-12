@@ -2,14 +2,14 @@
 #include "../../modules/Natural/Natural.h"
 
 
-TEST(mulByDigit, zero_mult) {
+TEST(Borisov_IP_2383_Natural_mulByDigit, zero_mult) {
     Natural natural(12345);
     digit muptiplier = 0;
     natural = natural.mulByDigit(muptiplier);
     EXPECT_TRUE(natural.isZero());
 }
 
-TEST(mulByDigit, normal) {
+TEST(Borisov_IP_2383_Natural_mulByDigit, normal) {
     Natural natural(12345);
     Natural check(12345 * 3);
     digit muptiplier = 3;
@@ -17,14 +17,14 @@ TEST(mulByDigit, normal) {
     EXPECT_TRUE(Natural::cmp(natural, check) == 0);
 }
 
-TEST(mulByDigit, zero_natural) {
+TEST(Borisov_IP_2383_Natural_mulByDigit, zero_natural) {
     Natural natural(0);
     digit muptiplier = 3;
     natural = natural.mulByDigit(muptiplier);
     EXPECT_TRUE(natural.isZero());
 }
 
-TEST(subScaled, zero_other) {
+TEST(Borisov_IP_2383_Natural_subScaled, zero_other) {
     Natural natural(12345);
     Natural check(12345);
     Natural natural_other(0);
@@ -33,7 +33,7 @@ TEST(subScaled, zero_other) {
     EXPECT_TRUE(Natural::cmp(natural, check) == 0);
 }
 
-TEST(subScaled, zero_k) {
+TEST(Borisov_IP_2383_Natural_subScaled, zero_k) {
     Natural natural(12345);
     Natural check(12345);
     Natural natural_other(12345);
@@ -42,7 +42,7 @@ TEST(subScaled, zero_k) {
     EXPECT_TRUE(Natural::cmp(natural, check) == 0);
 }
 
-TEST(subScaled, zero_all) {
+TEST(Borisov_IP_2383_Natural_subScaled, zero_all) {
     Natural natural(0);
     Natural natural_other(0);
     digit k = 0;
@@ -50,7 +50,7 @@ TEST(subScaled, zero_all) {
     EXPECT_TRUE(natural.isZero());
 }
 
-TEST(subScaled, usual) {
+TESTBorisov_IP_2383_Natural_(subScaled, usual) {
     Natural natural("1234567");
     Natural check("1172842");
     Natural natural_other(12345);
@@ -59,7 +59,7 @@ TEST(subScaled, usual) {
     EXPECT_TRUE(Natural::cmp(natural, check) == 0);
 }
 
-TEST(subScaled, equal) {
+TEST(Borisov_IP_2383_Natural_subScaled, equal) {
     Natural natural("1234567");
     Natural check(1);
     Natural natural_other("1234566");
@@ -68,14 +68,14 @@ TEST(subScaled, equal) {
     EXPECT_TRUE(Natural::cmp(natural, check) == 0);
 }
 
-TEST(remains, one) {
+TEST(Borisov_IP_2383_Natural_remains, one) {
     Natural natural("1234567");
     Natural natural_other(1);
     natural = natural % natural_other;
     EXPECT_TRUE(natural.isZero());
 }
 
-TEST(remains, usual) {
+TEST(Borisov_IP_2383_Natural_remains, usual) {
     Natural natural("1234567");
     Natural check(67);
     Natural natural_other(12345);
@@ -83,7 +83,7 @@ TEST(remains, usual) {
     EXPECT_TRUE(Natural::cmp(natural, check) == 0);
 }
 
-TEST(remains, smaller) {
+TEST(Borisov_IP_2383_Natural_remains, smaller) {
     Natural natural("1234567");
     Natural check("1234567");
     Natural natural_other("123456789");
