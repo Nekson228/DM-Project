@@ -116,47 +116,54 @@ TEST(Ilyin_2383_Polynomial_sub_test, GetZero) {
         coefs.emplace_back(i, i + 10);
     }
     std::vector<Rational> finalCoefs = {Rational(0, 1)};
-    Polynomial p1{coefs}, p3{finalCoefs};
-    EXPECT_EQ(p1 - p1, p3);
+    Polynomial p1{coefs}, expected{finalCoefs};
+    EXPECT_EQ(p1 - p1, expected);
 }
 
-TEST(Ilyin_2383_Polynomial_sub_test, GetNotZero) {
+TEST(Ilyin_2383_Polynomial_sub_test, GetMoreThanZero) {
     std::vector<Rational> firstCoefs;
     std::vector<Rational> secondCoefs;
-    std::vector<Rational> finalCoefs;
+    std::vector<Rational> finalCoefs = {Rational(2,1), Rational(1,1), Rational(2,3), Rational(1, 2), Rational(2, 5)};
     for (int i = 0; i < 5; i++) {
-        firstCoefs.push_back(Rational(i + 5, i + 1));
-        secondCoefs.push_back(Rational(i + 3, i + 1));
-        finalCoefs.push_back(Rational(2, i + 1));
+        firstCoefs.emplace_back(i + 5, i + 1);
+        secondCoefs.emplace_back(i + 3, i + 1);
     }
-    EXPECT_EQ(Polynomial(firstCoefs) -Polynomial(secondCoefs), Polynomial(finalCoefs));
+    Polynomial p1{firstCoefs}, p2{secondCoefs}, expected{finalCoefs};
+    Polynomial pt = p1 - p2;
+    EXPECT_EQ(pt, expected);
 }
 
-TEST(Ilyin_2383_Polynomial_sub_test, subZero) {
+TEST(Ilyin_2383_Polynomial_sub_test, GetLessThanZero) {
     std::vector<Rational> firstCoefs = {Rational(1, 1), Rational(0, 1), Rational(1, 1)};
-    std::vector<Rational> zero = {Rational(0, 1)};
-    EXPECT_EQ(Polynomial(firstCoefs) -Polynomial(zero), Polynomial(firstCoefs));
+    std::vector<Rational> biggerCoefs = {Rational(2, 1), Rational(0, 1), Rational(1, 1)};
+    std::vector<Rational> cmpCoefs = {Rational(-1, 1), Rational(0, 1), Rational(0, 1)};
+
+    Polynomial p1{firstCoefs}, p2{biggerCoefs}, expected{cmpCoefs};
+    EXPECT_EQ(p1-p2, expected);
 }
 
 TEST(Ilyin_2383_Polynomial_mod_test, GetZero) {
     std::vector<Rational> firstCoefs = {Rational(1, 1), Rational(0, 1), Rational(1, 1)};
     std::vector<Rational> secondCoefs = {Rational(1, 1)};
     std::vector<Rational> finalCoefs = {Rational(0, 1)};
-    EXPECT_EQ(Polynomial(firstCoefs)%Polynomial(secondCoefs), Polynomial(finalCoefs));
+    Polynomial first{firstCoefs}, second{secondCoefs}, expected{finalCoefs};
+    EXPECT_EQ(first % second, expected);
 }
 
 TEST(Ilyin_2383_Polynomial_mod_test, GetNotZero) {
-    std::vector<Rational> firstCoefs = {Rational(1, 1), Rational(0, 1), Rational(-1, 1)};
+    std::vector<Rational> firstCoefs = {Rational(1, 1), Rational(0, 1), Rational(-4, 1)};
     std::vector<Rational> secondCoefs = {Rational(1, 1), Rational(1, 1)};
-    std::vector<Rational> finalCoefs = {Rational(1, 1), Rational(-1, 1)};
-    EXPECT_EQ(Polynomial(firstCoefs)%Polynomial(secondCoefs), Polynomial(finalCoefs));
+    std::vector<Rational> finalCoefs = {Rational(-3, 1)};
+    Polynomial first{finalCoefs}, second{secondCoefs}, expected{finalCoefs};
+    EXPECT_EQ(first % second, expected);
 }
 
 TEST(Ilyin_2383_Polynomial_mod_test, get1) {
     std::vector<Rational> firstCoefs = {Rational(9, 1), Rational(56, 1), Rational(1, 1)};
     std::vector<Rational> secondCoefs = {Rational(1, 1), Rational(0, 1)};
     std::vector<Rational> finalCoefs = {Rational(1, 1)};
-    EXPECT_EQ(Polynomial(firstCoefs)%Polynomial(secondCoefs), Polynomial(finalCoefs));
+    Polynomial first{finalCoefs}, second{secondCoefs}, expected{finalCoefs};
+    EXPECT_EQ(first % second, expected);
 }
 
 TEST(Kuzminykh2384_Polynomial_ADD_PP_P, PolynomialAdditionTest1) {
