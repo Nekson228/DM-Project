@@ -283,9 +283,12 @@ TEST(Kuzminykh2384_Polynomial_DER_P_P, PolynomialDerivativeTest4) {
     EXPECT_EQ(first_pol.derivative(), result);
 }
 
-TEST(mulByXk, mul_test1) {
+TEST(Tsygankov_Roman_2384_Polynomal_MUL_Pxk_P, Mul_x2_Test){
     std::vector<Rational> coef1 = {Rational(1, 1), Rational(2, 1), Rational(3, 1)};
-    std::vector<Rational> coef2 = {Rational(1, 1), Rational(2, 1), Rational(3, 1), Rational(0, 1), Rational(0, 1)};
+    std::vector<Rational> coef2 = {Rational(1, 1), Rational(2, 1), Rational(3, 1)};
+
+    coef2.push_back(Rational(0, 1));
+    coef2.push_back(Rational(0, 1));
 
     Polynomial f(coef1);
     Polynomial g(coef2);
@@ -293,7 +296,7 @@ TEST(mulByXk, mul_test1) {
 
 }
 
-TEST(mulByXk, mul_test2) {
+TEST(Tsygankov_Roman_2384_Polynomal_MUL_Pxk_P, Mul_x0_Test){
     std::vector<Rational> coef1 = {Rational(1, 1), Rational(2, 1), Rational(3, 1)};
 
     Polynomial f(coef1);
@@ -302,7 +305,7 @@ TEST(mulByXk, mul_test2) {
 
 }
 
-TEST(mulByXk, mul_test3) {
+TEST(Tsygankov_Roman_2384_Polynomal_MUL_Pxk_P, Mul_x1_Test){
     std::vector<Rational> coef1 = {Rational(1, 1), Rational(2, 1), Rational(3, 1)};
 
     std::vector<Rational> coef2 = {Rational(1, 1), Rational(2, 1), Rational(3, 1)};
