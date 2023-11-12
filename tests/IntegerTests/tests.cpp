@@ -19,7 +19,7 @@ TEST(GurkovArseniy, IntegerAbsTest3) {
     }
 }
 
-TEST(Lavrenova_Yulia, isPositive1) {
+TEST(Lavrenova_Yulia_2384_Integer_POZ_Z_N, isPositiveTest1) {
     Integer integer_1(10);
     digit sign1 = integer_1.isPositive();
     digit sign_a_1 = 2;
@@ -27,7 +27,7 @@ TEST(Lavrenova_Yulia, isPositive1) {
     EXPECT_EQ(sign1, sign_a_1);
 }
 
-TEST(Lavrenova_Yulia, isPositive2) {
+TEST(Lavrenova_Yulia_2384_Integer_POZ_Z_N, isPositiveTest2) {
     Integer integer_2(-30000);
     digit sign_a_2 = 1;
     digit sign2 = integer_2.isPositive();
@@ -35,7 +35,7 @@ TEST(Lavrenova_Yulia, isPositive2) {
     EXPECT_EQ(sign2, sign_a_2);
 }
 
-TEST(Lavrenova_Yulia, isPositive3) {
+TEST(Lavrenova_Yulia_2384_Integer_POZ_Z_N, isPositiveTest3) {
     digit sign_a_3 = 0;
     Integer integer_3(0);
     digit sign3 = integer_3.isPositive();
@@ -43,7 +43,7 @@ TEST(Lavrenova_Yulia, isPositive3) {
     EXPECT_EQ(sign3, sign_a_3);
 }
 
-TEST(Lavrenova_Yulia, product1) {
+TEST(Lavrenova_Yulia_2384_Integer_MUL_ZZ_Z, ProductTest1) {
     Integer integer_1(12);
     Integer integer_2(6);
     Integer ans1(integer_1 * integer_2);
@@ -52,7 +52,7 @@ TEST(Lavrenova_Yulia, product1) {
     EXPECT_EQ(ans1, ans1_test);
 }
 
-TEST(Lavrenova_Yulia, product2) {
+TEST(Lavrenova_Yulia_2384_Integer_MUL_ZZ_Z, ProductTest2) {
     Integer integer_1(12);
     Integer integer_2(-2);
     Integer ans2(integer_1 * integer_2);
@@ -61,7 +61,7 @@ TEST(Lavrenova_Yulia, product2) {
     EXPECT_EQ(ans2, ans2_test);
 }
 
-TEST(Lavrenova_Yulia, product3) {
+TEST(Lavrenova_Yulia_2384_Integer_MUL_ZZ_Z, ProductTest3) {
     Integer integer_1(-2);
     Integer integer_2(-3);
     Integer ans3(integer_1 * integer_2);
@@ -70,7 +70,7 @@ TEST(Lavrenova_Yulia, product3) {
     EXPECT_EQ(ans3, ans3_test);
 }
 
-TEST(Lavrenova_Yulia, product4) {
+TEST(Lavrenova_Yulia_2384_Integer_MUL_ZZ_Z, ProductTest4) {
     Integer integer_1(12);
     Integer integer_2(0);
     Integer ans4(integer_1 * integer_2);
