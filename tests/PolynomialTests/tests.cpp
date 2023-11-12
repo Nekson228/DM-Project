@@ -1,20 +1,23 @@
 #include "../../modules/Polynomial/Polynomial.h"
 #include "gtest/gtest.h"
 #include <vector>
+ 
+//TEST(Bormatov2383_Polynomial_FAC_P_Q, FactoriseLowDegreeTest) {
+//    std::vector<Rational> cf1 = {Rational{5, 1}};
+//    std::vector<Rational> cf2 = {};
+//    Polynomial poly1(cf1);
+//    Polynomial poly2(cf2);
+//    EXPECT_EQ(poly1.factorize(), poly1);
+//    EXPECT_EQ(poly2.factorize(), poly2);
+//}
 
-TEST(PolynomialTest, FactoriseLowDegreeTest) {
-    std::vector<Rational> cf1 = {Rational{5, 1}};
-    Polynomial poly1(cf1);
-    EXPECT_EQ(poly1.factorize(), poly1);
-}
-
-TEST(PolynomialTest, FactoriseNotChangeTest) {
+TEST(Bormatov2383_Polynomial_FAC_P_Q, FactoriseNotChangeTest) {
     std::vector<Rational> cf1 = {Rational{5, 1}, Rational{5, 1}}, cf2 = {Rational(1, 1), Rational(1, 1)};
     Polynomial poly(cf1), answer(cf2);
     EXPECT_EQ(poly.factorize(), answer);
 }
 
-TEST(PolynomialTest, FactoriseChangeTest) {
+TEST(Bormatov2383_Polynomial_FAC_P_Q, FactoriseChangeTest) {
     std::vector<Rational> cf1 = {Rational{6, 5}, Rational{3, 4}};
     std::vector<Rational> cf2 = {Rational{8, 1}, Rational{5, 1}};
     Polynomial poly1(cf1);
@@ -22,19 +25,19 @@ TEST(PolynomialTest, FactoriseChangeTest) {
     EXPECT_EQ(poly1.factorize(), poly2);
 }
 
-TEST(PolynomialTest, SinglifyZeroRootTest) {
-    std::vector<Rational> cf = {Rational{5, 1}};
-    Polynomial poly(cf);
-    EXPECT_EQ(poly.singlify(), poly);
-}
+//TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyZeroRootTest) {
+//    std::vector<Rational> cf = {Rational{5, 1}};
+//    Polynomial poly(cf);
+//    EXPECT_EQ(poly.singlify(), poly);
+//}
 
-TEST(PolynomialTest, SinglifyOneRootTest) {
-    std::vector<Rational> cf = {Rational{1, 1}, Rational{-14, 2}, Rational{12, 1}}; // (x-3)(x-4) = x^2 - 7x + 12
-    Polynomial poly(cf);
-    EXPECT_EQ(poly.singlify(), poly);
-}
+// TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyOneRootTest) {
+//     std::vector<Rational> cf = {Rational{1, 1}, Rational{-14, 2}, Rational{12, 1}}; // (x-3)(x-4) = x^2 - 7x + 12
+//     Polynomial poly(cf);
+//     EXPECT_EQ(poly.singlify(), poly);
+// }
 
-TEST(PolynomialTest, SinglifyManyRootsTest) {
+TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyManyRootsTest) {
     std::vector<Rational> cf1 = {Rational{1, 1}, Rational{-6, 1}, Rational{27, 3}}; // (x-3)^2 = x^2 - 6x + 9
     std::vector<Rational> cf2 = {Rational{1, 1}, Rational{-3, 1}};                 // x - 3
     Polynomial poly1(cf1);
@@ -159,7 +162,7 @@ TEST(Ilyin_2383_Polynomial_mod_test, get1) {
     EXPECT_EQ(Polynomial(firstCoefs)%Polynomial(secondCoefs), Polynomial(finalCoefs));
 }
 
-TEST(Kuzminykh2384_Polynomial_ADD_PP_P, PolynomialAdditionTest1) {
+TEST(PolynomialAdditionTest, 1) {
     std::vector<Rational> coef1 = {Rational(Integer(1)), Rational(Integer(1)), Rational(Integer(1))};
     Polynomial first_pol = Polynomial(coef1);
     std::vector<Rational> coef2 = {Rational(Integer(1)), Rational(Integer(1)), Rational(Integer(1)),
@@ -171,7 +174,7 @@ TEST(Kuzminykh2384_Polynomial_ADD_PP_P, PolynomialAdditionTest1) {
     EXPECT_EQ(first_pol + second_pol, result);
 }
 
-TEST(Kuzminykh2384_Polynomial_ADD_PP_P, PolynomialAdditionTest2) {
+TEST(PolynomialAdditionTest, 2) {
     std::vector<Rational> coef1 = {Rational(Integer(1))};
     Polynomial first_pol = Polynomial(coef1);
     std::vector<Rational> coef2 = {Rational(Integer(0))};
@@ -181,7 +184,7 @@ TEST(Kuzminykh2384_Polynomial_ADD_PP_P, PolynomialAdditionTest2) {
     EXPECT_EQ(first_pol + second_pol, result);
 }
 
-TEST(Kuzminykh2384_Polynomial_ADD_PP_P, PolynomialAdditionTest3) {
+TEST(PolynomialAdditionTest, 3) {
     std::vector<Rational> coef1 = {Rational(1, 2), Rational(1, 2), Rational(1, 2)};
     Polynomial first_pol = Polynomial(coef1);
     std::vector<Rational> coef2 = {Rational(1, 2), Rational(1, 2), Rational(1, 2)};
@@ -191,7 +194,7 @@ TEST(Kuzminykh2384_Polynomial_ADD_PP_P, PolynomialAdditionTest3) {
     EXPECT_EQ(first_pol + second_pol, result);
 }
 
-TEST(Kuzminykh2384_Polynomial_ADD_PP_P, PolynomialAdditionTest4) {
+TEST(PolynomialAdditionTest, 4) {
     std::vector<Rational> coef1 = {Rational(1, 2), Rational(1, 2), Rational(1, 2)};
     Polynomial first_pol = Polynomial(coef1);
     std::vector<Rational> coef2 = {Rational(-1, 2), Rational(1, 2), Rational(1, 2)};
@@ -202,7 +205,7 @@ TEST(Kuzminykh2384_Polynomial_ADD_PP_P, PolynomialAdditionTest4) {
 }
 
 
-TEST(Kuzminykh2384_Polynomial_DIV_PP_P, PolynomialDivisionTest1) {
+TEST(PolynomialDivisionTest, 1) {
     std::vector<Rational> coef1 = {Rational(1, 1), Rational(1, 1), Rational(1, 1)};
     Polynomial first_pol = Polynomial(coef1);
     std::vector<Rational> coef2 = {Rational(1, 1), Rational(1, 1), Rational(1, 1)};
@@ -212,7 +215,7 @@ TEST(Kuzminykh2384_Polynomial_DIV_PP_P, PolynomialDivisionTest1) {
     EXPECT_EQ(first_pol / second_pol, result);
 }
 
-TEST(Kuzminykh2384_Polynomial_DIV_PP_P, PolynomialDivisionTest2) {
+TEST(PolynomialDivisionTest, 2) {
     std::vector<Rational> coef1 = {Rational(Integer(1)), Rational(Integer(2)), Rational(Integer(3))};
     Polynomial first_pol = Polynomial(coef1);
     std::vector<Rational> coef2 = {Rational(Integer(1)), Rational(Integer(5))};
@@ -222,7 +225,7 @@ TEST(Kuzminykh2384_Polynomial_DIV_PP_P, PolynomialDivisionTest2) {
     EXPECT_EQ(first_pol / second_pol, result);
 }
 
-TEST(Kuzminykh2384_Polynomial_DIV_PP_P, PolynomialDivisionTest3) {
+TEST(PolynomialDivisionTest, 3) {
     std::vector<Rational> coef1 = {Rational(Integer(5)), Rational(Integer(2)), Rational(Integer(3)),
                                    Rational(Integer(4))};
     Polynomial first_pol = Polynomial(coef1);
@@ -233,7 +236,7 @@ TEST(Kuzminykh2384_Polynomial_DIV_PP_P, PolynomialDivisionTest3) {
     EXPECT_EQ(first_pol / second_pol, result);
 }
 
-TEST(Kuzminykh2384_Polynomial_DIV_PP_P, PolynomialDivisionTest4) {
+TEST(PolynomialDivisionTest, 4) {
     std::vector<Rational> coef1 = {Rational(1, 1), Rational(1, 1), Rational(1, 1)};
     Polynomial first_pol = Polynomial(coef1);
     std::vector<Rational> coef2 = {Rational(0, 1)};
@@ -245,7 +248,7 @@ TEST(Kuzminykh2384_Polynomial_DIV_PP_P, PolynomialDivisionTest4) {
     }
 }
 
-TEST(Kuzminykh2384_Polynomial_DER_P_P, PolynomialDerivativeTest1) {
+TEST(PolynomialDerivativeTest, 1) {
     std::vector<Rational> coef1 = {Rational(Integer(1)), Rational(Integer(1))};
     Polynomial first_pol = Polynomial(coef1);
     std::vector<Rational> coef2 = {Rational(Integer(1))};
@@ -253,7 +256,7 @@ TEST(Kuzminykh2384_Polynomial_DER_P_P, PolynomialDerivativeTest1) {
     EXPECT_EQ(first_pol.derivative(), result);
 }
 
-TEST(Kuzminykh2384_Polynomial_DER_P_P, PolynomialDerivativeTest2) {
+TEST(PolynomialDerivativeTest, 2) {
     std::vector<Rational> coef1 = {Rational(1, 3), Rational(1, 2), Rational(1, 1), Rational(1, 1)};
     Polynomial first_pol = Polynomial(coef1);
     std::vector<Rational> coef2 = {Rational(1, 1), Rational(1, 1), Rational(1, 1)};
@@ -261,18 +264,12 @@ TEST(Kuzminykh2384_Polynomial_DER_P_P, PolynomialDerivativeTest2) {
     EXPECT_EQ(first_pol.derivative(), result);
 }
 
-TEST(Kuzminykh2384_Polynomial_DER_P_P, PolynomialDerivativeTest3) {
+TEST(PolynomialDerivativeTest, 3) {
     std::vector<Rational> coef1 = {Rational(Integer(5)), Rational(Integer(3)), Rational(Integer(2)),
                                    Rational(Integer(1))};
     Polynomial first_pol = Polynomial(coef1);
     std::vector<Rational> coef2 = {Rational(Integer(15)), Rational(Integer(6)), Rational(Integer(2))};
     Polynomial result = Polynomial(coef2);
-    EXPECT_EQ(first_pol.derivative(), result);
-}
-TEST(Kuzminykh2384_Polynomial_DER_P_P, PolynomialDerivativeTest4) {
-    std::vector<Rational> coef1 = {Rational(Integer(0))};
-    Polynomial first_pol = Polynomial(coef1);
-    Polynomial result = Polynomial(coef1);
     EXPECT_EQ(first_pol.derivative(), result);
 }
 

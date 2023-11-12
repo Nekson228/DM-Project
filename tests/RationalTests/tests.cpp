@@ -1,17 +1,17 @@
 #include "../../modules/Rational/Rational.h"
 #include "gtest/gtest.h"
 
-TEST(RationalTest, ToIntegerThrowTest) {
+TEST(Bormatov2383_Rational_TRANS_Q_Z, ToIntegerThrowTest) {
     Rational num(1,2);
     EXPECT_THROW(num.toInteger(), std::invalid_argument);
 }
 
-TEST(RationalTest, ToIntegerNegativeTest) {
+TEST(Bormatov2383_Rational_TRANS_Q_Z, ToIntegerNegativeTest) {
     Rational num(-2,1);
     EXPECT_EQ(num.toInteger(), Integer(-2));
 }
 
-TEST(RationalTest, ToIntegerPositiveReduceTest) {
+TEST(Bormatov2383_Rational_TRANS_Q_Z, ToIntegerPositiveReduceTest) {
     Rational num(6,2);
     EXPECT_EQ(num.toInteger(), Integer(3));
 }
@@ -63,43 +63,43 @@ TEST(Damakin2384_Rational_SUB_QQ_Q, RationalSubtractionTest4){
     ASSERT_TRUE(result == expected);
 }
 
-TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest1) {
+TEST(RationalAdditionTest, 1) {
     Rational first_number = Rational(1, 4);
     Rational second_number = Rational(1, 4);
-    Rational answer = Rational(2, 4);
+    Rational answer = Rational(1, 2);
     EXPECT_EQ(first_number + second_number, answer);
 }
 
-TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest2) {
+TEST(RationalAdditionTest, 2) {
     Rational first_number = Rational(1, 2);
     Rational second_number = Rational(1, 2);
-    Rational answer = Rational(2, 2);
+    Rational answer = Rational(1, 1);
     EXPECT_EQ(first_number + second_number, answer);
 
 }
 
-TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest3) {
+TEST(RationalAdditionTest, 3) {
     Rational first_number = Rational(3, 5);
     Rational second_number = Rational(1, 3);
     Rational answer = Rational(14, 15);
     EXPECT_EQ(first_number + second_number, answer);
 }
 
-TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest4) {
+TEST(RationalAAdditionTest, 4) {
     Rational first_number = Rational(2, 3);
     Rational second_number = Rational(5, 7);
     Rational answer = Rational(29, 21);
     EXPECT_EQ(first_number + second_number, answer);
 }
 
-TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest5) {
+TEST(RationalAAdditionTest, 5) {
     Rational first_number = Rational(2, 3);
     Rational second_number = Rational(0, 1);
     Rational answer = Rational(2, 3);
     EXPECT_EQ(first_number + second_number, answer);
 }
 
-TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest6) {
+TEST(RationalAAdditionTest, 6) {
     Rational first_number = Rational(3, 5);
     Rational second_number = Rational(-2, 5);
     Rational answer = Rational(1, 5);
