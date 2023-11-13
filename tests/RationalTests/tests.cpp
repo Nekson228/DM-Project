@@ -1,17 +1,17 @@
 #include "../../modules/Rational/Rational.h"
 #include "gtest/gtest.h"
 
-TEST(RationalTest, ToIntegerThrowTest) {
+TEST(Bormatov2383_Rational_TRANS_Q_Z, ToIntegerThrowTest) {
     Rational num(1,2);
     EXPECT_THROW(num.toInteger(), std::invalid_argument);
 }
 
-TEST(RationalTest, ToIntegerNegativeTest) {
+TEST(Bormatov2383_Rational_TRANS_Q_Z, ToIntegerNegativeTest) {
     Rational num(-2,1);
     EXPECT_EQ(num.toInteger(), Integer(-2));
 }
 
-TEST(RationalTest, ToIntegerPositiveReduceTest) {
+TEST(Bormatov2383_Rational_TRANS_Q_Z, ToIntegerPositiveReduceTest) {
     Rational num(6,2);
     EXPECT_EQ(num.toInteger(), Integer(3));
 }
