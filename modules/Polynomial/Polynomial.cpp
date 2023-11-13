@@ -223,6 +223,11 @@ Polynomial Polynomial::singlify() const {
 
     //Цикл действует, пока степень остатка от деления будет больше, чем степень делителя
     while (remainder.degree_ >= other.degree_) {
+        if (other.degree_ == 0) {
+            std::transform(remainder.coefficients_.begin(), remainder.coefficients_.end(), remainder.coefficients_.begin(),
+                           [&other](const Rational &coeff) { return coeff / other.coefficients_[0]; });
+            return remainder;
+        }
         std::size_t k = remainder.getDegree() -
                         other.getDegree();//вычислили степень на данном шагу, использование метода (DEG_P_N)
         Rational factor = remainder.leading() /
