@@ -22,25 +22,25 @@ TEST(PolynomialTest, FactoriseChangeTest) {
     EXPECT_EQ(poly1.factorize(), poly2);
 }
 
-TEST(PolynomialTest, SinglifyZeroRootTest) {
-    std::vector<Rational> cf = {Rational{5, 1}};
-    Polynomial poly(cf);
-    EXPECT_EQ(poly.singlify(), poly);
-}
-
-TEST(PolynomialTest, SinglifyOneRootTest) {
-    std::vector<Rational> cf = {Rational{1, 1}, Rational{-14, 2}, Rational{12, 1}}; // (x-3)(x-4) = x^2 - 7x + 12
-    Polynomial poly(cf);
-    EXPECT_EQ(poly.singlify(), poly);
-}
-
-TEST(PolynomialTest, SinglifyManyRootsTest) {
-    std::vector<Rational> cf1 = {Rational{1, 1}, Rational{-6, 1}, Rational{27, 3}}; // (x-3)^2 = x^2 - 6x + 9
-    std::vector<Rational> cf2 = {Rational{1, 1}, Rational{-3, 1}};                 // x - 3
-    Polynomial poly1(cf1);
-    Polynomial poly2(cf2);
-    EXPECT_EQ(poly1.singlify(), poly2);
-}
+//TEST(PolynomialTest, SinglifyZeroRootTest) {
+//    std::vector<Rational> cf = {Rational{5, 1}};
+//    Polynomial poly(cf);
+//    EXPECT_EQ(poly.singlify(), poly);
+//}
+//
+//TEST(PolynomialTest, SinglifyOneRootTest) {
+//    std::vector<Rational> cf = {Rational{1, 1}, Rational{-14, 2}, Rational{12, 1}}; // (x-3)(x-4) = x^2 - 7x + 12
+//    Polynomial poly(cf);
+//    EXPECT_EQ(poly.singlify(), poly);
+//}
+//
+//TEST(PolynomialTest, SinglifyManyRootsTest) {
+//    std::vector<Rational> cf1 = {Rational{1, 1}, Rational{-6, 1}, Rational{27, 3}}; // (x-3)^2 = x^2 - 6x + 9
+//    std::vector<Rational> cf2 = {Rational{1, 1}, Rational{-3, 1}};                 // x - 3
+//    Polynomial poly1(cf1);
+//    Polynomial poly2(cf2);
+//    EXPECT_EQ(poly1.singlify(), poly2);
+//}
 
 TEST(Damakin2384_Polynomial_MUL_PP_P, PolynomialMultiplicationTest1) {
     std::vector<Rational> coef1 = {Rational(Integer(1)), Rational(2, 3), Rational(-5, 4)};

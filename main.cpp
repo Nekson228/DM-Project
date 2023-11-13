@@ -5,6 +5,6 @@
 #include "modules/Polynomial/Polynomial.h"
 
 int main() {
-    Polynomial pol1{"0*x^2+x+1"};
-    std::cout << pol1.str();
+    Polynomial pol1{"x^100 - 0x^2 + x + 1"}, pol2{"x - 5x^2"}, pol3("0");
+    std::cout << (pol1 * pol2).str();
 }

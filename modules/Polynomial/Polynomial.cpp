@@ -4,6 +4,8 @@
 #include <map>
 #include <algorithm>
 
+#include "../utils/utils.h"
+
 Polynomial::Polynomial(const std::vector<Rational> &coefficients): coefficients_(coefficients) {
     removeLeadingZeros();
     degree_ = coefficients_.size() - 1;
@@ -15,8 +17,10 @@ std::string Polynomial::str() const {
     Rational curr_coefficient{0, 1};
     for (int i = 0; i <= degree_; i++) {
         curr_coefficient = coefficients_[i];
-        if (curr_coefficient.isZero())
+        if (curr_coefficient.isZero()) {
+            if (degree_ == 0) return "0";
             continue;
+        }
         sign = curr_coefficient.getSign();
         if (i == 0)
             sign = (sign == "-") ? sign : "";
@@ -40,7 +44,7 @@ std::map<size_t, std::string> getDegreeToCoefficientsMap(const std::string &poly
     std::map<size_t, std::string> res;
     while (end != std::string::npos) {
         end = polynomial.find_first_of("+-", start);
-        monomial_token = polynomial.substr(start, end - start);
+        monomial_token = utils::trim(polynomial.substr(start, end - start));
         x_pos = monomial_token.find('x');
         caret_pos = monomial_token.find('^');
         star_pos = monomial_token.find('*');
@@ -75,10 +79,10 @@ Polynomial::Polynomial(const std::string &polynomial) : degree_(0) {
         coefficients_.insert(coefficients_.end(), degree - degree_, Rational(0, 1));
         Rational coefficient{coefficient_str};
         coefficients_.push_back(coefficient);
+        degree_ = degree + 1;
     }
     std::reverse(coefficients_.begin(), coefficients_.end());
     removeLeadingZeros();
-    degree_ = coefficients_.size() - 1;
 }
 
 
@@ -337,8 +341,16 @@ Polynomial Polynomial::reduceAllCoefficients() const {
 }
 
 void Polynomial::removeLeadingZeros() {
-    coefficients_.erase(std::remove_if(coefficients_.begin(), coefficients_.end(),
-                                       [](const Rational &rational) { return rational.isZero(); }),
-                        coefficients_.end());
+    if (coefficients_.size() == 1) {
+        degree_ = 0;
+        return;
+    }
+    size_t leading_zeros_n = 0;
+    for (const auto &coefficient: coefficients_) {
+        if (coefficient.isZero()) leading_zeros_n++;
+        else break;
+    }
+    coefficients_.erase(coefficients_.begin(), coefficients_.begin() + leading_zeros_n);
+    degree_ = coefficients_.size() - 1;
 }
 

@@ -79,51 +79,46 @@ TEST(Lavrenova_Yulia_2384_Integer_MUL_ZZ_Z, ProductTest4) {
     EXPECT_EQ(ans4, ans4_test);
 }
 
-//TEST(IntegerTest, toNaturalNegativeTest) {
-//    Integer num(-1);
-//    EXPECT_THROW(num.toNatural(), std::invalid_argument);
-//}
-
-TEST(Sots_Katya_2384_Integer, toNaturalZeroTest) {
+TEST(Sots_Katya_2384_Integer_toNatural, ZeroTest) {
     Integer num(0);
     Natural value = num.toNatural();
     EXPECT_EQ(value.cmp(value, Natural(0)), 0);
 }
 
-TEST(Sots_Katya_2384_Integer, toNaturalPositiveTest) {
+TEST(Sots_Katya_2384_Integer_toNatural, PositiveTest) {
     Integer num(123);
     Natural value = num.toNatural();
     EXPECT_EQ(value.cmp(value, Natural(123)), 0);
 }
 
-TEST(Sots_Katya_2384_Integer, DivOperatorDivByZeroTest) {
+TEST(Sots_Katya_2384_Integer_DivOperator, DivByZeroTest) {
     Integer first(2);
     Integer second(0);
     EXPECT_THROW(first = first / second, std::invalid_argument);
 }
 
-TEST(Sots_Katya_2384_Integer, DivOperatorPosPosTest) {
+TEST(Sots_Katya_2384_Integer_DivOperator, PosPosTest) {
     Integer first(7);
     Integer second(3);
     first = first / second;
     EXPECT_EQ(first, Integer(2));
 }
 
-TEST(Sots_Katya_2384_Integer, DivOperatorPosNegTest) {
+TEST(Sots_Katya_2384_Integer_DivOperator, PosNegTest) {
     Integer first(7);
     Integer second(-3);
     first = first / second;
     EXPECT_EQ(first, Integer(-2));
 }
 
-TEST(Sots_Katya_2384_Integer, DivOperatorNegPosTest) {
+TEST(Sots_Katya_2384_Integer_DivOperator, NegPosTest) {
     Integer first(-7);
     Integer second(3);
     first = first / second;
     EXPECT_EQ(first, Integer(-3));
 }
 
-TEST(Sots_Katya_2384_Integer, DivOperatorNegNegTest) {
+TEST(Sots_Katya_2384_Integer_DivOperator, NegNegTest) {
     Integer first(-7);
     Integer second(-3);
     first = first / second;
@@ -227,17 +222,17 @@ TEST(Tsygankov_Roman_2384_Integer_TRANS_N_Z, HundredTest){
     EXPECT_EQ(integer_,ans11_test);
 }
 
-TEST(Tsygulev_Stanislav_2383_MUL_ZM_Z, negativeZeroValueTest) {
+TEST(Tsygulev_Stanislav_2383_Integer_MUL_ZM_Z, negativeZeroValueTest) {
     Integer num(0);
     EXPECT_EQ(num.negative(), Integer(0));
 }
 
-TEST(Tsygulev_Stanislav_2383_MUL_ZM_Z, negativePositiveValueTest) {
+TEST(Tsygulev_Stanislav_2383_Integer_MUL_ZM_Z, negativePositiveValueTest) {
     Integer num(123);
     EXPECT_EQ(num.negative(), Integer(-123));
 }
 
-TEST(Tsygulev_Stanislav_2383_MUL_ZM_Z, negativeNegativeValueTest) {
+TEST(Tsygulev_Stanislav_2383_Integer_MUL_ZM_Z, negativeNegativeValueTest) {
     Integer num(-777);
     EXPECT_EQ(num.negative(), Integer(777));
 }

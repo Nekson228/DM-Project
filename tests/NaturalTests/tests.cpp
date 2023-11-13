@@ -122,12 +122,7 @@ TEST(Gurkov2384_Natural_NZER_N_B, NOT_ZERO_VALUE){
 
 TEST(Gurkov2384_Natural_NZER_N_B, ZERO_VAUE){
     Natural natural_2(0);
-    EXPECT_EQ(natural_1.isZero(), true);
-}
-
-TEST(Gurkov2384_Natural_NZER_N_B, STANDART_CONSTRUCTOR_VALUE){
-    Natural natural_3;
-    EXPECT_EQ(natural_1.isZero(), true);
+    EXPECT_EQ(natural_2.isZero(), true);
 }
 
 TEST(Gurkov2384_Natural_COM_NN_D, FIRST_IS_BIGGER){
