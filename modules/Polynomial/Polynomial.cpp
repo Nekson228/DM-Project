@@ -200,7 +200,6 @@ Polynomial Polynomial::singlify() const {
         resultCoefficients[maxDegree - other.degree_ + i] =
                 resultCoefficients[maxDegree - other.degree_ + i] + other.coefficients_[i];
     }
-    
 
     // Создаем новый многочлен с полученными коэффами и возвращаем его
     return Polynomial(resultCoefficients).reduceAllCoefficients();
@@ -341,14 +340,10 @@ Polynomial Polynomial::reduceAllCoefficients() const {
 }
 
 void Polynomial::removeLeadingZeros() {
-    if (coefficients_.size() == 1) {
-        degree_ = 0;
-        return;
-    }
     size_t leading_zeros_n = 0;
     for (const auto &coefficient: coefficients_) {
-        if (coefficient.isZero()) leading_zeros_n++;
-        else break;
+        if (coefficients_.size() == 1 || !coefficient.isZero()) break;
+        leading_zeros_n++;
     }
     coefficients_.erase(coefficients_.begin(), coefficients_.begin() + leading_zeros_n);
     degree_ = coefficients_.size() - 1;
