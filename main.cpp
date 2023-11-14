@@ -5,7 +5,6 @@
 #include "modules/Polynomial/Polynomial.h"
 
 int main() {
-    Polynomial pol1{"1"}, pol2{"x"}, div = pol1 / pol2;
-//    Polynomial mul = div * pol2;
-    std::cout << div.mulByXk(1).str();
+    Polynomial pol1{"0"}, pol2{"x+1"};
+    std::cout << (pol1 * pol2).str();
 }

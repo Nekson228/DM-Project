@@ -268,7 +268,6 @@ Polynomial Polynomial::mulByXk(std::size_t k) const {
     }
 
     Polynomial new_coefficients_(new_coeff); // создаем мн-н с новыми коэффицентами и возвращаем его
-    new_coefficients_.degree_ = degree;
 
     return new_coefficients_;
 }
@@ -343,7 +342,7 @@ Polynomial Polynomial::reduceAllCoefficients() const {
 void Polynomial::removeLeadingZeros() {
     size_t leading_zeros_n = 0;
     for (const auto &coefficient: coefficients_) {
-        if (coefficients_.size() == 1 || !coefficient.isZero()) break;
+        if (coefficients_.size() - leading_zeros_n == 1 || !coefficient.isZero()) break;
         leading_zeros_n++;
     }
     coefficients_.erase(coefficients_.begin(), coefficients_.begin() + leading_zeros_n);

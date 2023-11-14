@@ -22,11 +22,11 @@ TEST(Bormatov2383_Polynomial_FAC_P_Q, FactoriseChangeTest) {
     EXPECT_EQ(poly1.factorize(), poly2);
 }
 
-//TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyZeroRootTest) {
-//   std::vector<Rational> cf = {Rational{5, 1}};
-//   Polynomial poly(cf);
-//   EXPECT_THROW(poly.singlify(), std::invalid_argument);
-//}
+TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyZeroRootTest) {
+   std::vector<Rational> cf = {Rational{5, 1}};
+   Polynomial poly(cf);
+   EXPECT_THROW(poly.singlify(), std::invalid_argument);
+}
 
 //TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyOneRootTest) {
 //   std::vector<Rational> cf = {Rational{1, 1}, Rational{-14, 2}, Rational{12, 1}}; // (x-3)(x-4) = x^2 - 7x + 12
