@@ -221,7 +221,8 @@ Polynomial Polynomial::singlify() const {
     }
 
     //Цикл действует, пока степень остатка от деления будет больше, чем степень делителя
-    while (remainder.degree_ >= other.degree_) {
+    while (remainder.degree_ >= other.degree_ && !remainder.coefficients_[0].isZero()) {
+        
         std::size_t k = remainder.getDegree() -
                         other.getDegree();//вычислили степень на данном шагу, использование метода (DEG_P_N)
         Rational factor = remainder.leading() /
