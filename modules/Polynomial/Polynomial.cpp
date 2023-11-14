@@ -120,6 +120,7 @@ Polynomial Polynomial::factorize() const {
 Polynomial Polynomial::singlify() const {
     Polynomial der_ = derivative();  // вычисление производной многочлена
     Polynomial gcd_ = gcd(*this, der_); // вычисление НОД <P(x), P'(x)>
+    if(gcd_.degree_ == 0) return *this;
     Polynomial result = *this / gcd_; // вычисление P(x) / gcd(<P(x), P'(x))
     return result.reduceAllCoefficients(); // возвращаем новый многочлен
 }
