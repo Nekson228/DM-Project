@@ -320,16 +320,16 @@ P - 11
 
     Polynomial ost1{first % second}; // находим остаток от деления первого на второй
     if (ost1.coefficients_[0] == Rational(0, 1)) // если остаток равен нулю, значит НОД - это second
-        return second;
+        return second.factorize();
     Polynomial ost2{second % ost1}; // находим остаток от деления второго на ost1
     // цикл пока один из остатков не равен нулю
     while (ost1.coefficients_[0] != Rational(0, 1) and ost2.coefficients_[0] != Rational(0, 1)) {
         ost1 = ost1 % ost2;
         if (ost1.coefficients_[0] == Rational(0, 1)) // если остаток равен нулю, значит НОД - это ost2
-            return ost2;
+            return ost2.factorize();
         ost2 = ost2 % ost1; // продолжаем делить с остатком
     }
-    return ost1; // если цикл завершился и не вернул ничего => НОД - ost1
+    return ost1.factorize(); // если цикл завершился и не вернул ничего => НОД - ost1
 }
 
 Polynomial Polynomial::reduceAllCoefficients() const {

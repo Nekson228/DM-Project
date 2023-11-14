@@ -411,7 +411,7 @@ TEST(Zhdanov_Anton_2383_GCF_PP_P, regular_test1) {
 
     std::vector<Rational> coef2 = {Rational(3, 1), Rational(10, 1), Rational(2, 1), Rational(-3, 1)};
 
-    std::vector<Rational> ans = {Rational(9, 1), Rational(27, 1)};
+    std::vector<Rational> ans = {Rational(1, 1), Rational(3, 1)};
 
     Polynomial f(coef1);
     Polynomial g(coef2);
@@ -424,7 +424,7 @@ TEST(Zhdanov_Anton_2383_GCF_PP_P, test_with_negativ_coef) {
 
     std::vector<Rational> coef2 = {Rational(-5, 9), Rational(-25, 9), Rational(-10, 3)};
 
-    std::vector<Rational> ans = {Rational(9, 1), Rational(27, 1)};
+    std::vector<Rational> ans = {Rational(1, 1), Rational(3, 1)};
 
     Polynomial f(coef1);
     Polynomial g(coef2);
