@@ -28,11 +28,11 @@ TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyZeroRootTest) {
    EXPECT_THROW(poly.singlify(), std::invalid_argument);
 }
 
-//TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyOneRootTest) {
-//   std::vector<Rational> cf = {Rational{1, 1}, Rational{-14, 2}, Rational{12, 1}}; // (x-3)(x-4) = x^2 - 7x + 12
-//   Polynomial poly(cf);
-//   EXPECT_EQ(poly.singlify(), poly); // тест падает в методе singlify->gcd->(переопределение оператора остатка)
-//}
+TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyOneRootTest) {
+   std::vector<Rational> cf = {Rational{1, 1}, Rational{-14, 2}, Rational{12, 1}}; // (x-3)(x-4) = x^2 - 7x + 12
+   Polynomial poly(cf);
+   EXPECT_EQ(poly.singlify(), poly); // тест падает в методе singlify->gcd->(переопределение оператора остатка)
+}
 
 TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyManyRootsTest) {
    std::vector<Rational> cf1 = {Rational{1, 1}, Rational{-6, 1}, Rational{27, 3}}; // (x-3)^2 = x^2 - 6x + 9

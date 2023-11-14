@@ -112,7 +112,7 @@ Polynomial Polynomial::factorize() const {
     for (size_t i = 0; i <= degree_; i++) {
         result.coefficients_[i] = coefficients_[i] / ratio; // делим каждый коэффициент на ratio
     }
-    return result.reduceAllCoefficients(); // возвращаем новый многочлен
+    return result; // возвращаем новый многочлен
 }
 
 // Bormatov_Yaroslav NMR_P_P - Преобразование многочлена — кратные корни в простые
@@ -121,7 +121,7 @@ Polynomial Polynomial::singlify() const {
     Polynomial der_ = derivative();  // вычисление производной многочлена
     Polynomial gcd_ = gcd(*this, der_); // вычисление НОД <P(x), P'(x)>
     Polynomial result = *this / gcd_; // вычисление P(x) / gcd(<P(x), P'(x))
-    return result.reduceAllCoefficients(); // возвращаем новый многочлен
+    return result; // возвращаем новый многочлен
 }
 
 /*
@@ -137,7 +137,7 @@ Polynomial Polynomial::singlify() const {
         // Прибавляем к результату результат умножения первого многочлена на очередной составляющий одночлен второго многочлена
         result = result + this->scale(other.coefficients_[k]).mulByXk(other.degree_ - k);
     }
-    return result.reduceAllCoefficients();
+    return result;
 }
 
 
@@ -162,7 +162,7 @@ Polynomial Polynomial::singlify() const {
         new_coefs.erase(new_coefs.begin());
     }
     // возвращаем измененный многочлен
-    return Polynomial(new_coefs).reduceAllCoefficients();
+    return Polynomial(new_coefs);
 }
 
 
@@ -204,7 +204,7 @@ Polynomial Polynomial::singlify() const {
     }
 
     // Создаем новый многочлен с полученными коэффами и возвращаем его
-    return Polynomial(resultCoefficients).reduceAllCoefficients();
+    return Polynomial(resultCoefficients);
 }
 
 //Написал функцию - Кузьминых Егор
@@ -236,7 +236,7 @@ Polynomial Polynomial::singlify() const {
 
         remainder = remainder - term * other;//Вычислили остаток
     }
-    return quotient.reduceAllCoefficients();
+    return quotient;
 }
 
 //Написал функцию - Кузьминых Егор
@@ -254,7 +254,7 @@ Polynomial Polynomial::derivative() const {
         derivativeCoefficients[i] = coefficients_[i] * Rational(degree_ - i, 1);
     }
     Polynomial result = Polynomial(derivativeCoefficients);//создаю новый многочлен и возвращаю его
-    return result.reduceAllCoefficients();
+    return result;
 }
 
 //Цыганков Роман гр 2384 MUL_Pxk_P - умножение мн-на на x^k
@@ -297,7 +297,7 @@ P - 3
     for (int i = 0; i < this->degree_ + 1; i++) {
         new_coeff[i] = this->coefficients_[i] * scalar; // записываем в вектор новые коэффиценты у множенные на скаляр
     }
-    return Polynomial{new_coeff}.reduceAllCoefficients(); // создаем многочлен с новыми коэффицентами и возвращаем его
+    return Polynomial{new_coeff}; // создаем многочлен с новыми коэффицентами и возвращаем его
 }
 
 /*

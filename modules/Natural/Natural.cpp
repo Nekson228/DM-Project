@@ -15,7 +15,7 @@ Natural::Natural(std::size_t number) {
     n_ = digits_.size() - 1;
 }
 
-Natural::Natural(const std::string &str_number) {
+Natural::Natural(const std::string &str_number) { // TODO: remove leading zeros
     if (str_number.empty())
         throw std::invalid_argument("Operand expected not empty");
     for (digit digit: utils::trim(str_number)) {
