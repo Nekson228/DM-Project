@@ -154,16 +154,15 @@ TEST(Ilyin_2383_Polynomial_mod_test, GetNotZero) {
     std::vector<Rational> firstCoefs = {Rational(1, 1), Rational(0, 1), Rational(-4, 1)};
     std::vector<Rational> secondCoefs = {Rational(1, 1), Rational(1, 1)};
     std::vector<Rational> finalCoefs = {Rational(-3, 1)};
-    Polynomial first{finalCoefs}, second{secondCoefs}, expected{finalCoefs};
+    Polynomial first{firstCoefs}, second{secondCoefs}, expected{finalCoefs};
     EXPECT_EQ(first % second, expected);
 }
 
-TEST(Ilyin_2383_Polynomial_mod_test, get1) {
-    std::vector<Rational> firstCoefs = {Rational(9, 1), Rational(56, 1), Rational(1, 1)};
-    std::vector<Rational> secondCoefs = {Rational(1, 1), Rational(0, 1)};
-    std::vector<Rational> finalCoefs = {Rational(1, 1)};
-    Polynomial first{finalCoefs}, second{secondCoefs}, expected{finalCoefs};
-    EXPECT_EQ(first % second, expected);
+TEST(Ilyin_2383_Polynomial_mod_test, GetDivisor) {
+    std::vector<Rational> firstCoefs = {Rational(56, 1), Rational(1, 1)};
+    std::vector<Rational> secondCoefs = {Rational(9, 1), Rational(1, 1), Rational(0, 1)};
+    Polynomial first{firstCoefs}, second{secondCoefs};
+    EXPECT_EQ(first % second, first);
 }
 
 TEST(Kuzminykh2384_Polynomial_ADD_PP_P, PolynomialAdditionTest1) {

@@ -175,6 +175,8 @@ Polynomial Polynomial::singlify() const {
     std::vector<Rational> coefsForDivisor = coefficients_;
     // создаем на их основе делимое число
     Polynomial firstDivisor(coefsForDivisor);
+    //если делимое меньше делителя
+    if (firstDivisor.degree_ < other.degree_) return firstDivisor;
     // вычисляем остаток и тут же возвращаем
     return firstDivisor - (firstDivisor / other) * other;
 }
