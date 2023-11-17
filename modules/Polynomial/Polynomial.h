@@ -1,22 +1,23 @@
-#ifndef DM_POLYNOMIAL_H
-#define DM_POLYNOMIAL_H
+#ifndef DM_MODULES_POLYNOMIAL_H
+#define DM_MODULES_POLYNOMIAL_H
 
 #include "../Rational/Rational.h"
 
 
-class Polynomial {
+class Polynomial : public iModel {
     std::vector<Rational> coefficients_; // массив дробных коэффициентов в прямом порядке (x^2 + 1/2 == [1/1, 0/1, 1/2]) 
     std::size_t degree_{}; // степень многочлена
 
     void removeLeadingZeros();
+
 public:
     explicit Polynomial(const std::vector<Rational> &coefficients);
 
-    explicit Polynomial(const std::string& polynomial);
+    explicit Polynomial(const std::string &polynomial);
 
     [[nodiscard]] static Polynomial gcd(const Polynomial &a, const Polynomial &b); //GCF_PP_P
 
-    [[nodiscard]] std::string str() const;
+    [[nodiscard]] std::string str() const override;
 
     [[nodiscard]] Polynomial scale(const Rational &scalar) const; // MUL_PQ_P
 
@@ -42,12 +43,12 @@ public:
 
     [[nodiscard]] Polynomial operator%(const Polynomial &other) const; // MOD_PP_P
 
-    [[nodiscard]] bool operator==(const Polynomial &other) const = default;
+    [[nodiscard]] bool operator==(const Polynomial &other) const;
 
-    [[nodiscard]] bool operator!=(const Polynomial &other) const = default;
+    [[nodiscard]] bool operator!=(const Polynomial &other) const;
 
     [[nodiscard]] Polynomial reduceAllCoefficients() const;
 };
 
 
-#endif //DM_POLYNOMIAL_H
+#endif //DM_MODULES_POLYNOMIAL_H

@@ -91,8 +91,8 @@ bool Rational::isInteger() const { // INT_Q_B
 */
 [[nodiscard]] Rational Rational::operator-(const Rational &other) const { // SUB_QQ_Q
     // Скоращаем дроби
-    Rational minuend = this->reduce(); // Уменьшаемое
-    Rational subtrahend = other.reduce(); // Вычитаемое
+    Rational minuend = *this; // Уменьшаемое
+    Rational subtrahend = other; // Вычитаемое
     Rational difference; // Разность
     // Проверяем равенство знаменателей уменьшлаемого и вычитаемого
     bool isDenominatorsEqual = (Natural::cmp(minuend.getDenominator(), subtrahend.getDenominator()) == 0);
@@ -109,7 +109,6 @@ bool Rational::isInteger() const { // INT_Q_B
                                       subtrahend.getNumerator(); // Считаем новый числитель вычитаемого
         difference = Rational(minuendNumerator - subtrahendNumerator, newDenominator); // Записыываем результат
     }
-    difference = difference.reduce(); // Сокращаем полученный результат
     return difference;
 }
 
@@ -179,4 +178,12 @@ Rational Rational::operator/(const Rational &other) const {
         return Rational{newNominator.negative(), newDenominator};
     }
     return Rational{newNominator, newDenominator};
+}
+
+bool Rational::operator==(const Rational &other) const {
+    return numerator_ == other.numerator_ && denominator_ == other.denominator_;
+}
+
+bool Rational::operator!=(const Rational &other) const {
+    return !(*this == other);
 }

@@ -1,5 +1,7 @@
-#ifndef DM_NATURAL_H
-#define DM_NATURAL_H
+#ifndef DM_MODULES_NATURAL_H
+#define DM_MODULES_NATURAL_H
+
+#include "../Interfaces/Model.h"
 
 #include <cstdint>
 #include <vector>
@@ -7,7 +9,7 @@
 
 using digit = uint8_t;
 
-class Natural {
+class Natural : public iModel {
     std::vector<digit> digits_ = {}; // цифры в обратном порядке
     std::size_t n_ = -1; // номер старшей позциии (начиная с 0)
 
@@ -18,7 +20,7 @@ public:
 
     explicit Natural(const std::string &str_number);
 
-    [[nodiscard]] std::string str() const;
+    [[nodiscard]] std::string str() const override;
 
     [[nodiscard]] static digit cmp(const Natural &a, const Natural &b); // COM_NN_D
 
@@ -32,7 +34,7 @@ public:
 
     [[nodiscard]] Natural mulByDigit(digit multiplier) const; // MUL_ND_N
 
-    [[nodiscard]] Natural mulBy10k(std::size_t k) const; // MUL_Nk_N
+    [[nodiscard]] Natural mulBy10K(std::size_t k) const; // MUL_Nk_N
 
     [[nodiscard]] Natural subScaled(const Natural &other, digit k) const; // SUB_NDN_N
 
@@ -48,9 +50,9 @@ public:
 
     [[nodiscard]] Natural operator%(const Natural &other) const; // MOD_NN_N
 
-    [[nodiscard]] bool operator==(const Natural &other) const = default;
+    [[nodiscard]] bool operator==(const Natural &other) const;
 
-    [[nodiscard]] bool operator!=(const Natural &other) const = default;
+    [[nodiscard]] bool operator!=(const Natural &other) const;
 };
 
-#endif //DM_NATURAL_H
+#endif //DM_MODULES_NATURAL_H

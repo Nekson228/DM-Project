@@ -1,10 +1,10 @@
-#ifndef DM_RATIONAL_H
-#define DM_RATIONAL_H
+#ifndef DM_MODULES_RATIONAL_H
+#define DM_MODULES_RATIONAL_H
 
 #include "../Integer/Integer.h"
 
 
-class Rational {
+class Rational : public iModel {
     Integer numerator_{0}; // числитель
     Natural denominator_{1}; // знаменатель
 
@@ -25,7 +25,7 @@ public:
 
     [[nodiscard]] const Natural &getDenominator() const;
 
-    [[nodiscard]] std::string str() const;
+    [[nodiscard]] std::string str() const override;
 
     [[nodiscard]] Rational reduce() const; // RED_Q_Q
 
@@ -41,9 +41,9 @@ public:
 
     [[nodiscard]] Rational operator/(const Rational &other) const; // DIV_QQ_Q
 
-    [[nodiscard]] bool operator==(const Rational &other) const = default;
+    [[nodiscard]] bool operator==(const Rational &other) const;
 
-    [[nodiscard]] bool operator!=(const Rational &other) const = default;
+    [[nodiscard]] bool operator!=(const Rational &other) const;
 
     [[nodiscard]] std::string getSign() const;
 
@@ -52,5 +52,4 @@ public:
     [[nodiscard]] bool isZero() const;
 };
 
-
-#endif //DM_RATIONAL_H
+#endif //DM_MODULES_RATIONAL_H

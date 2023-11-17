@@ -321,11 +321,11 @@ P - 11
     Polynomial second = a.degree_ < b.degree_ ? a : b; // где first - многочлен степени больше или равной second
 
     Polynomial ost1{first % second}; // находим остаток от деления первого на второй
-    if (ost1.coefficients_[0] == Rational(0, 1)) // если остаток равен нулю, значит НОД - это second
+    if (ost1.coefficients_[0].isZero()) // если остаток равен нулю, значит НОД - это second
         return second;
     Polynomial ost2{second % ost1}; // находим остаток от деления второго на ost1
     // цикл пока один из остатков не равен нулю
-    while (ost1.coefficients_[0] != Rational(0, 1) and ost2.coefficients_[0] != Rational(0, 1)) {
+    while (ost1.coefficients_[0].isZero() and ost2.coefficients_[0].isZero()) {
         ost1 = ost1 % ost2;
         if (ost1.coefficients_[0] == Rational(0, 1)) // если остаток равен нулю, значит НОД - это ost2
             return ost2;
@@ -351,3 +351,10 @@ void Polynomial::removeLeadingZeros() {
     degree_ = coefficients_.size() - 1;
 }
 
+bool Polynomial::operator==(const Polynomial &other) const {
+    return coefficients_ == other.coefficients_ && degree_ == other.degree_;
+}
+
+bool Polynomial::operator!=(const Polynomial &other) const {
+    return !(*this == other);
+}

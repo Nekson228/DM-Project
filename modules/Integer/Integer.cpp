@@ -54,7 +54,6 @@ Integer::Integer(Natural natural) : number_(std::move(natural)), sign_(false) {}
 // Katya Sots TRANS_Z_N - Преобразование целого неотрицательного в натуральное
 
 Natural Integer::toNatural() const {
-
     return Natural{number_}; // возвращаем натуральное число
 }
 
@@ -169,7 +168,7 @@ Integer Integer::operator+(const Integer &other) const {
     if (other.isPositive() == 2 && this->isPositive() == 2) {
         result = (number_ + other.number_); //  Складываю два натуральных числа без модуля, т.к. положительные
     }
-    // если оба числа отрицательные
+        // если оба числа отрицательные
     else if (other.isPositive() == 1 && this->isPositive() == 1) {
         result = (number_ + number_other); // складываю два натуральных числа(ADD_NN_N)
         flag_MUL_ZM_Z = 1; // нужно поменять знак у моего возвращаемого целого числа на минус
@@ -206,7 +205,15 @@ Integer Integer::operator+(const Integer &other) const {
 // Мирон Возгрин 2382; Остаток от деления целого на целое (MOD_ZZ_Z)
 Integer Integer::operator%(const Integer &other) const {
     //проверка на деление на 0
-    if(other == Integer(0))std::invalid_argument("Деление на 0 невозможно!");
+    if (other == Integer(0)) throw std::invalid_argument("Деление на 0 невозможно!");
     // Возвращаемое значение равно разности левого числа и произведения правого на разность деления 2 чисел
     return *this - (other * (*this / other));
+}
+
+bool Integer::operator==(const Integer &other) const {
+    return number_ == other.number_ && sign_ == other.sign_;
+}
+
+bool Integer::operator!=(const Integer &other) const {
+    return !(*this == other);
 }
