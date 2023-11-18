@@ -112,6 +112,13 @@ Polynomial Polynomial::factorize() const {
     for (size_t i = 0; i <= degree_; i++) {
         result.coefficients_[i] = coefficients_[i] / ratio; // делим каждый коэффициент на ratio
     }
+
+    if(result.coefficients_[0].getSign() == "-") { // если коэффициент при старшей степени отрицательный 
+        for(size_t i = 0; i <= degree_; i++) {
+            result.coefficients_[i] = result.coefficients_[i] * Rational{-1, 1}; // выносим -1
+        }
+    }
+
     return result.reduceAllCoefficients(); // возвращаем новый многочлен
 }
 
