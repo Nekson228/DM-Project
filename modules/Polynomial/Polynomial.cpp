@@ -112,6 +112,13 @@ Polynomial Polynomial::factorize() const {
     for (size_t i = 0; i <= degree_; i++) {
         result.coefficients_[i] = coefficients_[i] / ratio; // делим каждый коэффициент на ratio
     }
+
+    if(result.coefficients_[0].getSign() == "-") { // если коэффициент при старшей степени отрицательный 
+        for(size_t i = 0; i <= degree_; i++) {
+            result.coefficients_[i] = result.coefficients_[i] * Rational{-1, 1}; // выносим -1
+        }
+    }
+  
     return result; // возвращаем новый многочлен
 }
 
@@ -120,6 +127,7 @@ Polynomial Polynomial::factorize() const {
 Polynomial Polynomial::singlify() const {
     Polynomial der_ = derivative();  // вычисление производной многочлена
     Polynomial gcd_ = gcd(*this, der_); // вычисление НОД <P(x), P'(x)>
+    if(gcd_.degree_ == 0) return *this;
     Polynomial result = *this / gcd_; // вычисление P(x) / gcd(<P(x), P'(x))
     return result; // возвращаем новый многочлен
 }
