@@ -8,7 +8,7 @@
 using digit = uint8_t;
 
 class Natural {
-    std::vector<digit> digits_ = {}; // цифры в обратном порядке (154 == [4 5 1])
+    std::vector<digit> digits_ = {}; // цифры в обратном порядке
     std::size_t n_ = -1; // номер старшей позциии (начиная с 0)
 
 public:
@@ -32,7 +32,7 @@ public:
 
     [[nodiscard]] Natural mulByDigit(digit multiplier) const; // MUL_ND_N
 
-    [[nodiscard]] Natural mulBy10k(const std::size_t k) const; // MUL_Nk_N
+    [[nodiscard]] Natural mulBy10k(std::size_t k) const; // MUL_Nk_N
 
     [[nodiscard]] Natural subScaled(const Natural &other, digit k) const; // SUB_NDN_N
 

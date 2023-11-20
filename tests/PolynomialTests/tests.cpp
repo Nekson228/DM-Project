@@ -36,7 +36,7 @@ TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyOneRootTest) {
 
 TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyManyRootsTest) {
    std::vector<Rational> cf1 = {Rational{1, 1}, Rational{-6, 1}, Rational{27, 3}}; // (x-3)^2 = x^2 - 6x + 9
-   std::vector<Rational> cf2 = {Rational{1, 1}, Rational{-3, 1}};                  // x - 3
+   std::vector<Rational> cf2 = {Rational{1, 2}, Rational{-3, 2}};                  // x - 3
    Polynomial poly1(cf1);
    Polynomial poly2(cf2);
    EXPECT_EQ(poly1.singlify(), poly2);
@@ -154,16 +154,15 @@ TEST(Ilyin_2383_Polynomial_mod_test, GetNotZero) {
     std::vector<Rational> firstCoefs = {Rational(1, 1), Rational(0, 1), Rational(-4, 1)};
     std::vector<Rational> secondCoefs = {Rational(1, 1), Rational(1, 1)};
     std::vector<Rational> finalCoefs = {Rational(-3, 1)};
-    Polynomial first{finalCoefs}, second{secondCoefs}, expected{finalCoefs};
+    Polynomial first{firstCoefs}, second{secondCoefs}, expected{finalCoefs};
     EXPECT_EQ(first % second, expected);
 }
 
-TEST(Ilyin_2383_Polynomial_mod_test, get1) {
-    std::vector<Rational> firstCoefs = {Rational(9, 1), Rational(56, 1), Rational(1, 1)};
-    std::vector<Rational> secondCoefs = {Rational(1, 1), Rational(0, 1)};
-    std::vector<Rational> finalCoefs = {Rational(1, 1)};
-    Polynomial first{finalCoefs}, second{secondCoefs}, expected{finalCoefs};
-    EXPECT_EQ(first % second, expected);
+TEST(Ilyin_2383_Polynomial_mod_test, GetDivisor) {
+    std::vector<Rational> firstCoefs = {Rational(56, 1), Rational(1, 1)};
+    std::vector<Rational> secondCoefs = {Rational(9, 1), Rational(1, 1), Rational(0, 1)};
+    Polynomial first{firstCoefs}, second{secondCoefs};
+    EXPECT_EQ(first % second, first);
 }
 
 TEST(Kuzminykh2384_Polynomial_ADD_PP_P, PolynomialAdditionTest1) {
@@ -245,11 +244,7 @@ TEST(Kuzminykh2384_Polynomial_DIV_PP_P, PolynomialDivisionTest4) {
     Polynomial first_pol = Polynomial(coef1);
     std::vector<Rational> coef2 = {Rational(0, 1)};
     Polynomial second_pol = Polynomial(coef2);
-    try {
-        Polynomial res = first_pol / second_pol;
-    } catch (std::invalid_argument &e) {
-        EXPECT_EQ(e.what(), (std::string) "Деление на ноль невозможно");
-    }
+    EXPECT_THROW(first_pol / second_pol, std::invalid_argument);
 }
 
 TEST(Kuzminykh2384_Polynomial_DER_P_P, PolynomialDerivativeTest1) {
@@ -415,7 +410,7 @@ TEST(Zhdanov_Anton_2383_GCF_PP_P, regular_test1) {
 
     std::vector<Rational> coef2 = {Rational(3, 1), Rational(10, 1), Rational(2, 1), Rational(-3, 1)};
 
-    std::vector<Rational> ans = {Rational(1, 1), Rational(3, 1)};
+    std::vector<Rational> ans = {Rational(9, 1), Rational(27, 1)};
 
     Polynomial f(coef1);
     Polynomial g(coef2);
@@ -428,7 +423,7 @@ TEST(Zhdanov_Anton_2383_GCF_PP_P, test_with_negativ_coef) {
 
     std::vector<Rational> coef2 = {Rational(-5, 9), Rational(-25, 9), Rational(-10, 3)};
 
-    std::vector<Rational> ans = {Rational(1, 1), Rational(3, 1)};
+    std::vector<Rational> ans = {Rational(9, 1), Rational(27, 1)};
 
     Polynomial f(coef1);
     Polynomial g(coef2);

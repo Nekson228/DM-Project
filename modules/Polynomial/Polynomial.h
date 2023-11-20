@@ -8,8 +8,6 @@ class Polynomial {
     std::vector<Rational> coefficients_; // массив дробных коэффициентов в прямом порядке (x^2 + 1/2 == [1/1, 0/1, 1/2]) 
     std::size_t degree_{}; // степень многочлена
 
-    [[nodiscard]] Polynomial reduceAllCoefficients() const;
-
     void removeLeadingZeros();
 public:
     explicit Polynomial(const std::vector<Rational> &coefficients);
@@ -47,6 +45,8 @@ public:
     [[nodiscard]] bool operator==(const Polynomial &other) const = default;
 
     [[nodiscard]] bool operator!=(const Polynomial &other) const = default;
+
+    [[nodiscard]] Polynomial reduceAllCoefficients() const;
 };
 
 

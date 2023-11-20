@@ -15,10 +15,14 @@ Natural::Natural(std::size_t number) {
     n_ = digits_.size() - 1;
 }
 
-Natural::Natural(const std::string &str_number) {
+Natural::Natural(const std::string &str_number) { // TODO: remove leading zeros
     if (str_number.empty())
         throw std::invalid_argument("Operand expected not empty");
+    bool non_zero_encountered = false;
     for (digit digit: utils::trim(str_number)) {
+        if (digit == '0' && !non_zero_encountered)
+            continue;
+        non_zero_encountered = true;
         if (!isdigit(digit)) {
             std::string exception = "Operand data is invalid. Unknown character '";
             exception += static_cast<char>(digit);
@@ -27,6 +31,8 @@ Natural::Natural(const std::string &str_number) {
         }
         digits_.push_back(digit - '0');
     }
+    if (!non_zero_encountered)
+        digits_.push_back(0);
     std::reverse(digits_.begin(), digits_.end());
     n_ = digits_.size() - 1;
 }
