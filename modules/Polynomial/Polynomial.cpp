@@ -38,11 +38,15 @@ std::string Polynomial::str() const {
 }
 
 std::map<size_t, std::string> getDegreeToCoefficientsMap(const std::string &polynomial) {
-    size_t start = 0, end, x_pos, caret_pos, star_pos, exponent;
+    size_t start = 0, end = polynomial.find_first_of("+-"), x_pos, caret_pos, star_pos, exponent;
     std::string monomial_token, coefficient_str, exponent_str;
-    char sign = (polynomial.find_first_of("+-") < polynomial.find('x')) ? polynomial[end] : '+';
+    char sign = '+';
+    if (end < polynomial.find('x')) {
+        sign = polynomial[end];
+        start = end + 1;
+    }
     std::map<size_t, std::string> res;
-    while (end != std::string::npos) {
+    do {
         end = polynomial.find_first_of("+-", start);
         monomial_token = utils::trim(polynomial.substr(start, end - start));
         x_pos = monomial_token.find('x');
@@ -68,7 +72,7 @@ std::map<size_t, std::string> getDegreeToCoefficientsMap(const std::string &poly
         res[exponent] = sign + coefficient_str;
         start = end + 1;
         sign = end != std::string::npos ? polynomial[end] : '\0';
-    }
+    } while (end != std::string::npos);
     return res;
 }
 
