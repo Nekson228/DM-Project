@@ -298,7 +298,7 @@ P - 3
 Жданов Антон 2383
 */
 [[nodiscard]] Polynomial Polynomial::scale(const Rational &scalar) const {
-    if (scalar == Rational(0, 1))                       // если скаляр равен 0, то при умножении на многочлен
+    if (scalar.isZero())                       // если скаляр равен 0, то при умножении на многочлен
     {                                                  // остается многочлен степени 0, с коэффицентом Rational(0,1)
         std::vector<Rational> new_coeff{Rational(0, 1)};// => создаем вектор с 1 элементом и из него создаем многочлен
         return Polynomial{new_coeff};
