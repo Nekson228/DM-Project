@@ -6,9 +6,9 @@
 
 #include "../utils/utils.h"
 
-Polynomial::Polynomial(const std::vector<Rational> &coefficients): coefficients_(coefficients) {
-    removeLeadingZeros();
+Polynomial::Polynomial(const std::vector<Rational> &coefficients) : coefficients_(coefficients) {
     degree_ = coefficients_.size() - 1;
+    removeLeadingZeros();
 }
 
 std::string Polynomial::str() const {
@@ -38,17 +38,21 @@ std::string Polynomial::str() const {
 }
 
 std::map<size_t, std::string> getDegreeToCoefficientsMap(const std::string &polynomial) {
-    size_t start = 0, end = polynomial.find_first_of("+-"), x_pos, caret_pos, star_pos, exponent;
+    if (utils::trim(polynomial).empty())
+        throw std::invalid_argument("Operand data is invalid");
+    utils::checkForRedundantSymbols(polynomial, " +-1234567890x*/^");
+    std::map<size_t, std::string> res;
+    size_t start = 0, end, x_pos, caret_pos, star_pos, exponent;
     std::string monomial_token, coefficient_str, exponent_str;
     char sign = '+';
-    if (end < polynomial.find('x')) {
-        sign = polynomial[end];
-        start = end + 1;
-    }
-    std::map<size_t, std::string> res;
     do {
         end = polynomial.find_first_of("+-", start);
         monomial_token = utils::trim(polynomial.substr(start, end - start));
+        if (monomial_token.empty() && end != std::string::npos) {
+            sign = polynomial[end];
+            start = end + 1;
+            continue;
+        }
         x_pos = monomial_token.find('x');
         caret_pos = monomial_token.find('^');
         star_pos = monomial_token.find('*');
@@ -116,7 +120,12 @@ Polynomial Polynomial::factorize() const {
     for (size_t i = 0; i <= degree_; i++) {
         result.coefficients_[i] = coefficients_[i] / ratio; // делим каждый коэффициент на ratio
     }
-    return result; // возвращаем новый многочлен
+
+    if (result.coefficients_[0].getSign() == "-") { // если коэффициент при старшей степени отрицательный
+        result = result.scale(Rational{-1, 1});
+    }
+
+    return result.reduceAllCoefficients(); // возвращаем новый многочлен
 }
 
 // Bormatov_Yaroslav NMR_P_P - Преобразование многочлена — кратные корни в простые
@@ -125,7 +134,7 @@ Polynomial Polynomial::singlify() const {
     Polynomial der_ = derivative();  // вычисление производной многочлена
     Polynomial gcd_ = gcd(*this, der_); // вычисление НОД <P(x), P'(x)>
     Polynomial result = *this / gcd_; // вычисление P(x) / gcd(<P(x), P'(x))
-    return result; // возвращаем новый многочлен
+    return result.reduceAllCoefficients().factorize(); // возвращаем новый многочлен
 }
 
 /*
@@ -141,7 +150,7 @@ Polynomial Polynomial::singlify() const {
         // Прибавляем к результату результат умножения первого многочлена на очередной составляющий одночлен второго многочлена
         result = result + this->scale(other.coefficients_[k]).mulByXk(other.degree_ - k);
     }
-    return result;
+    return result.reduceAllCoefficients();
 }
 
 
@@ -166,7 +175,7 @@ Polynomial Polynomial::singlify() const {
         new_coefs.erase(new_coefs.begin());
     }
     // возвращаем измененный многочлен
-    return Polynomial(new_coefs);
+    return Polynomial(new_coefs).reduceAllCoefficients();
 }
 
 
@@ -180,9 +189,10 @@ Polynomial Polynomial::singlify() const {
     // создаем на их основе делимое число
     Polynomial firstDivisor(coefsForDivisor);
     //если делимое меньше делителя
-    if (firstDivisor.degree_ < other.degree_) return firstDivisor;
+    if (firstDivisor.degree_ < other.degree_)
+        return firstDivisor.reduceAllCoefficients();
     // вычисляем остаток и тут же возвращаем
-    return firstDivisor - (firstDivisor / other) * other;
+    return (firstDivisor - (firstDivisor / other) * other).reduceAllCoefficients();
 }
 
 //Написал функцию - Кузьминых Егор
@@ -208,7 +218,7 @@ Polynomial Polynomial::singlify() const {
     }
 
     // Создаем новый многочлен с полученными коэффами и возвращаем его
-    return Polynomial(resultCoefficients);
+    return Polynomial(resultCoefficients).reduceAllCoefficients();
 }
 
 //Написал функцию - Кузьминых Егор
@@ -223,12 +233,12 @@ Polynomial Polynomial::singlify() const {
     }
     if (degree_ < other.degree_) {
         // Если степень делителя больше степени делимого, возвращаем ноль (частное на данный момент)
-        return quotient;
+        return quotient.reduceAllCoefficients();
     }
 
     //Цикл действует, пока степень остатка от деления будет больше, чем степень делителя
     while (remainder.degree_ >= other.degree_ && !remainder.coefficients_[0].isZero()) {
-        
+
         std::size_t k = remainder.getDegree() -
                         other.getDegree();//вычислили степень на данном шагу, использование метода (DEG_P_N)
         Rational factor = remainder.leading() /
@@ -240,7 +250,7 @@ Polynomial Polynomial::singlify() const {
 
         remainder = remainder - term * other;//Вычислили остаток
     }
-    return quotient;
+    return quotient.reduceAllCoefficients();
 }
 
 //Написал функцию - Кузьминых Егор
@@ -248,8 +258,8 @@ Polynomial Polynomial::singlify() const {
 Polynomial Polynomial::derivative() const {
     //Создали вектор для хранения коэффициентов
     std::vector<Rational> derivativeCoefficients(degree_, Rational(0, 1));
-    std::vector<Rational> const_coeff(1, Rational(0, 1));
-    if(degree_==0){
+    if (degree_ == 0) {
+        std::vector<Rational> const_coeff(1, Rational(0, 1));
         Polynomial zero = Polynomial(const_coeff);
         return zero;
     }
@@ -258,7 +268,7 @@ Polynomial Polynomial::derivative() const {
         derivativeCoefficients[i] = coefficients_[i] * Rational(degree_ - i, 1);
     }
     Polynomial result = Polynomial(derivativeCoefficients);//создаю новый многочлен и возвращаю его
-    return result;
+    return result.reduceAllCoefficients();
 }
 
 //Цыганков Роман гр 2384 MUL_Pxk_P - умножение мн-на на x^k
@@ -273,9 +283,7 @@ Polynomial Polynomial::mulByXk(std::size_t k) const {
         new_coeff[i] = Rational(0, 1); // оставшееся заполняем нулями
     }
 
-    Polynomial new_coefficients_(new_coeff); // создаем мн-н с новыми коэффицентами и возвращаем его
-
-    return new_coefficients_;
+    return Polynomial(new_coeff).reduceAllCoefficients(); // создаем мн-н с новыми коэффицентами и возвращаем его
 }
 
 // Мирон Возгрин 2382; Возвращает старший коэфицент многочлена (LED_P_Q)
@@ -301,7 +309,7 @@ P - 3
     for (int i = 0; i < this->degree_ + 1; i++) {
         new_coeff[i] = this->coefficients_[i] * scalar; // записываем в вектор новые коэффиценты у множенные на скаляр
     }
-    return Polynomial{new_coeff}; // создаем многочлен с новыми коэффицентами и возвращаем его
+    return Polynomial{new_coeff}.reduceAllCoefficients(); // создаем многочлен с новыми коэффицентами и возвращаем его
 }
 
 /*
@@ -326,16 +334,16 @@ P - 11
 
     Polynomial ost1{first % second}; // находим остаток от деления первого на второй
     if (ost1.coefficients_[0].isZero()) // если остаток равен нулю, значит НОД - это second
-        return second;
+        return second.reduceAllCoefficients();
     Polynomial ost2{second % ost1}; // находим остаток от деления второго на ost1
     // цикл пока один из остатков не равен нулю
-    while (ost1.coefficients_[0].isZero() and ost2.coefficients_[0].isZero()) {
+    while (!ost1.coefficients_[0].isZero() and !ost2.coefficients_[0].isZero()) {
         ost1 = ost1 % ost2;
-        if (ost1.coefficients_[0] == Rational(0, 1)) // если остаток равен нулю, значит НОД - это ost2
-            return ost2;
+        if (ost1.coefficients_[0].isZero()) // если остаток равен нулю, значит НОД - это ost2
+            return ost2.reduceAllCoefficients();
         ost2 = ost2 % ost1; // продолжаем делить с остатком
     }
-    return ost1; // если цикл завершился и не вернул ничего => НОД - ost1
+    return ost1.reduceAllCoefficients(); // если цикл завершился и не вернул ничего => НОД - ost1
 }
 
 Polynomial Polynomial::reduceAllCoefficients() const {
