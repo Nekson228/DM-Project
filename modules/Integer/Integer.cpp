@@ -61,41 +61,25 @@ Natural Integer::toNatural() const {
 // Katya Sots DIV_ZZ_Z - Частное от деления целого на целое (делитель отличен от нуля)
 // Используемые методы - ABS_Z_N POZ_Z_D DIV_NN_N ADD_1N_N
 Integer Integer::operator/(const Integer &other) const {
-    Integer first(*this);  // копируем первое число
-    if (other == Integer(0)) {
-        throw std::invalid_argument("Деление на 0 невозможно");
+    if(other == Integer{0}) { // если второе число - 0
+        throw std::invalid_argument("Деление на 0 невозможно"); 
     }
 
-    Integer answer(0);  // частное
-    answer.sign_ = false;
-
-    if (first.isPositive() == 2 && other.isPositive() == 2) { // a > 0, b > 0
-        while (first.isPositive() != 1) {  // пока a >= 0
-            answer = answer + Integer(1); // ans += 1
-            first = first - other;       // a -= b
-        }
-        answer = answer - Integer(1);
-    } else if (first.isPositive() == 2 && other.isPositive() == 1) { // a > 0, b < 0
-        while (first.isPositive() != 1) {  // пока a >= 0
-            answer = answer + Integer(1); // ans += 1
-            first = first + other;       // a += b
-        }
-        answer = answer - Integer(1);
-        answer.sign_ = true;              // ответ - отрицательное число
-    } else if (first.isPositive() == 1 && other.isPositive() == 2) { // a < 0, b > 0
-        while (first.isPositive() == 1) {  // пока a < 0
-            answer = answer + Integer(1); // ans += 1
-            first = first + other;       // a += b
-        }
-        answer.sign_ = true;              // ответ - отрицательное число
-    } else { // a < 0, b < 0
-        while (first.isPositive() == 1) {  // пока a < 0
-            answer = answer + Integer(1); // ans += 1
-            first = first - other;       // a -= b
-        }
+    if(this->number_.isZero() == true) { // если первое число 0 - результат 0
+        return Integer{0}; 
     }
 
-    return answer; // возвращаем полученный результат
+    // вычисляем модуль результата используя деление нацело для натуральных чисел
+    Integer result = Integer(this->number_ / other.number_); 
+
+    if(this->sign_ == true) { // если делитель - отрицательный, то добавляем к ответу единицу
+        result = result + Integer{1};
+    }
+
+    // меняем знак у результата в зависимости от знаков делимого и делителя (sign a XOR sign b)
+    result.sign_ = this->sign_ ^ other.sign_;
+
+    return result; // возвращаем полученный результат
 }
 
 
