@@ -185,78 +185,49 @@ digit Natural::cmp(const Natural &a, const Natural &b) {
 //ADD_NN_N Иваницкий Илья функция сложения 2 натуральных числел
 [[nodiscard]] Natural Natural::operator+(const Natural &other) const {//
     Natural tmp(*this);//создаем копию объекта
-    if (cmp(tmp, other) == 0 || cmp(tmp, other) == 2) {//если первое число больше - делаем
-        for (int i = 0; i < other.digits_.size(); i++) {
-            // прибавляем к каждому числу первого каждое число второго по их порядку
-            tmp.digits_[i] += other.digits_[i];
-        }
-        int fl = 0;
-        for (unsigned char &digit: tmp.digits_) {
-            //далее если число больше 10 оставляем только остаток от деления на 10
-            if (digit + fl >= 10) {
-                //неполное частное при делении всегда единица для суммы цифр , поэтому флаг = 1
-                digit = (digit + fl) % 10;
-                fl = 1;
-            } else {
-                //если число нацело не делится просто прибавляем флаг
-                digit += fl;
-                fl = 0;
-            }
-        }
-        if (fl == 1)
-            //если в конце чисел не осталось , но флаг не равен 0 , заносим его в начало числа(конец массива)
-            tmp.digits_.push_back(1);
-        tmp.n_ = tmp.digits_.size() - 1;
-        return tmp; //результат
+    Natural cur(other);
+    if(cmp(tmp , cur) == 1) std::swap(tmp , cur);// если воторое больше - меняем местами
+    for (int i = 0; i < cur.digits_.size(); i++) {
+        // прибавляем к каждому числу первого каждое число второго по их порядку
+        tmp.digits_[i] += cur.digits_[i];
     }
-    if (cmp(tmp, other) == 1) {//если число меньше - делаем
-        Natural cur(other);//копия второго числа
-        for (int i = 0; i < tmp.digits_.size(); i++) {//все также , только делаем для второго числа
-            cur.digits_[i] += tmp.digits_[i];
+    int fl = 0;
+    for (unsigned char &digit: tmp.digits_) {
+        //далее если число больше 10 оставляем только остаток от деления на 10
+        if (digit + fl >= 10) {
+            //неполное частное при делении всегда единица для суммы цифр , поэтому флаг = 1
+            digit = (digit + fl) % 10;
+            fl = 1;
+        } else {
+            //если число нацело не делится просто прибавляем флаг
+            digit += fl;
+            fl = 0;
         }
-        int fl = 0;
-        for (unsigned char &digit: cur.digits_) {
-            if (digit + fl >= 10) {
-                digit = (digit + fl) % 10;
-                fl = 1;
-            } else {
-                digit += fl;
-                fl = 0;
-            }
-        }
-        if (fl == 1) {
-            cur.digits_.push_back(1);
-        }
-        cur.n_ = cur.digits_.size() - 1;
-        return cur;// результат
     }
-    return tmp;
+    if (fl == 1)
+        //если в конце чисел не осталось , но флаг не равен 0 , заносим его в начало числа(конец массива)
+        tmp.digits_.push_back(1);
+    tmp.n_ = tmp.digits_.size() - 1;
+    return tmp; //результат
 }
-
 
 // MUL_NN_N Иваницкий Илья, функция умножения 2 натуральных чисел
 [[nodiscard]] Natural Natural::operator*(const Natural &other) const {
     std::vector<Natural> array;//массив чисел полученных путем умножения на конкретную цифру
     Natural tmp(*this);
-    if (cmp(tmp, other) == 2 || cmp(tmp, other) == 0) {
-        for (unsigned char digit: other.digits_) {
+    Natural cur(other);
+    if(cmp(tmp , cur) == 1) std::swap(tmp , cur);//если второе больше меняем их местами
+    // if (cmp(tmp, other) == 2 || cmp(tmp, other) == 0) {
+        for (unsigned char digit: cur.digits_) {
             // в массив чисел добавляем по одному первое число умноженное с помощью функкции
             array.push_back(tmp.mulByDigit(digit));
             //MUL_ND_N на цифры из второго числа
         }
-    }
-    if (cmp(tmp, other) == 1) {
-        for (unsigned char digit: tmp.digits_) {
-            // в массив чисел добавляем по одному первое число умноженное с помощью функкции
-            array.push_back(other.mulByDigit(digit));
-            //MUL_ND_N на цифры из второго числа
-        }
-    }
     Natural res(0);
     digit k = 0;
     for (const auto &i: array)
         // в цикле заносим в числа из array умноженные на 10^k степени где k - номер порядка
-        res = res + i.mulBy10K(k++);
+        res = res + i.mulBy10k(k++);
     //для пояснения:array[111,112,113] , тогда res = 113*100+112*10+111
     res.n_ = res.digits_.size() - 1;
     return res;
