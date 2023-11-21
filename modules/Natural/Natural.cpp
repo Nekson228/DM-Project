@@ -91,9 +91,8 @@ Natural Natural::operator%(const Natural &other) const {
 Функция N-10: Вычисление первой цифры деления большего натурального на меньшее, домноженной на 10^k,где k - номер позиции этой цифры (номер считается с нуля)
 */
 [[nodiscard]] Natural Natural::divFirstDigit(const Natural &other) const { // DIV_NN_Dk
-    if (this->isZero() || other.isZero()) { // Проверка, что числа не нули
-        Natural nullNum = Natural(0); // Возвращаем 0 если какое-то из чисел ноль
-        return nullNum;
+    if (this->isZero() || other.isZero()) { // Проверка, что числа не нули, большее не может быть нулем в натуральных числах
+        throw std::invalid_argument("Деление на 0 невыполнимо");
     }
     digit cmpFlag = Natural::cmp(*this, other); // Сравниваем два числа
     // записываем большее в larger, меньшее в smaller
