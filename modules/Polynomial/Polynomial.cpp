@@ -290,7 +290,7 @@ P - 3
 Жданов Антон 2383
 */
 [[nodiscard]] Polynomial Polynomial::scale(const Rational &scalar) const {
-    if (scalar == Rational(0, 1))                       // если скаляр равен 0, то при умножении на многочлен
+    if (scalar.isZero())                       // если скаляр равен 0, то при умножении на многочлен
     {                                                  // остается многочлен степени 0, с коэффицентом Rational(0,1)
         std::vector<Rational> new_coeff{Rational(0, 1)};// => создаем вектор с 1 элементом и из него создаем многочлен
         return Polynomial{new_coeff};
@@ -329,9 +329,9 @@ P - 11
         return second;
     Polynomial ost2{second % ost1}; // находим остаток от деления второго на ost1
     // цикл пока один из остатков не равен нулю
-    while (ost1.coefficients_[0].isZero() and ost2.coefficients_[0].isZero()) {
+    while (!ost1.coefficients_[0].isZero() and !ost2.coefficients_[0].isZero()) {
         ost1 = ost1 % ost2;
-        if (ost1.coefficients_[0] == Rational(0, 1)) // если остаток равен нулю, значит НОД - это ost2
+        if (ost1.coefficients_[0].isZero()) // если остаток равен нулю, значит НОД - это ost2
             return ost2;
         ost2 = ost2 % ost1; // продолжаем делить с остатком
     }
