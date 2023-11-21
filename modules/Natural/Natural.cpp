@@ -16,19 +16,15 @@ Natural::Natural(std::size_t number) {
 }
 
 Natural::Natural(const std::string &str_number) {
-    if (str_number.empty())
+    std::string trimmed_number = utils::trim(str_number);
+    if (trimmed_number.empty())
         throw std::invalid_argument("Operand expected not empty");
+    utils::checkForRedundantSymbols(trimmed_number, " 0123456789");
     bool non_zero_encountered = false;
-    for (digit digit: utils::trim(str_number)) {
+    for (digit digit: trimmed_number) {
         if (digit == '0' && !non_zero_encountered)
             continue;
         non_zero_encountered = true;
-        if (!isdigit(digit)) {
-            std::string exception = "Operand data is invalid. Unknown character '";
-            exception += static_cast<char>(digit);
-            exception += "'";
-            throw std::invalid_argument(exception);
-        }
         digits_.push_back(digit - '0');
     }
     if (!non_zero_encountered)
