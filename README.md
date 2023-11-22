@@ -6,7 +6,7 @@
 2) Распаковываете архив
 3) В зависимости от ОС запускаете: (сборка под мак пока под вопросом)
    * Windows:  build-windows/release/DM.exe
-   * Linux:    build-linux/DistributionKit/bin/DM
+   * Linux:    build-linux/DM
    
 
 ## ETU 2023 DM Project
