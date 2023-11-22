@@ -106,7 +106,7 @@ TEST(Damakin2384_Natural_DIV_NN_Dk, DivFirstDigitTest2){
 TEST(Damakin2384_Natural_DIV_NN_Dk, DivFirstDigitTest3){
     Natural a = Natural(0);
     Natural b = Natural(12345);
-    ASSERT_FALSE(a.divFirstDigit(b) == Natural(10000));
+    ASSERT_THROW(a.divFirstDigit(b), std::invalid_argument);
 }
 
 TEST(Damakin2384_Natural_DIV_NN_Dk, DivFirstDigitTest4){
@@ -156,19 +156,19 @@ TEST(Ilyin_2383_Natural_mulBy10k_test, degree0) {
     Natural first(5);
     Natural second(5);
     Natural third;
-    third = first.mulBy10k(0);
+    third = first.mulBy10K(0);
     EXPECT_EQ(third, second);
 }
 
 TEST(Ilyin_2383_Natural_mulBy10k_test, degree6) {
-    Natural first = Natural(5), second = Natural(5000000), third = first.mulBy10k(6);
+    Natural first = Natural(5), second = Natural(5000000), third = first.mulBy10K(6);
     EXPECT_EQ(third, second);
 }
 
 TEST(Ilyin_2383_Natural_mulBy10k_test, degree25) {
     Natural test_object(1);
     Natural expected_size("10000000000000000000000000");
-    EXPECT_EQ(test_object.mulBy10k(25), expected_size);
+    EXPECT_EQ(test_object.mulBy10K(25), expected_size);
 }
 
 TEST(Ilyin_2383_Natural_lcm_test, 5and6get30) {

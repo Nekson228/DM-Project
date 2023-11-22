@@ -51,21 +51,21 @@ bool Natural::isZero() const {
 
 //Борисов Иван Павлович 2383, N-6, MUL_ND_N, умножение натурального числа на цифру
 Natural Natural::mulByDigit(const digit multiplier) const {
-    if (multiplier == 0) { //если множитель равен нулю, то натуральное число равно нулю
-        Natural number(0);
-        return number;
-    }
+    if (multiplier == 0) //если множитель равен нулю, то натуральное число равно нулю
+        return Natural{0};
     Natural number(*this); //создаем копию от данного объекта
     int discharge = 0; //разряды. Используется, если результат умножения затрагивает и следующий разряд
     int add; //число, которое получается в результате умножения цифры разряда числа на цифру
     for (size_t i = 0; i <= number.n_; i++) {
-        add = number.digits_[i] * multiplier +
-              discharge; //добавляется discharge- часть результата прошлого умножения, относящаяся к новому разряду
+        //добавляется discharge - часть результата прошлого умножения, относящаяся к новому разряду
+        add = number.digits_[i] * multiplier + discharge;
         number.digits_[i] = (add) % 10;
         discharge = add / 10;
     }
-    if (discharge != 0) number.digits_.push_back(discharge); //если в результате умножения число стало на разряд больше
-
+    if (discharge != 0) {//если в результате умножения число стало на разряд больше
+        number.digits_.push_back(discharge);
+        number.n_++;
+    }
     return number;
 }
 
@@ -74,15 +74,17 @@ Natural Natural::subScaled(const Natural &other, digit k) const {
     Natural number(*this); //создаём копии объектов
     Natural other_num(other);
     other_num = other_num.mulByDigit(k); //умножаем вычитаемое на цифру
-    number = number - other_num; //производим вычетание
+    number = number - other_num; //производим вычитание
     return number;
 }
 
 //Борисов Иван Павлович 2383, N-12, MOD_NN_N, Остаток от деления первого натурального числа на второе натуральное (делитель отличен от нуля)
 Natural Natural::operator%(const Natural &other) const {
     Natural number(*this);
-    if (cmp(number, other) == 1) return number; //если делимое меньше делителя возвращаем делимое
-    Natural quotient = number / other; //целочисленно делим число на второе, остаток деления на которое мы ищем
+    if (cmp(number, other) == 1) //если делимое меньше делителя возвращаем делимое
+        return number;
+    // целочисленное деление первого числа на второе, остаток деления на которое мы ищем
+    Natural quotient = number / other;
     return number - quotient * other; // возвращаем остаток от деления
 }
 
@@ -91,19 +93,14 @@ Natural Natural::operator%(const Natural &other) const {
 Функция N-10: Вычисление первой цифры деления большего натурального на меньшее, домноженной на 10^k,где k - номер позиции этой цифры (номер считается с нуля)
 */
 [[nodiscard]] Natural Natural::divFirstDigit(const Natural &other) const { // DIV_NN_Dk
-    if (this->isZero() || other.isZero()) { // Проверка, что числа не нули, большее не может быть нулем в натуральных числах
+    // Проверка, что числа не нули, большее не может быть нулем в натуральных числах
+    if (this->isZero() || other.isZero())
         throw std::invalid_argument("Деление на 0 невыполнимо");
-    }
-    digit cmpFlag = Natural::cmp(*this, other); // Сравниваем два числа
     // записываем большее в larger, меньшее в smaller
-    Natural larger;
-    Natural smaller;
-    if (cmpFlag == 2) {
+    Natural larger(other), smaller(*this);
+    if (Natural::cmp(*this, other) == 2) {
         larger = Natural(*this);
         smaller = Natural(other);
-    } else {
-        larger = Natural(other);
-        smaller = Natural(*this);
     }
     // Создаем счетчик номера позиции первой цифры
     int k = 1;
@@ -156,18 +153,16 @@ digit Natural::cmp(const Natural &a, const Natural &b) {
 // MUL_Nk_N N-7 умножение на 10^k Ильин Павел 2383
 [[nodiscard]] Natural Natural::mulBy10K(const std::size_t k) const {
     //копируем изменяемый объект
-    Natural new_num;
-    new_num.digits_ = digits_;
+    Natural new_num(*this);
 
-    //вносим изменения
-    for (size_t i = 0; i < k; i++) {
+    // умножаем на 10^k
+    for (size_t i = 0; i < k; i++)
         new_num.digits_.insert(new_num.digits_.begin(), 0);
-    }
 
     //обновляем поле старшего разряда числа
     new_num.n_ = new_num.digits_.size() - 1;
 
-    //возвращаем результатик
+    //возвращаем результат
     return new_num;
 }
 
@@ -177,52 +172,46 @@ digit Natural::cmp(const Natural &a, const Natural &b) {
     return a * b / gcd(a, b);
 }
 
-//ADD_NN_N Иваницкий Илья функция сложения 2 натуральных числел
+//ADD_NN_N Иваницкий Илья функция сложения 2 натуральных чисел
 [[nodiscard]] Natural Natural::operator+(const Natural &other) const {//
-    Natural tmp(*this);//создаем копию объекта
-    Natural cur(other);
-    if(cmp(tmp , cur) == 1) std::swap(tmp , cur);// если воторое больше - меняем местами
-    for (int i = 0; i < cur.digits_.size(); i++) {
+    Natural tmp(*this), cur(other); //создаем копии
+    if (cmp(tmp, cur) == 1)
+        std::swap(tmp, cur);// если второе больше - меняем местами
+    for (int i = 0; i < cur.digits_.size(); i++)
         // прибавляем к каждому числу первого каждое число второго по их порядку
         tmp.digits_[i] += cur.digits_[i];
-    }
     int fl = 0;
-    for (unsigned char &digit: tmp.digits_) {
-        //далее если число больше 10 оставляем только остаток от деления на 10
-        if (digit + fl >= 10) {
-            //неполное частное при делении всегда единица для суммы цифр , поэтому флаг = 1
-            digit = (digit + fl) % 10;
-            fl = 1;
-        } else {
-            //если число нацело не делится просто прибавляем флаг
-            digit += fl;
-            fl = 0;
-        }
+    for (digit &digit: tmp.digits_) {
+        //далее оставляем только остаток от деления на 10
+        digit += fl;  // добавляем перенесенный разряд
+        fl = digit >= 10; // перенос разряда
+        digit %= 10;  // оставляем остаток от деления на 10
     }
-    if (fl == 1)
-        //если в конце чисел не осталось , но флаг не равен 0 , заносим его в начало числа(конец массива)
+    if (fl == 1) {
+        //если в конце чисел не осталось, но флаг не равен 0, заносим его в начало числа(конец массива)
         tmp.digits_.push_back(1);
-    tmp.n_ = tmp.digits_.size() - 1;
+        tmp.n_++;
+    }
     return tmp; //результат
 }
 
 // MUL_NN_N Иваницкий Илья, функция умножения 2 натуральных чисел
 [[nodiscard]] Natural Natural::operator*(const Natural &other) const {
     std::vector<Natural> array;//массив чисел полученных путем умножения на конкретную цифру
-    Natural tmp(*this);
-    Natural cur(other);
-    if(cmp(tmp , cur) == 1) std::swap(tmp , cur);//если второе больше меняем их местами
+    Natural tmp(*this), cur(other);
+    if (cmp(tmp, cur) == 1)
+        std::swap(tmp, cur); //если второе больше меняем их местами
     // if (cmp(tmp, other) == 2 || cmp(tmp, other) == 0) {
-        for (unsigned char digit: cur.digits_) {
-            // в массив чисел добавляем по одному первое число умноженное с помощью функкции
-            array.push_back(tmp.mulByDigit(digit));
-            //MUL_ND_N на цифры из второго числа
-        }
+    for (unsigned char digit: cur.digits_) {
+        // в массив чисел добавляем по одному первое число умноженное с помощью функции
+        array.push_back(tmp.mulByDigit(digit));
+        //MUL_ND_N на цифры из второго числа
+    }
     Natural res(0);
     digit k = 0;
     for (const auto &i: array)
         // в цикле заносим в числа из array умноженные на 10^k степени где k - номер порядка
-        res = res + i.mulBy10k(k++);
+        res = res + i.mulBy10K(k++);
     //для пояснения:array[111,112,113] , тогда res = 113*100+112*10+111
     res.n_ = res.digits_.size() - 1;
     return res;
@@ -231,20 +220,14 @@ digit Natural::cmp(const Natural &a, const Natural &b) {
 //DIV_NN_N  Иваницкий Илья 2383 нахождение неполного частного 2ух чисел
 [[nodiscard]] Natural Natural::operator/(const Natural &other) const {
     Natural tmp(*this);//создаем копии чисел
-    Natural res(0);//результат равен нулю
-    if (cmp(other, Natural(0)) == 0) throw std::invalid_argument("Деление на 0 невыполнимо");//не допускаем деление на 0
-    else if (cmp(tmp, other) == 0) return Natural(1);//если числа равны результат деления 1
-    else if (cmp(tmp, other) == 1) return res;//если второе число больше первого результат деления равен 0
-    Natural part(0);//создаем переменную в которую будем записывать результат поэтапного деления
-    part = other.divFirstDigit(tmp);
-    if (cmp(tmp, other) == 2) {
-        while (cmp(tmp, other) != 1) {
-            // первое число = первое число минус второе умноженное на первую цифру деления(в 10^k степени)
-            tmp = tmp - part * other;
-            res = res + part; //добавляем результат в res
-            part = tmp.divFirstDigit(other);
-
-        }
+    if (cmp(other, Natural(0)) == 0) //не допускаем деление на 0
+        throw std::invalid_argument("Деление на 0 невыполнимо");
+    Natural res(0), part;//создаем переменную в которую будем записывать результат поэтапного деления
+    while (cmp(tmp, other) != 1) { // пока первое число >= второго
+        // первое число = первое число минус второе умноженное на первую цифру деления(в 10^k степени)
+        part = tmp.divFirstDigit(other);
+        tmp = tmp - part * other; // вычитаем из первого числа полученный part умноженный на делитель
+        res = res + part; //добавляем результат в res
     }
     res.n_ = res.digits_.size() - 1;
     return res;
@@ -254,14 +237,12 @@ digit Natural::cmp(const Natural &a, const Natural &b) {
 // Katya Sots - GCF_NN_N - НОД натуральных чисел
 // Используемые методы - MOD_NN_N COM_NN_D NZER_N_B
 Natural Natural::gcd(const Natural &a, const Natural &b) { // стандартный алгоритм Евклида для нахождения НОД
-    Natural first(a);
-    Natural second(b);
+    Natural first(a), second(b);
     while (!first.isZero() && !second.isZero()) { // while a != 0 && b != 0
-        if (first.cmp(first, second) == 2) { // if first > second
+        if (first.cmp(first, second) == 2) // if first > second
             first = first % second;
-        } else {
+        else
             second = second % first;
-        }
     }
     return first + second;
 }
@@ -294,12 +275,13 @@ Natural Natural::operator-(const Natural &other) const {
 
     Natural answer(*this); // создание копии числа
     int borrow = 0; // переменная нужная для того, чтобы занимать из следующего разряда
+    int ai, bi, result;
     for (size_t i = 0; i <= this->n_; ++i) { // проходимся по всем цифрам первого числа
         // поскольку цикл идет по первому числу, нужны перемменные, отвечающие за цифры, которвые вычисляем, так как 1 число > 2 числа, значит в какой-то момент начнем вычитать нули
-        int ai = i <= this->n_ ? this->digits_[i] : 0; // берем цифру из 1 числа
-        int bi = i <= other.n_ ? other.digits_[i] : 0; // берем цифру из 2 числа
+        ai = i <= this->n_ ? this->digits_[i] : 0; // берем цифру из 1 числа
+        bi = i <= other.n_ ? other.digits_[i] : 0; // берем цифру из 2 числа
 
-        int result = ai - bi - borrow; // текущий результат = (цифра первого - цифра второго) - 1/0
+        result = ai - bi - borrow; // текущий результат = (цифра первого - цифра второго) - 1/0
         if (result < 0) { // если цифра < 0 - надо забрать еденицу из следующего разряда
             result += 10; // занимаем из следующего разряда => +10 в текующий разряд
             borrow = 1; // заполняем borrow тк мы заняли из следующего => на следующей итерации нужно уменьшить число на 1

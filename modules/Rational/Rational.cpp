@@ -66,7 +66,7 @@ void Rational::checkDenominator() {
 // Bormatov Yaroslav TRANS_Q_Z - Преобразование сокращенного дробного в целое (если знаменатель равен 1)
 Integer Rational::toInteger() const {
     Rational tmp = reduce(); // Сокращение дроби
-    if (tmp.denominator_.cmp(tmp.denominator_, Natural{1}) == 0) { // проверка на то, является ли знаменатель равным 1
+    if (Natural::cmp(tmp.denominator_, Natural{1}) == 0) { // проверка на то, является ли знаменатель равным 1
         return tmp.numerator_;
     } else {
         throw std::invalid_argument("Преобразование в \"Integer\" невозможно");
@@ -109,7 +109,7 @@ bool Rational::isInteger() const { // INT_Q_B
                                       subtrahend.getNumerator(); // Считаем новый числитель вычитаемого
         difference = Rational(minuendNumerator - subtrahendNumerator, newDenominator); // Записыываем результат
     }
-    return difference;
+    return difference.reduce();
 }
 
 //Написал функцию - Кузьминых Егор
@@ -129,7 +129,7 @@ bool Rational::isInteger() const { // INT_Q_B
     // Складываем числители
     Integer sum = num1 + num2; //использование метода (ADD_ZZ_Z)
     //Создаем новую дробь с новым числителем и знаменателем, возвращаем ее
-    return Rational{sum, lcm};
+    return Rational{sum, lcm}.reduce();
 }
 
 //Лавренова Юлия гр.2384 TRANS_Z_Q - Преобразование целого в дробное
@@ -143,10 +143,10 @@ Rational Rational::operator*(const Rational &other) const { // MUL_QQ_Q
 
     // Создаем и возвращаем новый объект Rational
     Rational result(new_numerator, new_denominator);
-    return result;
+    return result.reduce();
 }
 
-// Valeyeva Alina RED_Q_Q - Сокращение дроби(использумые методы: ABS_Z_N, GCF_NN_N, DIV_ZZ_Z )
+// Valeyeva Alina RED_Q_Q - Сокращение дроби(используемые методы: ABS_Z_N, GCF_NN_N, DIV_ZZ_Z )
 Rational Rational::reduce() const {
     Natural my_numerator = numerator_.abs().toNatural(); // получили мой числитель в виде натурального неотрицательного числа
     Natural nod = Natural::gcd(my_numerator, denominator_); // получили НОД в виде натур числа
@@ -158,8 +158,7 @@ Rational Rational::reduce() const {
     Natural new_denominator = denominator_ / nod; // новый знаменатель (через метод DIV_NN_N)
 
     // Создаем и возвращаем новый объект Rational с сокращенной дробью
-    Rational result(new_numerator, new_denominator);
-    return result;
+    return Rational{new_numerator, new_denominator};
 }
 
 // Мирон Возгрин 2382; оператор деления для дробей (DIV_QQ_Q)
@@ -174,10 +173,9 @@ Rational Rational::operator/(const Rational &other) const {
     Natural newDenominator = denominator_ * other.numerator_.toNatural();
     //так как все числа были лишены знака,
     //предстоит провести проверку входных данных и присвоить нужный знак возвращаемому значению
-    if (other.numerator_.isPositive() == 1) {
-        return Rational{newNominator.negative(), newDenominator};
-    }
-    return Rational{newNominator, newDenominator};
+    if (other.numerator_.isPositive() == 1)
+        return Rational{newNominator.negative(), newDenominator}.reduce();
+    return Rational{newNominator, newDenominator}.reduce();
 }
 
 bool Rational::operator==(const Rational &other) const {

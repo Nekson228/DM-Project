@@ -18,17 +18,15 @@ std::string Integer::str() const {
 
 //Лавренова Юлия гр.2384 POZ_Z_D - Определение положительности числа (2 - положительное, 0 — равное нулю, 1 - отрицательное)
 [[nodiscard]] digit Integer::isPositive() const {
-    digit sign; //переменная знака
-    if (number_.isZero()) sign = 0;
-    else if (sign_) sign = 1; //если знак числа true, число отрицательное - возвращаем 1
-    else sign = 2; //если знак числа false, число положительное - возвращаем 2
-    return sign; //возвращаем знак
+    if (number_.isZero()) //если число равно 0, возвращаем 0
+        return 0;
+    return sign_ ? 1 : 2; //если число отрицательное, возвращаем 1, иначе 2
 }
 
 //Гурков Арсений 2384, Z1, ABS_Z_Z, Абсолютная величина числа
 Integer Integer::abs() const {
-    Integer abs_int(number_); //создание объекта типа Integer с использованием текущего значения, без учета знака
-    return abs_int;
+    //создание объекта типа Integer с использованием текущего значения, без учета знака
+    return Integer{number_};
 }
 
 // Цыганков Роман гр 2384 TRANS_N_Z - Преобразование натурального в целое
@@ -61,10 +59,8 @@ Natural Integer::toNatural() const {
 // Используемые методы - ABS_Z_N POZ_Z_D DIV_NN_N ADD_1N_N
 Integer Integer::operator/(const Integer &other) const {
     Integer first(*this);  // копируем первое число
-    if (other == Integer(0)) {
+    if (other.isPositive() == 0)
         throw std::invalid_argument("Деление на 0 невозможно");
-    }
-
     Integer answer(0);  // частное
     answer.sign_ = false;
 
