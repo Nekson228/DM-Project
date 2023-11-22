@@ -154,48 +154,37 @@ Integer Integer::operator+(const Integer &other) const {
     if (other.isPositive() == 0)
         return *this;
 
-    int flag_MUL_ZM_Z = 0; // Для определения знака. Если флаг = 1, то умножаем на (-1) через метод MUL_ZM_Z
     Natural number_other = other.abs().number_; // получаю абсолютную часть второго числа (ABS_Z_Z)
-    Natural result; // число-резу тат, натуральное
-
     digit my_cmp = Natural::cmp(number_, number_other); // сравниваю два натуральных числа (COM_NN_D)
 
     // если числа положительные или равны 0 (POZ_Z_D)
     if (other.isPositive() == 2 && this->isPositive() == 2) {
-        result = (number_ + other.number_); //  Складываю два натуральных числа без модуля, т.к. положительные
+        return Integer(number_ + other.number_);//  Складываю два натуральных числа без модуля, т.к. положительные
     }
         // если оба числа отрицательные
     else if (other.isPositive() == 1 && this->isPositive() == 1) {
-        result = (number_ + number_other); // складываю два натуральных числа(ADD_NN_N)
-        flag_MUL_ZM_Z = 1; // нужно поменять знак у моего возвращаемого целого числа на минус
+        return Integer(number_ + other.number_).negative();// меняем знак на минус, домножая на (-1) MUL_ZM_Z
     }
-
         // Если одно число положительное, а другое отрицательное
     else {
-        if (my_cmp == 0) { // если равны
-            result = (number_ - number_other); // (SUB_NN_N)
-        } else if (my_cmp == 2) { // если первое > второго
-            if (this->isPositive() == 2) { // если при этом первое - положительное (второе отр)
-                result = (number_ - number_other); // вычитаю из первого второе(SUB_NN_N)
-            } else if (this->isPositive() == 1) { // если при этом первое - отрицательное (второе полож)
-                result = (number_ - number_other); // вычитаю из первого второе(SUB_NN_N)
-                flag_MUL_ZM_Z = 1; // нужно поменять знак у моего возвращаемого целого числа на минус
-            }
-        } else { // если первое < второго (cmp == 1)
-            if (this->isPositive() == 2) { // первое +
-                result = (number_other - number_); // вычитаю из второго первое(SUB_NN_N)
-                flag_MUL_ZM_Z = 1; // нужно поменять знак у моего возвращаемого целого числа на минус
-            } else if (this->isPositive() == 1) { // если при этом первое - отрицательное (второе полож)
-                result = (number_other - number_); // вычитаю из второго первое(SUB_NN_N)
-            }
+        switch (my_cmp) {
+            case 0:  // если равны
+                return Integer(number_ - number_other); // (SUB_NN_N)
+            case 1:// если первое < второго
+                if (this->isPositive() == 2) { // первое +
+                   return Integer(number_other - number_).negative(); // вычитаю из второго первое(SUB_NN_N)
+                } else if (this->isPositive() == 1) { // если при этом первое - отрицательное (второе полож)
+                    return Integer(number_other - number_); // вычитаю из второго первое(SUB_NN_N)
+                }
+            case 2: // если первое > второго
+                if (this->isPositive() == 2) { // если при этом первое - положительное (второе отр)
+                    return Integer(number_ - number_other); // вычитаю из первого второе(SUB_NN_N)
+                } else if (this->isPositive() == 1) { // если при этом первое - отрицательное (второе полож)
+                    return Integer(number_ - number_other).negative(); // вычитаю из первого второе(SUB_NN_N) и нужно поменять знак у моего возвращаемого целого числа на минус
+                }
         }
     }
-    // создаем и возвращаем объект класса Integer
-    Integer result_integer(result);
-    if (flag_MUL_ZM_Z == 1) {
-        result_integer = result_integer.negative(); // меняем знак на минус, домножая на (-1)
-    }
-    return result_integer;
+    return Integer(0);
 }
 
 // Мирон Возгрин 2382; Остаток от деления целого на целое (MOD_ZZ_Z)
