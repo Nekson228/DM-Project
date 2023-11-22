@@ -174,18 +174,19 @@ Integer Integer::operator+(const Integer &other) const {
         switch (my_cmp) {
             case 0:  // если равны
                 return Integer(number_ - number_other); // (SUB_NN_N)
+            case 1:// если первое < второго
+                if (this->isPositive() == 2) { // первое +
+                   return Integer(number_other - number_).negative(); // вычитаю из второго первое(SUB_NN_N)
+                } else if (this->isPositive() == 1) { // если при этом первое - отрицательное (второе полож)
+                    return Integer(number_other - number_); // вычитаю из второго первое(SUB_NN_N)
+                }
             case 2: // если первое > второго
                 if (this->isPositive() == 2) { // если при этом первое - положительное (второе отр)
                     return Integer(number_ - number_other); // вычитаю из первого второе(SUB_NN_N)
                 } else if (this->isPositive() == 1) { // если при этом первое - отрицательное (второе полож)
                     return Integer(number_ - number_other).negative(); // вычитаю из первого второе(SUB_NN_N) и нужно поменять знак у моего возвращаемого целого числа на минус
                 }
-            case 3:// если первое < второго
-                if (this->isPositive() == 2) { // первое +
-                   return Integer(number_other - number_).negative(); // вычитаю из второго первое(SUB_NN_N)
-                } else if (this->isPositive() == 1) { // если при этом первое - отрицательное (второе полож)
-                    return Integer(number_other - number_); // вычитаю из второго первое(SUB_NN_N)
-                }
+  
         }
     }
 }
