@@ -66,14 +66,14 @@ TEST(Damakin2384_Rational_SUB_QQ_Q, RationalSubtractionTest4){
 TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest1) {
     Rational first_number = Rational(1, 4);
     Rational second_number = Rational(1, 4);
-    Rational answer = Rational(2, 4);
+    Rational answer = Rational(1, 2);
     EXPECT_EQ(first_number + second_number, answer);
 }
 
 TEST(Kuzminykh2384_Rational_ADD_QQ_Q, RationalAdditionTest2) {
     Rational first_number = Rational(1, 2);
     Rational second_number = Rational(1, 2);
-    Rational answer = Rational(2, 2);
+    Rational answer = Rational(1, 1);
     EXPECT_EQ(first_number + second_number, answer);
 
 }
@@ -128,77 +128,54 @@ TEST(Lavrenova2384_Rational_TRANS_Z_Q, RationalTransformationTest3){
 }
 
 TEST(Valeyeva2384_Rational_MUL_QQ_Q, Multiplication_test1){
-    Integer integer_1(8 );
-    Natural natural_1(15);
-    Rational rational_1(integer_1, natural_1);
-
-    Integer integer_2(7);
-    Natural natural_2(30);
-    Rational rational_2(integer_2, natural_2);
-
+    Rational rational_1(8, 15);
+    Rational rational_2(7, 30);
     Rational rational_ = rational_1 * rational_2;
-    Rational test("56/450");
+    Rational test(28, 225);
 
     EXPECT_EQ(rational_, test);
 }
 
 TEST(Valeyeva2384_Rational_MUL_QQ_Q, Multiplication_test2){
-    Integer integer_1(-8);
-    Natural natural_1(15);
-    Rational rational_1(integer_1, natural_1);
-
-    Integer integer_2(7);
-    Natural natural_2(30);
-    Rational rational_2(integer_2, natural_2);
-
+    Rational rational_1(-8, 15);
+    Rational rational_2(7, 30);
     Rational rational_ = rational_1 * rational_2;
-    Rational test("-56/450");
+    Rational test(-28, 225);
 
     EXPECT_EQ(rational_, test);
 }
 
 TEST(Valeyeva2384_Rational_MUL_QQ_Q, Multiplication_test3){
-    Integer integer_1(-8);
-    Natural natural_1(15);
-    Rational rational_1(integer_1, natural_1);
-
-    Integer integer_2(-7);
-    Natural natural_2(30);
-    Rational rational_2(integer_2, natural_2);
+    Rational rational_1(-8, 15);
+    Rational rational_2(-7, 30);
 
     Rational rational_ = rational_1 * rational_2;
-    Rational test("56/450");
+    Rational test(28, 225);
 
     EXPECT_EQ(rational_, test);
 }
 
 
 TEST(Valeyeva2384_Rational_RED_Q_Q, Reduce_test1){
-    Integer integer_1(150);
-    Natural natural_1(300);
-    Rational rational_(integer_1, natural_1);
+    Rational rational_(150, 300);
     Rational my_answer = rational_.reduce();
-    Rational test("1/2");
+    Rational test(1, 2);
 
     EXPECT_EQ(my_answer, test);
 }
 
 TEST(Valeyeva2384_Rational_RED_Q_Q, Reduce_test2){
-    Integer integer_1(-150);
-    Natural natural_1(300);
-    Rational rational_(integer_1, natural_1);
+    Rational rational_(-150, 300);
     Rational my_answer = rational_.reduce();
-    Rational test("-1/2");
+    Rational test(-1, 2);
 
     EXPECT_EQ(my_answer, test);
 }
 
 TEST(Valeyeva2384_Rational_RED_Q_Q, Reduce_test3){
-    Integer integer_1(2000);
-    Natural natural_1(2000);
-    Rational rational_(integer_1, natural_1);
+    Rational rational_(2000, 2000);
     Rational my_answer = rational_.reduce();
-    Rational test("1");
+    Rational test(1, 1);
 
     EXPECT_EQ(my_answer, test);
 }
@@ -208,19 +185,19 @@ TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_zero){
 }
 
 TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_PP){
-    ASSERT_TRUE(Rational(7, 8) / Rational(5, 6) == Rational(42, 40));
+    ASSERT_TRUE(Rational(7, 8) / Rational(5, 6) == Rational(21, 20));
 }
 
 TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_NP){
-    ASSERT_TRUE(Rational(-5,10) / Rational(2, 3) == Rational(-15, 20));
+    ASSERT_TRUE(Rational(-5,10) / Rational(2, 3) == Rational(-3, 4));
 }
 
 TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_PN){
-    ASSERT_TRUE(Rational(5,10) / Rational(-2, 3) == Rational(-15, 20));
+    ASSERT_TRUE(Rational(5,10) / Rational(-2, 3) == Rational(-3, 4));
 }
 
 TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_NN){
-    ASSERT_TRUE(Rational(-5,10) / Rational(-2, 3) == Rational(15, 20));
+    ASSERT_TRUE(Rational(-5,10) / Rational(-2, 3) == Rational(3, 4));
 }
 
 TEST(Vozgrin2382_Rational_DIV_QQ_Q, DIV_test_PZero){

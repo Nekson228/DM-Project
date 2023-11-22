@@ -12,85 +12,111 @@ Polynomial::Polynomial(const std::vector<Rational> &coefficients) : coefficients
 }
 
 std::string Polynomial::str() const {
-    std::stringstream res_stream;
-    std::string sign;
-    Rational curr_coefficient{0, 1};
-    for (int i = 0; i <= degree_; i++) {
-        curr_coefficient = coefficients_[i];
-        if (curr_coefficient.isZero()) {
-            if (degree_ == 0) return "0";
-            continue;
+    std::ostringstream resStream; // Output stream for the result string
+    for (size_t i = 0; i <= degree_; i++) { // Iterate over the coefficients
+        const Rational &currCoefficient = coefficients_[i]; // Get the current coefficient
+        if (currCoefficient.isZero()) { // If the coefficient is zero
+            if (i == 0 && degree_ == 0) // If the degree is zero
+                resStream << "0"; // Write zero
+            continue; // Skip the coefficient
         }
-        sign = curr_coefficient.getSign();
-        if (i == 0)
-            sign = (sign == "-") ? sign : "";
-        res_stream << sign << (sign.empty() || i == 0 ? "" : " ");
-        bool coefficientIgnorable = curr_coefficient.abs() != Rational{1, 1};
-        res_stream << (coefficientIgnorable || i == degree_ ? curr_coefficient.abs().str() : "");
-        if (i != degree_) {
-            res_stream << (coefficientIgnorable ? "*" : "") << "x";
-            if (i != degree_ - 1)
-                res_stream << "^" << (degree_ - i);
-            res_stream << " ";
+
+        if (i == 0) // If the coefficient is the first one
+            resStream << (currCoefficient.getSign() == "-" ? "-" : "");
+        else // If the coefficient is not the first one
+            resStream << (currCoefficient.getSign() == "-" ? " - " : " + ");
+
+        bool coefficientIgnored = currCoefficient.abs() == Rational{1, 1} && i != degree_;
+
+        if (!coefficientIgnored)
+            // If the coefficient is not 1, or it is the last one
+            resStream << currCoefficient.abs().str(); // Write the absolute value of the coefficient
+        if (i < degree_) { // If the coefficient is not the last one
+            if (!coefficientIgnored) // If the coefficient is not 1
+                resStream << "*"; // Write *
+            resStream << "x"; // Write x
+            if (i < degree_ - 1) // If the coefficient is not the penultimate one
+                resStream << "^" << degree_ - i; // Write the exponent
         }
     }
-    return res_stream.str();
+    return resStream.str();
+}
+
+std::vector<std::string> tokenizePolynomial(const std::string &polynomial) {
+    size_t start = 0, end = 0; // Start and end positions of the current monomial token
+    std::vector<std::string> tokens; // Vector of monomial tokens
+    while (end != std::string::npos) {
+        // Find the next monomial token
+        end = polynomial.find_first_of("+-", start + 1);
+        // Add the token to the vector
+        tokens.push_back(polynomial.substr(start, end - start));
+        // Update the start position
+        start = end;
+    }
+    return tokens;
+}
+
+std::tuple<std::string, size_t, char> parseMonomialToken(const std::string &token) {
+    size_t x_pos = token.find('x'),
+            caret_pos = token.find('^'),
+            star_pos = token.find('*'),
+            sign_pos = token.find_first_of("+-"); // Positions of the x, ^, * and sign symbols in the token
+    if (sign_pos != std::string::npos && utils::trim(token.substr(sign_pos + 1)).empty())
+        throw std::invalid_argument("Operand data is invalid");
+    std::string coefficient_str; // String representation of the coefficient
+    size_t exponent; // Exponent of the monomial
+    char sign; // Sign of the monomial
+    if (x_pos == std::string::npos) // If the monomial doesn't contain x
+        exponent = 0; // The exponent is 0
+    else { // If the monomial contains x
+        if (caret_pos == std::string::npos) { // If the monomial doesn't contain ^
+            exponent = 1; // The exponent is 1
+        } else { // If the monomial contains ^
+            exponent = std::stoull(token.substr(caret_pos + 1)); // Parse the exponent
+        }
+    }
+
+    size_t coeff_start = (sign_pos == std::string::npos) ? 0 : sign_pos + 1,  // Start position of the coefficient
+    coeff_end = (star_pos == std::string::npos) ? x_pos : star_pos; // End position of the coefficient
+    coefficient_str = utils::trim(token.substr(coeff_start, coeff_end - coeff_start)); // Parse the coefficient
+    if (coefficient_str.empty())
+        coefficient_str = "1"; // If the coefficient is empty, it is 1
+    // Handle the sign
+    sign = (token[0] == '-') ? '-' : '+';
+
+    return std::make_tuple(coefficient_str, exponent, sign);
 }
 
 std::map<size_t, std::string> getDegreeToCoefficientsMap(const std::string &polynomial) {
     if (utils::trim(polynomial).empty())
         throw std::invalid_argument("Operand data is invalid");
     utils::checkForRedundantSymbols(polynomial, " +-1234567890x*/^");
+    // Tokenize the polynomial string into monomial tokens
+    std::vector<std::string> tokens = tokenizePolynomial(polynomial);
+
     std::map<size_t, std::string> res;
-    size_t start = 0, end, x_pos, caret_pos, star_pos, exponent;
-    std::string monomial_token, coefficient_str, exponent_str;
-    char sign = '+';
-    do {
-        end = polynomial.find_first_of("+-", start);
-        monomial_token = utils::trim(polynomial.substr(start, end - start));
-        if (monomial_token.empty() && end != std::string::npos) {
-            sign = polynomial[end];
-            start = end + 1;
-            continue;
-        }
-        x_pos = monomial_token.find('x');
-        caret_pos = monomial_token.find('^');
-        star_pos = monomial_token.find('*');
-        exponent_str = monomial_token.substr(caret_pos + 1);
-        coefficient_str = monomial_token.substr(0, (star_pos == std::string::npos) ? x_pos : star_pos);
-        if (x_pos == std::string::npos && caret_pos == std::string::npos) {
-            exponent_str = "0";
-        } else if (caret_pos == std::string::npos) {
-            exponent_str = "1";
-        } else if (x_pos == std::string::npos) {
-            throw std::invalid_argument("Operand data is invalid");
-        }
-        if (star_pos == std::string::npos && x_pos == 0) {
-            coefficient_str = "1";
-        }
-        try {
-            exponent = std::stoull(exponent_str);
-        } catch (const std::invalid_argument &exception) {
-            throw std::invalid_argument("Operand data is invalid");
-        }
+
+    for (const auto &token: tokens) {
+        // Parse coefficient and exponent from the token
+        auto [coefficient_str, exponent, sign] = parseMonomialToken(token);
+        // Add the coefficient to the map
         res[exponent] = sign + coefficient_str;
-        start = end + 1;
-        sign = end != std::string::npos ? polynomial[end] : '\0';
-    } while (end != std::string::npos);
+    }
     return res;
 }
 
 Polynomial::Polynomial(const std::string &polynomial) : degree_(0) {
-    std::map<size_t, std::string> degree_to_coefficient = getDegreeToCoefficientsMap(polynomial);
-    for (const auto &iter: degree_to_coefficient) {
-        auto [degree, coefficient_str] = iter;
-        coefficients_.insert(coefficients_.end(), degree - degree_, Rational(0, 1));
-        Rational coefficient{coefficient_str};
-        coefficients_.push_back(coefficient);
-        degree_ = degree + 1;
+    std::map<size_t, std::string> degree_to_coefficient = getDegreeToCoefficientsMap(
+            polynomial); // Map of degrees to coefficients
+    for (const auto &iter: degree_to_coefficient) { // Iterate over the map
+        auto [degree, coefficient_str] = iter;  // Get the degree and coefficient from the map
+        coefficients_.insert(coefficients_.end(), degree - degree_, Rational(0, 1)); // Add zeros to the vector
+        Rational coefficient{coefficient_str}; // Parse the coefficient
+        coefficients_.push_back(coefficient); // Add the coefficient to the vector
+        degree_ = degree + 1; // Update the degree
     }
-    std::reverse(coefficients_.begin(), coefficients_.end());
-    removeLeadingZeros();
+    std::reverse(coefficients_.begin(), coefficients_.end()); // Reverse the vector
+    removeLeadingZeros(); // Remove leading zeros
 }
 
 
@@ -356,7 +382,8 @@ Polynomial Polynomial::reduceAllCoefficients() const {
 void Polynomial::removeLeadingZeros() {
     size_t leading_zeros_n = 0;
     for (const auto &coefficient: coefficients_) {
-        if (coefficients_.size() - leading_zeros_n == 1 || !coefficient.isZero()) break;
+        if (coefficients_.size() - leading_zeros_n == 1 || !coefficient.isZero())
+            break;
         leading_zeros_n++;
     }
     coefficients_.erase(coefficients_.begin(), coefficients_.begin() + leading_zeros_n);
