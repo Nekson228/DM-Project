@@ -186,9 +186,9 @@ Integer Integer::operator+(const Integer &other) const {
                 } else if (this->isPositive() == 1) { // если при этом первое - отрицательное (второе полож)
                     return Integer(number_ - number_other).negative(); // вычитаю из первого второе(SUB_NN_N) и нужно поменять знак у моего возвращаемого целого числа на минус
                 }
-  
         }
     }
+    return Integer(0);
 }
 
 // Мирон Возгрин 2382; Остаток от деления целого на целое (MOD_ZZ_Z)
