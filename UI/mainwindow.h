@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "modules/Natural/Natural.h"
+#include "../modules/Natural/Natural.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -77,7 +77,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    bool exceptionThrown = false;
+    bool exceptionThrown = false,
+    firstOpOcurred = false;
 
     void setResult(const iModel &model);
 

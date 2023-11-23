@@ -1,9 +1,9 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "modules/Natural/Natural.h"
-#include "modules/Integer/Integer.h"
-#include "modules/Rational/Rational.h"
-#include "modules/Polynomial/Polynomial.h"
+#include "../ui_mainwindow.h"
+#include "../modules/Natural/Natural.h"
+#include "../modules/Integer/Integer.h"
+#include "../modules/Rational/Rational.h"
+#include "../modules/Polynomial/Polynomial.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -25,6 +25,7 @@ X MainWindow::getOp2() {
 
 void MainWindow::setResult(const iModel &model) {
     exceptionThrown = false;
+    firstOpOcurred = true;
     ui->outputLine->setStyleSheet("");
     ui->outputLine->setText(model.str().c_str());
 }
@@ -36,7 +37,7 @@ void MainWindow::exceptionHandler(const std::exception &e) {
 }
 
 void MainWindow::on_useButton_clicked() {
-    if (ui->outputLine->text().isEmpty() || exceptionThrown)
+    if (ui->outputLine->text().isEmpty() || exceptionThrown || !firstOpOcurred)
         return;
     ui->op1Line->setText(ui->outputLine->text());
     ui->outputLine->clear();

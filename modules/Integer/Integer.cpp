@@ -35,22 +35,16 @@ Integer::Integer(Natural natural) : number_(std::move(natural)), sign_(false) {}
 
 //Лавренова Юлия гр.2384 MULL_ZZ_Z - Умножение целых чисел
 [[nodiscard]] Integer Integer::operator*(const Integer &other) const {
-    digit sign_this = this->isPositive(); //знак текущего числа
-    digit sign_other = other.isPositive(); //знак другого числа
-    Natural n_this = this->toNatural(); //абсолютная часть текущего числа
-    Natural n_other = other.toNatural(); //абсолютная часть другого числа
-
+    if (this->isPositive() == 0 || other.isPositive() == 0)
+        return Integer{0};
+    Natural n_this = this->toNatural(), n_other = other.toNatural(); //абсолютные части чисел
     Integer new_num(n_other * n_this); //абсолютная часть произведения чисел
-    if ((sign_other == 1 && sign_this == 1) || (sign_other == 2 && sign_this == 2) ||
-        (sign_other == 0 || sign_this == 0))
-        return new_num; //если знаки оба положительные, оба отрицательные или оба ноль
-    else
-        return new_num.negative(); //иначе присваиваем отрицательный знак
+    new_num.sign_ = this->sign_ ^ other.sign_; // меняем знак у результата в зависимости от знаков операндов
+    return new_num;
 }
 
 
 // Katya Sots TRANS_Z_N - Преобразование целого неотрицательного в натуральное
-
 Natural Integer::toNatural() const {
     return Natural{number_}; // возвращаем натуральное число
 }
@@ -58,20 +52,18 @@ Natural Integer::toNatural() const {
 // Katya Sots DIV_ZZ_Z - Частное от деления целого на целое (делитель отличен от нуля)
 // Используемые методы - ABS_Z_N POZ_Z_D DIV_NN_N ADD_1N_N
 Integer Integer::operator/(const Integer &other) const {
-    if(other == Integer{0}) { // если второе число - 0
-        throw std::invalid_argument("Деление на 0 невозможно"); 
-    }
+    if (other.isPositive() == 0)  // если делитель = 0
+        throw std::invalid_argument("Деление на 0 невозможно");
 
-    if(this->number_.isZero() == true) { // если первое число 0 - результат 0
-        return Integer{0}; 
-    }
+    if (this->isPositive() == 0) // если первое число 0 - результат 0
+        return Integer{0};
 
     // вычисляем модуль результата используя деление нацело для натуральных чисел
-    Integer result = Integer(this->number_ / other.number_); 
+    Integer result = Integer(this->number_ / other.number_);
 
-    if(this->sign_ == true) { // если делитель - отрицательный, то добавляем к ответу единицу
+    // если делитель - отрицательный и деление не нацело, то добавляем к ответу единицу
+    if ((this->number_ % other.number_) != Natural{0} && this->isPositive() == 1)
         result = result + Integer{1};
-    }
 
     // меняем знак у результата в зависимости от знаков делимого и делителя (sign a XOR sign b)
     result.sign_ = this->sign_ ^ other.sign_;
@@ -80,50 +72,37 @@ Integer Integer::operator/(const Integer &other) const {
 }
 
 
-
 // Цыганков Роман гр. 2384 SUB_ZZ_Z- Вычитание целых чисел
 Integer Integer::operator-(const Integer &other) const {
-    int flag = 0; // знак (0 - плюс, 1 - минус)
-    Natural number_other = other.abs().number_; //абсолютная часть 2ого числа
-    Natural result; // результат
+    // Проверяем, является ли одно из чисел нулем и возвращаем другое число
+    if (this->isPositive() == 0)
+        return other.negative();
+    if (other.isPositive() == 0)
+        return *this;
 
-    digit my_cmp = Natural::cmp(number_, number_other); // сравнение
-
-    if (this->isPositive() == 2 && other.isPositive() == 2) { // если оба числа положительные
-        if (my_cmp == 2 || my_cmp == 0) { // если первое больше, или они равны
-            result = number_ - number_other;
-        } else if (my_cmp == 1) { // если второе больше
-            result = number_other - number_;
-            flag = 1;
+    Natural number_other = other.abs().number_; // Получаем абсолютную часть второго числа (ABS_Z_Z)
+    Integer res{0};
+    // Если числа имеют одинаковые знаки (POZ_Z_D)
+    if (other.isPositive() == this->isPositive()) {
+        // Вычитаем два натуральных числа
+        switch (Natural::cmp(number_, number_other)) {
+            case 1:   // если первое < второго
+                res = Integer{number_other - number_}; // Вычитаем два натуральных числа
+                res.sign_ = !sign_; // Меняем знак
+                break;
+            case 2: // если первое > второго
+                res = Integer{number_ - number_other}; // Вычитаем
+                res.sign_ = sign_; // Сохраняем исходный знак
+                break;
         }
-    } else if (this->isPositive() == 2 && (other.isPositive() == 1 || other.isPositive() == 0)) {
-        // если первое положительное, а второе отрицательное или 0
-        result = number_ + number_other;
-    } else if (this->isPositive() == 1 &&
-               other.isPositive() == 2) { // если первое отрицательное, а второе положительное
-        result = number_ + number_other;
-        flag = 1;
-    } else if (this->isPositive() == 1 && (other.isPositive() == 1 || other.isPositive() ==
-                                                                      0)) { // если первое отрицательное, а второе отрицательное или 0
-        if (my_cmp == 2) { // если первое больше
-            result = number_ - number_other;
-            flag = 1;
-        } else if (my_cmp == 1 || my_cmp == 0) {// если первое меньше, или числа равны
-            result = number_other - number_;
-        }
-    } else if (this->isPositive() == 0 && other.isPositive() == 2) { // если первое 0, а второе положительное
-        result = number_other;
-        flag = 1;
-    } else { // если первое 0, а второе отрицательное или 0
-        result = number_other;
+        return res; // Возвращаем результат
     }
-
-    Integer result_integer(result); // создаем объект класса
-    if (flag == 1) {
-        result_integer = result_integer.negative(); // указываем минус
-    }
-    return result_integer; // возвращаем значение
+    // Если одно число положительное, а другое отрицательное
+    res = Integer{number_ + number_other}; // Складываем два натуральных числа
+    res.sign_ = sign_; // Сохраняем исходный знак
+    return res; // Возвращаем результат
 }
+
 
 // Цыгулев Станислав MUL_ZM_Z - Умножение целого на (-1)
 Integer Integer::negative() const {
@@ -136,42 +115,33 @@ Integer Integer::negative() const {
 
 // Valeyeva Alina ADD_ZZ_Z - Сложение целых чисел(используемые методы: POZ_Z_D, ABS_Z_N, COM_NN_D, ADD_NN_N, SUB_NN_N, MUL_ZM_Z)
 Integer Integer::operator+(const Integer &other) const {
+    // если одно из чисел 0 - возвращаем другое
     if (this->isPositive() == 0)
         return other;
     if (other.isPositive() == 0)
         return *this;
 
     Natural number_other = other.abs().number_; // получаю абсолютную часть второго числа (ABS_Z_Z)
-    digit my_cmp = Natural::cmp(number_, number_other); // сравниваю два натуральных числа (COM_NN_D)
-
-    // если числа положительные или равны 0 (POZ_Z_D)
-    if (other.isPositive() == 2 && this->isPositive() == 2) {
-        return Integer(number_ + other.number_);//  Складываю два натуральных числа без модуля, т.к. положительные
-    }
-        // если оба числа отрицательные
-    else if (other.isPositive() == 1 && this->isPositive() == 1) {
-        return Integer(number_ + other.number_).negative();// меняем знак на минус, домножая на (-1) MUL_ZM_Z
-    }
-        // Если одно число положительное, а другое отрицательное
-    else {
-        switch (my_cmp) {
-            case 0:  // если равны
-                return Integer(number_ - number_other); // (SUB_NN_N)
+    Integer res{0};
+    // Если одно число положительное, а другое отрицательное
+    if (other.isPositive() != this->isPositive()) {
+        switch (Natural::cmp(number_, number_other)) { // сравниваю два натуральных числа (COM_NN_D)
             case 1:// если первое < второго
-                if (this->isPositive() == 2) { // первое +
-                   return Integer(number_other - number_).negative(); // вычитаю из второго первое(SUB_NN_N)
-                } else if (this->isPositive() == 1) { // если при этом первое - отрицательное (второе полож)
-                    return Integer(number_other - number_); // вычитаю из второго первое(SUB_NN_N)
-                }
+                res = Integer{number_other - number_};
+                res.sign_ = other.sign_;
+                break;
             case 2: // если первое > второго
-                if (this->isPositive() == 2) { // если при этом первое - положительное (второе отр)
-                    return Integer(number_ - number_other); // вычитаю из первого второе(SUB_NN_N)
-                } else if (this->isPositive() == 1) { // если при этом первое - отрицательное (второе полож)
-                    return Integer(number_ - number_other).negative(); // вычитаю из первого второе(SUB_NN_N) и нужно поменять знак у моего возвращаемого целого числа на минус
-                }
+                res = Integer{number_ - number_other};
+                res.sign_ = sign_;
+                break;
+                // если первое == второе оставляем все как есть
         }
+        return res;
     }
-    return Integer(0);
+    // если числа имеют одинаковые знаки (POZ_Z_D)
+    res = Integer{number_ + number_other}; // Складываю два натуральных числа
+    res.sign_ = sign_; // оставляю исходный знак
+    return res;
 }
 
 // Мирон Возгрин 2382; Остаток от деления целого на целое (MOD_ZZ_Z)

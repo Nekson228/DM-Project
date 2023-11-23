@@ -380,7 +380,7 @@ moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 compiler_moc_header_make_all: moc_mainwindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp
-moc_mainwindow.cpp: ../mainwindow.h \
+moc_mainwindow.cpp: ../UI/mainwindow.h \
 		../modules/Natural/Natural.h \
 		../modules/Interfaces/Model.h \
 		moc_predefs.h \
@@ -394,7 +394,7 @@ compiler_moc_source_clean:
 compiler_uic_make_all: ui_mainwindow.h
 compiler_uic_clean:
 	-$(DEL_FILE) ui_mainwindow.h
-ui_mainwindow.h: ../mainwindow.ui \
+ui_mainwindow.h: ../UI/mainwindow.ui \
 		/usr/lib/qt5/bin/uic
 	/usr/lib/qt5/bin/uic ../mainwindow.ui -o ui_mainwindow.h
 
@@ -436,12 +436,12 @@ Rational.o: ../modules/Rational/Rational.cpp ../modules/Rational/Rational.h \
 utils.o: ../modules/utils/utils.cpp ../modules/utils/utils.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o utils.o ../modules/utils/utils.cpp
 
-main.o: ../main.cpp ../mainwindow.h \
+main.o: ../main.cpp ../UI/mainwindow.h \
 		../modules/Natural/Natural.h \
 		../modules/Interfaces/Model.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../main.cpp
 
-mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
+mainwindow.o: ../UI/mainwindow.cpp ../UI/mainwindow.h \
 		../modules/Natural/Natural.h \
 		../modules/Interfaces/Model.h \
 		ui_mainwindow.h \
