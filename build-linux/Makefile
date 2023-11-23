@@ -441,7 +441,7 @@ main.o: ../main.cpp ../UI/mainwindow.h \
 		../modules/Interfaces/Model.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../main.cpp
 
-mainwindow.o: ../UI/mainwindow.cpp ../UI/mainwindow.h \
+mainwindow.o: ../mainwindow.cpp ../UI/mainwindow.h \
 		../modules/Natural/Natural.h \
 		../modules/Interfaces/Model.h \
 		ui_mainwindow.h \

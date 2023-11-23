@@ -9,7 +9,7 @@ CONFIG += c++20
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    UI/mainwindow.cpp \
+    mainwindow.cpp \
     modules/Integer/Integer.cpp \
     modules/Natural/Natural.cpp \
     modules/Polynomial/Polynomial.cpp \
@@ -36,7 +36,3 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RC_ICONS = DM.ico
 ICON = myapp.icns
-
-DISTFILES += \
-    info/DM.ico \
-    info/architecture.png

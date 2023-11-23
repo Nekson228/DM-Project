@@ -1,9 +1,9 @@
-#include "mainwindow.h"
-#include "../ui_mainwindow.h"
-#include "../modules/Natural/Natural.h"
-#include "../modules/Integer/Integer.h"
-#include "../modules/Rational/Rational.h"
-#include "../modules/Polynomial/Polynomial.h"
+#include "UI/mainwindow.h"
+#include "ui_mainwindow.h"
+#include "modules/Natural/Natural.h"
+#include "modules/Integer/Integer.h"
+#include "modules/Rational/Rational.h"
+#include "modules/Polynomial/Polynomial.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
