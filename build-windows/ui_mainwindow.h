@@ -104,7 +104,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1036, 574);
+        MainWindow->resize(1099, 574);
         QFont font;
         font.setFamily(QString::fromUtf8("Courier"));
         font.setPointSize(10);
@@ -308,6 +308,7 @@ public:
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(infoLabel->sizePolicy().hasHeightForWidth());
         infoLabel->setSizePolicy(sizePolicy2);
+        infoLabel->setFont(font1);
         infoLabel->setTextFormat(Qt::AutoText);
         infoLabel->setWordWrap(true);
 
@@ -392,6 +393,7 @@ public:
         infoLabel_2->setObjectName(QString::fromUtf8("infoLabel_2"));
         sizePolicy2.setHeightForWidth(infoLabel_2->sizePolicy().hasHeightForWidth());
         infoLabel_2->setSizePolicy(sizePolicy2);
+        infoLabel_2->setFont(font1);
         infoLabel_2->setTextFormat(Qt::AutoText);
         infoLabel_2->setWordWrap(true);
 
@@ -475,6 +477,7 @@ public:
         infoLabel_3->setObjectName(QString::fromUtf8("infoLabel_3"));
         sizePolicy2.setHeightForWidth(infoLabel_3->sizePolicy().hasHeightForWidth());
         infoLabel_3->setSizePolicy(sizePolicy2);
+        infoLabel_3->setFont(font1);
         infoLabel_3->setTextFormat(Qt::AutoText);
         infoLabel_3->setWordWrap(true);
 
@@ -607,6 +610,7 @@ public:
         sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(infoLabel_4->sizePolicy().hasHeightForWidth());
         infoLabel_4->setSizePolicy(sizePolicy3);
+        infoLabel_4->setFont(font1);
         infoLabel_4->setTextFormat(Qt::AutoText);
         infoLabel_4->setWordWrap(true);
 
