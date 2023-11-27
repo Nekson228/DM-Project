@@ -1,5 +1,15 @@
+
 # DM-Project
-ETU 2023 DM Project
+
+## Временная инструкция по установке (до сдачи коллоквиума)
+1) Заходите на ветку UI, скачиваете как архив
+2) Распаковываете архив
+3) В зависимости от ОС запускаете: (сборка под мак пока под вопросом)
+   * Windows:  build-windows/release/DM.exe
+   * Linux:    build-linux/DM
+   
+
+## ETU 2023 DM Project
 
 | Студент           | Код модуля       | Название модуля                        | Название метода                                                                           | Сделано |
 |-------------------|------------------|----------------------------------------|-------------------------------------------------------------------------------------------|:-------:|
@@ -12,7 +22,7 @@ ETU 2023 DM Project
 | Екатерина Соц     | Z5, Z9, N13      | TRANS_Z_N, DIV_ZZ_Z, GCF_NN_N          | Integer::toNatural, Integer::operator/, <br> Natural::gcd                                 |    ✓    |
 | Алина Валеева     | Q1, Z6, Q7       | RED_Q_Q, ADD_ZZ_Z, MUL_QQ_Q            | Rational::reduce, Integer::operator+, Rational::operator*                                 |    ✓    |
 | Роман Дамакин     | Q2, Q6, P8, N10  | INT_Q_B, SUB_QQ_Q, MUL_PP_P, DIV_NN_Dk | Rational::isInteger, Rational::operator-, Polynomial::operator*,  Natural::divFirstDigit  |    ✓    |
-| Ярослав Борматов  | Q4, P7, P13      | TRANS_Q_Z, FAC_P_Q, NMR_P_P            | Rational::toInteger, Polynomial::factorize, Polynomial::singlify                          |    ✓?   |
+| Ярослав Борматов  | Q4, P7, P13      | TRANS_Q_Z, FAC_P_Q, NMR_P_P            | Rational::toInteger, Polynomial::factorize, Polynomial::singlify                          |    ✓    |
 | Егор Кузьминых    | P1, Q5, P9, P12  | ADD_PP_P, ADD_QQ_Q, DIV_PP_P, DER_P_P  | Polynomial::operator+, Rational::operator+, Polynomial::operator/, Polynomial::derivative |    ✓    |
 | Антон Жданов      | P3, P6, P11      | MUL_PQ_P, DEG_P_N, GCF_PP_P            | Polynomial::scale, Polynomial::getDegree, Polynomial::gcd                                 |    ✓    |
 | Павел Ильин       | N7, N14, P2, P10 | MUL_Nk_N, LCM_NN_N, SUB_PP_P, MOD_PP_P | Natural::mulBy10K, <br>Natural::lcm, <br> Polynomial::operator-, Polynomial::operator%    |    ✓    |

@@ -31,7 +31,7 @@ TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyZeroRootTest) {
 TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyOneRootTest) {
    std::vector<Rational> cf = {Rational{1, 1}, Rational{-7, 1}, Rational{12, 1}}; // (x-3)(x-4) = x^2 - 7x + 12
    Polynomial poly(cf);
-   EXPECT_EQ(poly.singlify(), poly); // тест падает в методе singlify->gcd->(переопределение оператора остатка)
+   EXPECT_EQ(poly.singlify(), poly);
 }
 
 TEST(Bormatov2383_Polynomial_NMR_P_P, SinglifyManyRootsTest) {

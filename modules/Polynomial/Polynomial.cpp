@@ -147,11 +147,13 @@ Polynomial Polynomial::factorize() const {
         result.coefficients_[i] = coefficients_[i] / ratio; // делим каждый коэффициент на ratio
     }
 
+
     if (result.coefficients_[0].getSign() == "-") { // если коэффициент при старшей степени отрицательный
         result = result.scale(Rational{-1, 1});
     }
 
     return result.reduceAllCoefficients(); // возвращаем новый многочлен
+
 }
 
 // Bormatov_Yaroslav NMR_P_P - Преобразование многочлена — кратные корни в простые
@@ -159,6 +161,7 @@ Polynomial Polynomial::factorize() const {
 Polynomial Polynomial::singlify() const {
     Polynomial der_ = derivative();  // вычисление производной многочлена
     Polynomial gcd_ = gcd(*this, der_); // вычисление НОД <P(x), P'(x)>
+    if(gcd_.degree_ == 0) return *this;
     Polynomial result = *this / gcd_; // вычисление P(x) / gcd(<P(x), P'(x))
     return result.reduceAllCoefficients().factorize(); // возвращаем новый многочлен
 }
