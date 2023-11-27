@@ -1,9 +1,9 @@
-#ifndef DM_INTEGER_H
-#define DM_INTEGER_H
+#ifndef DM_MODULES_INTEGER_H
+#define DM_MODULES_INTEGER_H
 
 #include "../Natural/Natural.h"
 
-class Integer {
+class Integer : public iModel {
     Natural number_{0}; // беззнаковая часть числа
     bool sign_; // знак (минус - true, плюс - false)
 public:
@@ -13,7 +13,7 @@ public:
 
     explicit Integer(Natural natural); // TRANS_N_Z
 
-    [[nodiscard]] std::string str() const;
+    [[nodiscard]] std::string str() const override;
 
     [[nodiscard]] Integer abs() const; // ABS_Z_N
 
@@ -33,9 +33,9 @@ public:
 
     [[nodiscard]] Integer operator%(const Integer &other) const; // MOD_ZZ_Z
 
-    [[nodiscard]] bool operator==(const Integer &other) const = default;
+    [[nodiscard]] bool operator==(const Integer &other) const;
 
-    [[nodiscard]] bool operator!=(const Integer &other) const = default;
+    [[nodiscard]] bool operator!=(const Integer &other) const;
 };
 
-#endif //DM_INTEGER_H
+#endif //DM_MODULES_INTEGER_H

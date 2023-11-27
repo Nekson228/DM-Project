@@ -13,4 +13,6 @@ add_executable(DM main.cpp
         modules/Polynomial/Polynomial.h
         modules/Rational/Rational.cpp
         modules/Rational/Rational.h
-        modules/utils/utils.cpp modules/utils/utils.h)
+        modules/utils/utils.cpp
+        modules/utils/utils.h
+        modules/Interfaces/Model.h)

@@ -25,7 +25,7 @@
 | Ярослав Борматов  | Q4, P7, P13      | TRANS_Q_Z, FAC_P_Q, NMR_P_P            | Rational::toInteger, Polynomial::factorize, Polynomial::singlify                          |    ✓    |
 | Егор Кузьминых    | P1, Q5, P9, P12  | ADD_PP_P, ADD_QQ_Q, DIV_PP_P, DER_P_P  | Polynomial::operator+, Rational::operator+, Polynomial::operator/, Polynomial::derivative |    ✓    |
 | Антон Жданов      | P3, P6, P11      | MUL_PQ_P, DEG_P_N, GCF_PP_P            | Polynomial::scale, Polynomial::getDegree, Polynomial::gcd                                 |    ✓    |
-| Павел Ильин       | N7, N14, P2, P10 | MUL_Nk_N, LCM_NN_N, SUB_PP_P, MOD_PP_P | Natural::mulBy10k, <br>Natural::lcm, <br> Polynomial::operator-, Polynomial::operator%    |    ✓    |
+| Павел Ильин       | N7, N14, P2, P10 | MUL_Nk_N, LCM_NN_N, SUB_PP_P, MOD_PP_P | Natural::mulBy10K, <br>Natural::lcm, <br> Polynomial::operator-, Polynomial::operator%    |    ✓    |
 | Мирон Возгрин     | Z10, P5, Q8      | MOD_ZZ_Z, LED_P_Q, DIV_QQ_Q            | Integer::operator%, Rational::leading, Rational::operator/                                |    ✓    |
 
 ![img.png](info/architecture.png)

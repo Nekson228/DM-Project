@@ -66,7 +66,7 @@ void Rational::checkDenominator() {
 // Bormatov Yaroslav TRANS_Q_Z - Преобразование сокращенного дробного в целое (если знаменатель равен 1)
 Integer Rational::toInteger() const {
     Rational tmp = reduce(); // Сокращение дроби
-    if (tmp.denominator_.cmp(tmp.denominator_, Natural{1}) == 0) { // проверка на то, является ли знаменатель равным 1
+    if (Natural::cmp(tmp.denominator_, Natural{1}) == 0) { // проверка на то, является ли знаменатель равным 1
         return tmp.numerator_;
     } else {
         throw std::invalid_argument("Преобразование в \"Integer\" невозможно");
@@ -91,26 +91,25 @@ bool Rational::isInteger() const { // INT_Q_B
 */
 [[nodiscard]] Rational Rational::operator-(const Rational &other) const { // SUB_QQ_Q
     // Скоращаем дроби
-    Rational minuend = this->reduce(); // Уменьшаемое
-    Rational subtrahend = other.reduce(); // Вычитаемое
+    Rational minuend = *this; // Уменьшаемое
+    const Rational &subtrahend = other; // Вычитаемое
     Rational difference; // Разность
     // Проверяем равенство знаменателей уменьшлаемого и вычитаемого
     bool isDenominatorsEqual = (Natural::cmp(minuend.getDenominator(), subtrahend.getDenominator()) == 0);
     if (isDenominatorsEqual) { // Если знаменатели равны
         const Natural &newDenominator = minuend.getDenominator(); // Фиксируем знаменатель
-        difference = Rational(minuend.getNumerator() - subtrahend.getNumerator(),
-                               newDenominator); // Записыываем результат
-    } else {
-        Natural newDenominator = Natural::lcm(minuend.getDenominator(),
-                                              subtrahend.getDenominator()); // Ищем НОК - фиксируем как получившийся знаменатель
-        Integer minuendNumerator = Integer(newDenominator / minuend.getDenominator()) *
-                                   minuend.getNumerator(); // Считаем новый числитель уменьшаемого
-        Integer subtrahendNumerator = Integer(newDenominator / subtrahend.getDenominator()) *
-                                      subtrahend.getNumerator(); // Считаем новый числитель вычитаемого
-        difference = Rational(minuendNumerator - subtrahendNumerator, newDenominator); // Записыываем результат
+        // Записываем результат
+        return Rational(minuend.getNumerator() - subtrahend.getNumerator(), newDenominator).reduce();
     }
-    difference = difference.reduce(); // Сокращаем полученный результат
-    return difference;
+    // если знаменатели не равны:
+    // Ищем НОК - фиксируем как получившийся знаменатель
+    Natural newDenominator = Natural::lcm(minuend.getDenominator(), subtrahend.getDenominator());
+    // Считаем новый числитель уменьшаемого
+    Integer minuendNumerator = Integer(newDenominator / minuend.getDenominator()) * minuend.getNumerator();
+    // Считаем новый числитель вычитаемого
+    Integer subtrahendNumerator = Integer(newDenominator / subtrahend.getDenominator()) * subtrahend.getNumerator();
+    // Возвращаем результат
+    return Rational(minuendNumerator - subtrahendNumerator, newDenominator).reduce();
 }
 
 //Написал функцию - Кузьминых Егор
@@ -120,17 +119,15 @@ bool Rational::isInteger() const { // INT_Q_B
     Natural lcm = Natural::lcm(denominator_, other.denominator_);// Использование метода (LCM_NN_N)
 
     // Считаем коэфы, на которые будем домножать числители
-    Integer num_1_int = Integer(lcm / denominator_);
-    Integer num_2_int = Integer(lcm / other.denominator_);
+    Integer num_1_int = Integer(lcm / denominator_), num_2_int = Integer(lcm / other.denominator_);
 
     //Получаем новые значения числителей, домноженных на num_1_int и num_2_int
-    Integer num1 = numerator_ * num_1_int; // Использование метода (MUL_ZZ_Z)
-    Integer num2 = other.numerator_ * num_2_int;
+    Integer num1 = numerator_ * num_1_int, num2 = other.numerator_ * num_2_int;
 
     // Складываем числители
     Integer sum = num1 + num2; //использование метода (ADD_ZZ_Z)
     //Создаем новую дробь с новым числителем и знаменателем, возвращаем ее
-    return Rational{sum, lcm};
+    return Rational{sum, lcm}.reduce();
 }
 
 //Лавренова Юлия гр.2384 TRANS_Z_Q - Преобразование целого в дробное
@@ -144,13 +141,13 @@ Rational Rational::operator*(const Rational &other) const { // MUL_QQ_Q
 
     // Создаем и возвращаем новый объект Rational
     Rational result(new_numerator, new_denominator);
-    return result;
+    return result.reduce();
 }
 
-// Valeyeva Alina RED_Q_Q - Сокращение дроби(использумые методы: ABS_Z_N, GCF_NN_N, DIV_ZZ_Z )
+// Valeyeva Alina RED_Q_Q - Сокращение дроби(используемые методы: ABS_Z_N, GCF_NN_N, DIV_ZZ_Z )
 Rational Rational::reduce() const {
-    Natural my_numerator = numerator_.abs().toNatural(); // получили мой числитель в виде натурального неотрицательного числа
-    Natural nod = Natural::gcd(my_numerator, denominator_); // получили НОД в виде натур числа
+    Natural my_numerator = numerator_.abs().toNatural(), // получили мой числитель в виде натурального неотрицательного числа
+    nod = Natural::gcd(my_numerator, denominator_); // получили НОД в виде натур числа
 
     Integer nod_integer(nod); // НОД в виде целого числа
 
@@ -159,8 +156,7 @@ Rational Rational::reduce() const {
     Natural new_denominator = denominator_ / nod; // новый знаменатель (через метод DIV_NN_N)
 
     // Создаем и возвращаем новый объект Rational с сокращенной дробью
-    Rational result(new_numerator, new_denominator);
-    return result;
+    return Rational{new_numerator, new_denominator};
 }
 
 // Мирон Возгрин 2382; оператор деления для дробей (DIV_QQ_Q)
@@ -175,8 +171,15 @@ Rational Rational::operator/(const Rational &other) const {
     Natural newDenominator = denominator_ * other.numerator_.toNatural();
     //так как все числа были лишены знака,
     //предстоит провести проверку входных данных и присвоить нужный знак возвращаемому значению
-    if (other.numerator_.isPositive() == 1) {
-        return Rational{newNominator.negative(), newDenominator};
-    }
-    return Rational{newNominator, newDenominator};
+    if (other.numerator_.isPositive() == 1)
+        return Rational{newNominator.negative(), newDenominator}.reduce();
+    return Rational{newNominator, newDenominator}.reduce();
+}
+
+bool Rational::operator==(const Rational &other) const {
+    return numerator_ == other.numerator_ && denominator_ == other.denominator_;
+}
+
+bool Rational::operator!=(const Rational &other) const {
+    return !(*this == other);
 }
